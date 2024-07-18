@@ -1,14 +1,112 @@
-[gd_scene load_steps=14 format=3 uid="uid://dn8vx1of10jxq"]
+[gd_scene load_steps=23 format=3 uid="uid://dn8vx1of10jxq"]
 
+[ext_resource type="Shader" path="res://ursc/canvas_item/dithering.gdshader" id="1_0p6j5"]
 [ext_resource type="Environment" uid="uid://c62mfdjj2y2bq" path="res://new_environment.tres" id="1_6yqfn"]
 [ext_resource type="Shader" path="res://node_3d.gdshader" id="2_8jfu5"]
-[ext_resource type="Shader" path="res://shaderplane.gdshader" id="3_23xp4"]
+[ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://bayer2tile16.png" id="2_qarg6"]
+[ext_resource type="Shader" path="res://ursc/spatial/shaderplane.gdshader" id="3_23xp4"]
+[ext_resource type="Script" path="res://AnimationPlayer.gd" id="3_cxhdy"]
+[ext_resource type="Shader" path="res://ursc/spatial/standard_opaque.gdshader" id="3_hy84p"]
 [ext_resource type="Shader" path="res://shadercolorquant.gdshader" id="4_8yglv"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4rc51"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.309005, 0.227476, 0.193416, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qtus2"]
+shader = ExtResource("1_0p6j5")
+shader_parameter/color_depth = 24.0
+shader_parameter/dithering_pattern_texture = ExtResource("2_qarg6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gf8ye"]
+render_priority = 0
+shader = ExtResource("3_hy84p")
+shader_parameter/albedo_color = Color(0.635294, 0.635294, 0.635294, 1)
+shader_parameter/albedo_texture_as_primary_color = true
+shader_parameter/mix_factor = 1.0
+shader_parameter/texture_lod_halve_distance_override = 0.0
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_scroll_speed = Vector2(0, 0)
+shader_parameter/cull_distance_override = 0.0
+shader_parameter/convert_vertex_colors = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lypwd"]
+render_priority = 0
+shader = ExtResource("3_hy84p")
+shader_parameter/albedo_color = Color(0.633757, 0.633757, 0.633757, 1)
+shader_parameter/albedo_texture_as_primary_color = true
+shader_parameter/mix_factor = 1.0
+shader_parameter/texture_lod_halve_distance_override = 0.0
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_scroll_speed = Vector2(0, 0)
+shader_parameter/cull_distance_override = 400.0
+shader_parameter/convert_vertex_colors = true
+
+[sub_resource type="Animation" id="Animation_x5f55"]
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(7.05707, 5.31762, 6.09296), Vector3(-1.47232, 5.80277, 5.63435)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.360371, 0.482245, 0), Vector3(-0.268742, -0.700224, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_p58lq"]
+resource_name = "new_animation"
+length = 5.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array()
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(6.68613, 6.04906, 5.23712), Vector3(0.994867, 6.17024, 5.77323)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.360371, 0.482245, 0), Vector3(-0.430184, -0.543147, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mj4dt"]
+_data = {
+"RESET": SubResource("Animation_x5f55"),
+"new_animation": SubResource("Animation_p58lq")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_joyuk"]
 shader = ExtResource("2_8jfu5")
@@ -43,66 +141,106 @@ shader_parameter/pallate = PackedColorArray(0.511293, 0.316499, 0.0766041, 1, 0,
 
 [node name="Node3D" type="Node3D"]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.616538, -0.78731, -0.00490614, -0.654614, 0.509142, 0.558798, -0.437449, 0.347732, -0.829289, 0, 2.05866, 0)
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_qtus2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 4
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(320, 240)
+render_target_update_mode = 4
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(-0.616538, -0.78731, -0.00490659, -0.654614, 0.509142, 0.558798, -0.437449, 0.347732, -0.829289, 0, 2.05866, 0)
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
 environment = ExtResource("1_6yqfn")
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="."]
+[node name="CSGBox3D7" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(0.110455, 0, -2.27374e-13, 0, 8.50406, 0, -8.88178e-16, 0, 12.9435, -7.14182, 1.33686, -1.40741)
 size = Vector3(16.6064, 0.377441, 0.783203)
+material = SubResource("ShaderMaterial_gf8ye")
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="."]
+[node name="CSGBox3D8" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, 0.279412, 1.33686, 2.74613)
 size = Vector3(16.6064, 0.377441, 1.27246)
-material = SubResource("StandardMaterial3D_4rc51")
+material = SubResource("ShaderMaterial_lypwd")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D12" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, 0.279412, 1.33686, 8.31363)
+size = Vector3(19.8521, 0.377441, 1.27246)
+material = SubResource("ShaderMaterial_lypwd")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, 0.279412, 7.67804, 8.49288)
+size = Vector3(16.6064, 0.377441, 1.27246)
+material = SubResource("ShaderMaterial_lypwd")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, 0.279412, 4.13393, 9.66168)
+size = Vector3(16.6064, 0.506103, 1.27246)
+material = SubResource("ShaderMaterial_lypwd")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, -3.09737, 3.984, 9.08735)
 size = Vector3(1.71509, 1, 1.79626)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+[node name="CSGBox3D4" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, -13.3935, 3.984, -9.00279)
 size = Vector3(1.71509, 1, 1.55107)
 
-[node name="CSGBox3D10" type="CSGBox3D" parent="."]
+[node name="CSGBox3D10" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, 10.325, 3.984, -9.00279)
 size = Vector3(1.71509, 1, 1.55107)
 
-[node name="CSGBox3D9" type="CSGBox3D" parent="."]
+[node name="CSGBox3D9" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, -0.995193, 10.2051, -9.00279)
 size = Vector3(1.71509, 1, 1.55107)
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+[node name="CSGBox3D5" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, -3.09737, 0.391405, -0.129121)
 size = Vector3(171.54, 0.085022, 1.79626)
 
-[node name="CSGBox3D11" type="CSGBox3D" parent="."]
+[node name="CSGBox3D11" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(-1.80422e-08, 0, 62.3728, 0, 8.49226, 0, -0.412758, 0, -2.7264e-06, -3.09737, 0.391405, -0.129121)
 size = Vector3(171.54, 0.085022, 1.79626)
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+[node name="CSGBox3D6" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, -3.09737, 7.90339, -0.129121)
 size = Vector3(171.54, 0.085022, 1.79626)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+[node name="CSGBox3D3" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(0.110455, 0, 0, 0, 8.50414, 0, 0, 0, 12.9435, -14.6284, 4.12415, -0.00544167)
 size = Vector3(1.71509, 1, 1.41675)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+[node name="CSGBox3D2" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(0.110455, 0, 0, 0, 8.50414, 0, 0, 0, 12.9435, 8.49662, 4.12415, -0.00544167)
 size = Vector3(1.71509, 1, 1.41675)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.941972, -0.0270188, 0.334603, 0.0058182, 0.99792, 0.0642015, -0.335642, -0.0585292, 0.94017, 6.78644, 4.11109, 5.18579)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport"]
+active = false
+root_node = NodePath("Camera3D")
+libraries = {
+"": SubResource("AnimationLibrary_mj4dt")
+}
+autoplay = "new_animation"
+script = ExtResource("3_cxhdy")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/AnimationPlayer"]
+transform = Transform3D(0.885956, -0.163535, 0.43398, 0, 0.935766, 0.352622, -0.463769, -0.312407, 0.829048, 7.05707, 5.31762, 6.09296)
 environment = ExtResource("1_6yqfn")
 current = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport/AnimationPlayer/Camera3D"]
 
-[node name="ColorRect" type="ColorRect" parent="Camera3D/CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/AnimationPlayer/Camera3D/CanvasLayer"]
 visible = false
 material = SubResource("ShaderMaterial_joyuk")
 anchors_preset = -1
@@ -113,30 +251,31 @@ grow_vertical = 2
 scale = Vector2(0.896552, 2.08)
 metadata/_edit_use_anchors_ = true
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.17388, 4.24334, 3.06704)
 light_color = Color(1, 0.682292, 0.409179, 1)
 light_energy = 5.202
 omni_range = 30.921
 omni_attenuation = 0.812252
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+[node name="OmniLight3D2" type="OmniLight3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1443, 6.17877, 5.53723)
 light_color = Color(1, 0.682292, 0.409179, 1)
 omni_range = 30.921
 omni_attenuation = 0.812252
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+[node name="OmniLight3D3" type="OmniLight3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.92767, 6.17877, 5.53723)
 light_color = Color(1, 0.682292, 0.409179, 1)
 omni_range = 30.921
 omni_attenuation = 0.812252
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(0.995861, 0.0908933, -7.94615e-09, -0.0588578, 0.644868, -0.762025, -0.0692629, 0.75887, 0.647548, 3.28382, 4.42662, 0.842736)
 mesh = SubResource("PlaneMesh_xsrjv")
+skeleton = NodePath("../../..")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.26208, 3.32552, 1.73775)
 visible = false
 radius = 2.9826
