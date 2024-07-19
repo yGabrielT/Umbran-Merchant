@@ -1,0 +1,366 @@
+[gd_scene load_steps=33 format=3 uid="uid://dixx52xms2qbh"]
+
+[ext_resource type="Shader" path="res://ursc/canvas_item/dithering.gdshader" id="1_ya7wj"]
+[ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://Textures/bayer2tile16.png" id="2_yrc5a"]
+[ext_resource type="Shader" path="res://ursc/spatial/standard_opaque.gdshader" id="3_wpw37"]
+[ext_resource type="Shader" path="res://ursc/spatial/shaderplane.gdshader" id="4_8t2t8"]
+[ext_resource type="Texture2D" uid="uid://cjcwu5uq5jasx" path="res://Textures/texture.png" id="5_30qnp"]
+[ext_resource type="Environment" uid="uid://c62mfdjj2y2bq" path="res://new_environment.tres" id="5_iooh4"]
+[ext_resource type="Script" path="res://Scripts/PlayerManager.gd" id="6_k4qfc"]
+[ext_resource type="ArrayMesh" uid="uid://dlek53txrrx10" path="res://Models/floor.obj" id="6_u0r52"]
+[ext_resource type="Shader" path="res://Shaders/node_3d.gdshader" id="7_rtjda"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qtus2"]
+shader = ExtResource("1_ya7wj")
+shader_parameter/color_depth = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_00eh2"]
+shader = ExtResource("1_ya7wj")
+shader_parameter/color_depth = 32.0
+shader_parameter/dithering_pattern_texture = ExtResource("2_yrc5a")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tn4an"]
+render_priority = 0
+shader = ExtResource("3_wpw37")
+shader_parameter/albedo_color = Color(0.471236, 0.440417, 0.421074, 1)
+shader_parameter/albedo_texture_as_primary_color = true
+shader_parameter/mix_factor = 1.0
+shader_parameter/texture_lod_halve_distance_override = 8.0
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_scroll_speed = Vector2(0, 0)
+shader_parameter/cull_distance_override = 0.0
+shader_parameter/convert_vertex_colors = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0ksmo"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hstsw"]
+noise = SubResource("FastNoiseLite_0ksmo")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jh7eq"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mbkup"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_jh7eq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xclxy"]
+render_priority = 0
+shader = ExtResource("4_8t2t8")
+shader_parameter/height_scale = 0.01
+shader_parameter/noise = SubResource("NoiseTexture2D_hstsw")
+shader_parameter/normalmap = SubResource("NoiseTexture2D_mbkup")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xsrjv"]
+material = SubResource("ShaderMaterial_xclxy")
+subdivide_width = 32
+subdivide_depth = 32
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6jbvm"]
+render_priority = 0
+shader = ExtResource("3_wpw37")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture_as_primary_color = true
+shader_parameter/mix_factor = 1.0
+shader_parameter/texture_lod_halve_distance_override = 0.0
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_scroll_speed = Vector2(0, 0)
+shader_parameter/cull_distance_override = 0.0
+shader_parameter/convert_vertex_colors = false
+shader_parameter/albedo_texture = ExtResource("5_30qnp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x7rtc"]
+render_priority = 0
+shader = ExtResource("3_wpw37")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture_as_primary_color = true
+shader_parameter/mix_factor = 1.0
+shader_parameter/texture_lod_halve_distance_override = 0.0
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_scroll_speed = Vector2(0, 0)
+shader_parameter/cull_distance_override = 0.0
+shader_parameter/convert_vertex_colors = false
+shader_parameter/albedo_texture = ExtResource("5_30qnp")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mjw43"]
+points = PackedVector3Array(2.09438, 0.0476097, 3.04702, -2.09438, -0.0476097, -3.04702, -3.04702, -0.0476097, -2.09438, 3.04702, -0.0476097, 2.09438, 2.09438, 0.0476097, -3.04702, -3.04702, 0.0476097, 2.09438, -2.09438, -0.0476097, 3.04702, -3.04702, 0.0476097, -2.09438, 3.04702, -0.0476097, -2.09438, 3.04702, 0.0476097, -2.09438, 2.09438, -0.0476097, -3.04702, -3.04702, -0.0476097, 2.09438, -2.09438, 0.0476097, -3.04702, -2.09438, 0.0476097, 3.04702, 2.09438, -0.0476097, 3.04702, 3.04702, 0.0476097, 2.09438)
+
+[sub_resource type="BoxMesh" id="BoxMesh_b7ucj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_404mk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6031a"]
+render_priority = 0
+shader = ExtResource("3_wpw37")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture_as_primary_color = true
+shader_parameter/mix_factor = 1.0
+shader_parameter/texture_lod_halve_distance_override = 0.0
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_scroll_speed = Vector2(0, 0)
+shader_parameter/cull_distance_override = 0.0
+shader_parameter/convert_vertex_colors = false
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_f88d6"]
+_surfaces = [{
+"aabb": AABB(-0.528867, -0.528867, -0.528867, 1.05773, 1.05774, 1.05774),
+"attribute_data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 171, 170, 42, 63, 0, 0, 0, 0, 171, 170, 170, 62, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 171, 170, 42, 63, 0, 0, 0, 63, 171, 170, 170, 62, 0, 0, 0, 63, 0, 0, 128, 63, 0, 0, 0, 63, 171, 170, 170, 62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 171, 170, 42, 63, 0, 0, 0, 0, 171, 170, 170, 62, 0, 0, 0, 63, 171, 170, 170, 62, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 128, 63, 171, 170, 42, 63, 0, 0, 0, 63, 171, 170, 170, 62, 0, 0, 128, 63, 171, 170, 170, 62, 0, 0, 0, 63, 171, 170, 42, 63, 0, 0, 0, 63, 171, 170, 42, 63, 0, 0, 0, 63, 0, 0, 128, 63, 0, 0, 0, 63, 171, 170, 170, 62, 0, 0, 128, 63, 171, 170, 42, 63, 0, 0, 128, 63, 171, 170, 42, 63, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 128, 63),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray(0, 0, 4, 0, 2, 0, 2, 0, 4, 0, 6, 0, 1, 0, 5, 0, 3, 0, 3, 0, 5, 0, 7, 0, 8, 0, 12, 0, 10, 0, 10, 0, 12, 0, 14, 0, 9, 0, 13, 0, 11, 0, 11, 0, 13, 0, 15, 0, 16, 0, 20, 0, 18, 0, 18, 0, 20, 0, 22, 0, 17, 0, 21, 0, 19, 0, 19, 0, 21, 0, 23, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray(220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 63, 220, 99, 7, 191, 220, 99, 7, 191, 255, 127, 255, 127, 255, 255, 255, 191, 255, 255, 255, 255, 0, 0, 255, 191, 255, 127, 255, 127, 255, 255, 255, 191, 255, 255, 255, 255, 0, 0, 255, 191, 255, 127, 255, 127, 255, 255, 255, 191, 255, 255, 255, 255, 0, 0, 255, 191, 255, 127, 255, 127, 255, 255, 255, 191, 255, 255, 255, 255, 0, 0, 255, 191, 255, 255, 0, 128, 255, 255, 255, 255, 0, 0, 0, 128, 255, 127, 255, 191, 255, 255, 0, 128, 255, 255, 255, 255, 0, 0, 0, 128, 255, 127, 255, 191, 255, 255, 0, 128, 255, 255, 255, 255, 0, 0, 0, 128, 255, 127, 255, 191, 255, 255, 0, 128, 255, 255, 255, 255, 0, 0, 0, 128, 255, 127, 255, 191, 0, 128, 255, 255, 0, 0, 255, 191, 0, 128, 0, 0, 255, 255, 255, 191, 0, 128, 255, 255, 0, 0, 255, 191, 0, 128, 0, 0, 255, 255, 255, 191, 0, 128, 255, 255, 0, 0, 255, 191, 0, 128, 0, 0, 255, 255, 255, 191, 0, 128, 255, 255, 0, 0, 255, 191, 0, 128, 0, 0, 255, 255, 255, 191)
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ahr3d"]
+render_priority = 0
+shader = ExtResource("3_wpw37")
+shader_parameter/albedo_color = Color(0, 0, 0, 1)
+shader_parameter/albedo_texture_as_primary_color = true
+shader_parameter/mix_factor = 1.0
+shader_parameter/texture_lod_halve_distance_override = 0.0
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_scroll_speed = Vector2(0, 0)
+shader_parameter/cull_distance_override = 0.0
+shader_parameter/convert_vertex_colors = false
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_33ulx"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_y1vxo"]
+points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607, 0.498884, 0.169713, 0.559144, 0.464172, 0.231051, -0.803591, 0.320455, 0.40741, 0.651043, -0.243523, -0.482789, 0.594843, 0.0822132, -0.362868, -0.682312, 0.289697, 0.469044, -0.654529, -0.0662713, -0.127444, 0.842701, -0.338103, -0.393435, -0.683942, -0.244717, 0.438255, 0.623309, 0.200849, 0.0841477, 0.977454, 0.114795, -0.0682023, -0.976458, -0.12927, 0.20055, -0.563129, -0.451454, -0.185527, 0.595453, -0.453475, -0.273363, 0.592268, 0.407754, -0.00693649, -0.476823, 0.49966, 0.375821, -0.588614, 0.316955, 0.111579, 0.563059, -0.481177, -0.41725, 0.527866, -0.270497, -0.484546, -0.596972, -0.0665097, -0.279747, 0.908561, 0.0533361, -0.250197, -0.880712, 0.205319, 0.263647, -0.902771, -0.127394, 0.293368, 0.871526, -0.157196, 0.373412, -0.526319, -0.328246, 0.499663, 0.476641, -0.00688856, 0.0531056, 0.875001, 0.324703, -0.154543, -0.590854, 0.465879, -0.0972799, -0.782358, -0.398188, -0.387649, -0.498171, 0.31565, -0.30068, -0.587995, -0.388901)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_joyuk"]
+shader = ExtResource("7_rtjda")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xd5g8"]
+
+[sub_resource type="Shader" id="Shader_iivs1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wldtl"]
+render_priority = 0
+shader = SubResource("Shader_iivs1")
+
+[node name="All" type="Node3D"]
+
+[node name="LowResPort" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_qtus2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 4
+
+[node name="LowResSubPort" type="SubViewport" parent="LowResPort"]
+handle_input_locally = false
+size = Vector2i(320, 240)
+render_target_update_mode = 4
+
+[node name="DitherPort" type="SubViewportContainer" parent="LowResPort/LowResSubPort"]
+material = SubResource("ShaderMaterial_00eh2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="DitherSubPort" type="SubViewport" parent="LowResPort/LowResSubPort/DitherPort"]
+handle_input_locally = false
+size = Vector2i(320, 240)
+render_target_update_mode = 4
+
+[node name="World" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort"]
+
+[node name="Objects" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
+
+[node name="Static" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects"]
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
+transform = Transform3D(0.110455, 0, -2.27374e-13, 0, 8.50406, 0, -8.88178e-16, 0, 12.9435, -7.14182, 1.33686, -1.40741)
+use_collision = true
+size = Vector3(16.6064, 0.377441, 0.783203)
+material = SubResource("ShaderMaterial_tn4an")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
+transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, 0.279412, 1.33686, 2.74613)
+use_collision = true
+size = Vector3(16.6064, 0.377441, 1.27246)
+material = SubResource("ShaderMaterial_tn4an")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
+transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, 0.279412, 1.33686, 8.31363)
+use_collision = true
+size = Vector3(19.8521, 0.377441, 1.27246)
+material = SubResource("ShaderMaterial_tn4an")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
+transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, 0.279412, 7.67804, 8.49288)
+use_collision = true
+size = Vector3(16.6064, 0.377441, 1.27246)
+material = SubResource("ShaderMaterial_tn4an")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
+transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, 0.279412, 4.13393, 9.66168)
+use_collision = true
+size = Vector3(16.6064, 0.506103, 1.27246)
+material = SubResource("ShaderMaterial_tn4an")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
+transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, -3.09737, 3.984, 9.08735)
+use_collision = true
+size = Vector3(1.71509, 1, 1.79626)
+material = SubResource("ShaderMaterial_tn4an")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
+transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, -13.3935, 3.984, -9.00279)
+use_collision = true
+size = Vector3(1.71509, 1, 1.55107)
+material = SubResource("ShaderMaterial_tn4an")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
+transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, 10.325, 3.984, -9.00279)
+use_collision = true
+size = Vector3(1.71509, 1, 1.55107)
+material = SubResource("ShaderMaterial_tn4an")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
+transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, -0.995193, 10.2051, -9.00279)
+use_collision = true
+size = Vector3(1.71509, 1, 1.55107)
+material = SubResource("ShaderMaterial_tn4an")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
+transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, -3.09737, 7.90339, -0.129121)
+use_collision = true
+size = Vector3(171.54, 0.085022, 1.79626)
+material = SubResource("ShaderMaterial_tn4an")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
+transform = Transform3D(0.110455, 0, 0, 0, 8.50414, 0, 0, 0, 12.9435, -14.6284, 4.12415, -0.00544167)
+use_collision = true
+size = Vector3(1.71509, 1, 1.41675)
+material = SubResource("ShaderMaterial_tn4an")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
+transform = Transform3D(0.110455, 0, 0, 0, 8.50414, 0, 0, 0, 12.9435, 8.49662, 4.12415, -0.00544167)
+use_collision = true
+size = Vector3(1.71509, 1, 1.41675)
+material = SubResource("ShaderMaterial_tn4an")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
+transform = Transform3D(0.522846, 0.0151944, 0.0192401, -0.0129359, 0.519916, -0.0590624, -0.0208258, 0.0585217, 0.519721, 5.49545, 3.04597, 2.90966)
+mesh = SubResource("PlaneMesh_xsrjv")
+skeleton = NodePath("../../../../../../../..")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
+transform = Transform3D(1.04836, 0, 0, 0, 1.04836, 0, 0, 0, 1.04836, 2.67524, 3.63962, 2.6874)
+size = Vector3(1, 0.863159, 1)
+material = SubResource("ShaderMaterial_6jbvm")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
+transform = Transform3D(3.28819, 0, 0, 0, 3.28819, 0, 0, 0, 3.28819, 0, 0, 0)
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static/StaticBody3D"]
+mesh = ExtResource("6_u0r52")
+skeleton = NodePath("../../../../../../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_x7rtc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_mjw43")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
+transform = Transform3D(0.957749, 0.285915, -0.0311167, -0.255249, 0.894871, 0.366134, 0.132529, -0.342722, 0.930042, 1.11918, 3.89298, 2.82776)
+mesh = SubResource("BoxMesh_b7ucj")
+skeleton = NodePath("../..")
+
+[node name="Interactables" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65462, 3.42915, 7.96676)
+mesh = SubResource("BoxMesh_404mk")
+surface_material_override/0 = SubResource("ShaderMaterial_6031a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/MeshInstance3D"]
+mesh = SubResource("ArrayMesh_f88d6")
+surface_material_override/0 = SubResource("ShaderMaterial_ahr3d")
+
+[node name="Lights" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
+transform = Transform3D(-0.616538, -0.78731, -0.00490658, -0.654614, 0.509142, 0.558798, -0.437449, 0.347732, -0.829289, 0, 2.05866, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
+environment = ExtResource("5_iooh4")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.17388, 4.24334, 3.06704)
+light_color = Color(1, 0.655279, 0.369502, 1)
+light_energy = 5.202
+omni_range = 30.921
+omni_attenuation = 0.812252
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9302, 4.24334, 3.06704)
+light_color = Color(1, 0.655279, 0.369502, 1)
+light_energy = 5.202
+omni_range = 30.921
+omni_attenuation = 0.812252
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1443, 6.17877, 5.53723)
+light_color = Color(1, 0.682292, 0.409179, 1)
+omni_range = 30.921
+omni_attenuation = 0.812252
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.92767, 6.17877, 5.53723)
+light_color = Color(1, 0.682292, 0.409179, 1)
+omni_range = 30.921
+omni_attenuation = 0.812252
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
+active = false
+
+[node name="Player" type="CharacterBody3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
+transform = Transform3D(1.96099, 0, 0, 0, 1.96099, 0, 0, 0, 1.96099, 5.70366, 4.49504, 5.41755)
+script = ExtResource("6_k4qfc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.90117, 0)
+mesh = SubResource("CapsuleMesh_33ulx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.90117, 0)
+shape = SubResource("ConvexPolygonShape3D_y1vxo")
+
+[node name="Head" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player"]
+
+[node name="Camera3D" type="Camera3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Head"]
+environment = ExtResource("5_iooh4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Head/Camera3D"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Head/Camera3D/CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_joyuk")
+anchors_preset = -1
+anchor_right = 1.11563
+anchor_bottom = 0.479167
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.896552, 2.08)
+metadata/_edit_use_anchors_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.17667, 2.28003, 0)
+mesh = SubResource("PlaneMesh_xd5g8")
+surface_material_override/0 = SubResource("ShaderMaterial_wldtl")

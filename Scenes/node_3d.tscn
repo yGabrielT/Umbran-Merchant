@@ -1,22 +1,21 @@
 [gd_scene load_steps=23 format=3 uid="uid://dn8vx1of10jxq"]
 
-[ext_resource type="Shader" path="res://ursc/canvas_item/dithering.gdshader" id="1_0p6j5"]
-[ext_resource type="Environment" uid="uid://c62mfdjj2y2bq" path="res://new_environment.tres" id="1_6yqfn"]
-[ext_resource type="Shader" path="res://node_3d.gdshader" id="2_8jfu5"]
-[ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://bayer2tile16.png" id="2_qarg6"]
-[ext_resource type="Shader" path="res://ursc/spatial/shaderplane.gdshader" id="3_23xp4"]
-[ext_resource type="Script" path="res://AnimationPlayer.gd" id="3_cxhdy"]
-[ext_resource type="Shader" path="res://ursc/spatial/standard_opaque.gdshader" id="3_hy84p"]
-[ext_resource type="Shader" path="res://shadercolorquant.gdshader" id="4_8yglv"]
+[ext_resource type="Shader" path="res://ursc/canvas_item/dithering.gdshader" id="1_hjmkh"]
+[ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://Textures/bayer2tile16.png" id="2_p74i3"]
+[ext_resource type="Environment" uid="uid://c62mfdjj2y2bq" path="res://new_environment.tres" id="3_wct60"]
+[ext_resource type="Shader" path="res://ursc/spatial/standard_opaque.gdshader" id="4_ptd0n"]
+[ext_resource type="Shader" path="res://Shaders/node_3d.gdshader" id="6_mfy25"]
+[ext_resource type="Shader" path="res://ursc/spatial/shaderplane.gdshader" id="7_8in34"]
+[ext_resource type="Shader" path="res://Shaders/shadercolorquant.gdshader" id="8_dhrwu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtus2"]
-shader = ExtResource("1_0p6j5")
+shader = ExtResource("1_hjmkh")
 shader_parameter/color_depth = 24.0
-shader_parameter/dithering_pattern_texture = ExtResource("2_qarg6")
+shader_parameter/dithering_pattern_texture = ExtResource("2_p74i3")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gf8ye"]
 render_priority = 0
-shader = ExtResource("3_hy84p")
+shader = ExtResource("4_ptd0n")
 shader_parameter/albedo_color = Color(0.635294, 0.635294, 0.635294, 1)
 shader_parameter/albedo_texture_as_primary_color = true
 shader_parameter/mix_factor = 1.0
@@ -29,7 +28,7 @@ shader_parameter/convert_vertex_colors = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lypwd"]
 render_priority = 0
-shader = ExtResource("3_hy84p")
+shader = ExtResource("4_ptd0n")
 shader_parameter/albedo_color = Color(0.633757, 0.633757, 0.633757, 1)
 shader_parameter/albedo_texture_as_primary_color = true
 shader_parameter/mix_factor = 1.0
@@ -108,8 +107,21 @@ _data = {
 "new_animation": SubResource("Animation_p58lq")
 }
 
+[sub_resource type="GDScript" id="GDScript_3mrl7"]
+script/source = "extends AnimationPlayer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_joyuk"]
-shader = ExtResource("2_8jfu5")
+shader = ExtResource("6_mfy25")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0ksmo"]
 
@@ -124,7 +136,7 @@ noise = SubResource("FastNoiseLite_jh7eq")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xclxy"]
 render_priority = 0
-shader = ExtResource("3_23xp4")
+shader = ExtResource("7_8in34")
 shader_parameter/height_scale = 0.3
 shader_parameter/noise = SubResource("NoiseTexture2D_hstsw")
 shader_parameter/normalmap = SubResource("NoiseTexture2D_mbkup")
@@ -136,7 +148,7 @@ subdivide_depth = 32
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u1ug4"]
 render_priority = 0
-shader = ExtResource("4_8yglv")
+shader = ExtResource("8_dhrwu")
 shader_parameter/pallate = PackedColorArray(0.511293, 0.316499, 0.0766041, 1, 0, 0, 0, 1, 0.847059, 0, 0, 1, 0.359069, 0.359069, 0.359069, 1, 1, 1, 1, 1, 0.381999, 0.14262, 0.399996, 1, 0.500919, 0.458297, 0.418834, 1, 0.252448, 0.259047, 0, 1, 0, 0, 0, 1)
 
 [node name="Node3D" type="Node3D"]
@@ -161,7 +173,7 @@ transform = Transform3D(-0.616538, -0.78731, -0.00490659, -0.654614, 0.509142, 0
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
-environment = ExtResource("1_6yqfn")
+environment = ExtResource("3_wct60")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(0.110455, 0, -2.27374e-13, 0, 8.50406, 0, -8.88178e-16, 0, 12.9435, -7.14182, 1.33686, -1.40741)
@@ -231,11 +243,11 @@ libraries = {
 "": SubResource("AnimationLibrary_mj4dt")
 }
 autoplay = "new_animation"
-script = ExtResource("3_cxhdy")
+script = SubResource("GDScript_3mrl7")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/AnimationPlayer"]
 transform = Transform3D(0.885956, -0.163535, 0.43398, 0, 0.935766, 0.352622, -0.463769, -0.312407, 0.829048, 7.05707, 5.31762, 6.09296)
-environment = ExtResource("1_6yqfn")
+environment = ExtResource("3_wct60")
 current = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport/AnimationPlayer/Camera3D"]

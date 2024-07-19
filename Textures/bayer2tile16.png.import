@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bak2msiguksnp"
-path="res://.godot/imported/dithering_pattern.png-54f448a4945f35240636cda18a958e7b.ctex"
+uid="uid://cl5r2kp31c4p1"
+path="res://.godot/imported/bayer2tile16.png-59630c89759a03eb467a7b55faf59ef0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dithering_pattern.png"
-dest_files=["res://.godot/imported/dithering_pattern.png-54f448a4945f35240636cda18a958e7b.ctex"]
+source_file="res://Textures/bayer2tile16.png"
+dest_files=["res://.godot/imported/bayer2tile16.png-59630c89759a03eb467a7b55faf59ef0.ctex"]
 
 [params]
 
