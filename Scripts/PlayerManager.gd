@@ -1,22 +1,27 @@
 extends CharacterBody3D
 
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
-const SENSITIVITY = 0.01
+@export var SPEED = 5.0
+
+@export var SENSITIVITY = 0.01
 
 #bob variables
-const BOB_FREQ = 2.4
-const BOB_AMP = 0.05
+@export var BOB_FREQ = 2.4
+@export var BOB_AMP = 0.05
 var t_bob = 0.0 
 var idle_bob = 0.0
 var cos_value = 2.0
 var velocity_valuer = 0.0
-
+var isMouseCaptured = false
+var mouse1 = false
+var mouse2 = false
 #Raycast
 var raycastObj : Node3D = null
 var isLookingToItem = false
-
+var isLeftHandOccupied = false
+var isRightHandOccupied = false
+var canInterpolate = false
+var t =0.0
 
 #raycast
 @onready var raycaster : RayCast3D = $Head/Camera3D/RayCast3D
@@ -33,6 +38,9 @@ func _unhandled_input(event):
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+		
+	
+		
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -93,3 +101,30 @@ func _headbob(time) -> Vector3:
 	pos.x = cos(time * BOB_FREQ / 2) * (BOB_AMP * cos_value)
 	return pos
 		
+
+func _process(delta):
+	mouse1 = Input.is_action_pressed("mouse1")
+	mouse2 = Input.is_action_pressed("mouse2")
+	
+	if mouse1 == true and isLookingToItem == true and isLeftHandOccupied == false:
+		isLeftHandOccupied = true
+		raycastObj.get_parent().reparent($Head/Camera3D/LeftHand)
+		canInterpolate = true
+	if mouse2 == true and isLookingToItem == true and isRightHandOccupied == false:
+		isRightHandOccupied = true
+		raycastObj.get_parent().reparent($Head/Camera3D/RightHand)
+		canInterpolate = true
+	
+	if canInterpolate:
+		if isLeftHandOccupied:
+			t += delta
+			raycastObj.get_parent().position = lerp(raycastObj.get_parent().position, $Head/Camera3D/LeftHand.position, delta * 20)
+			if t > .1:
+				t=0
+				canInterpolate = false
+		if isRightHandOccupied:
+			t += delta
+			raycastObj.get_parent().position = lerp(raycastObj.get_parent().position, $Head/Camera3D/RightHand.position, delta * 20)
+			if t > .1:
+				t=0
+				canInterpolate = false
