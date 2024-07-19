@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Pirate Jam"
-run/main_scene="res://Scenes/GameScene.tscn"
+run/main_scene="res://scenes/GameScene.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -21,6 +21,16 @@ window/size/viewport_width=1280
 window/size/viewport_height=960
 window/size/resizable=false
 window/stretch/scale_mode="integer"
+
+[file_customization]
+
+folder_colors={
+"res://Scripts/": "red",
+"res://assets/": "orange",
+"res://plugins/": "teal",
+"res://resources/": "purple",
+"res://scenes/": "blue"
+}
 
 [importer_defaults]
 
@@ -58,6 +68,10 @@ interact={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"echo":false,"script":null)
 ]
 }
+
+[layer_names]
+
+3d_physics/layer_2="Potions"
 
 [rendering]
 

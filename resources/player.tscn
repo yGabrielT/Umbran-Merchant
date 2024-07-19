@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8yyuwnlpim6o"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerManager.gd" id="1_wl0py"]
+[ext_resource type="Environment" uid="uid://c62mfdjj2y2bq" path="res://new_environment.tres" id="2_mavha"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_u3v8a"]
+points = PackedVector3Array(-0.0665929, -0.5973, -0.484913, 0.0227999, 0.476611, 0.499442, 0.170329, 0.561274, 0.46591, -0.246361, 0.807649, -0.306064, -0.452618, -0.624135, 0.171342, 0.470778, -0.656991, 0.0527058, 0.378217, 0.622145, -0.303, 0.0827502, -0.80943, 0.382681, -0.452617, 0.624134, 0.171342, -0.420081, -0.619974, -0.242882, 0.322744, 0.839752, 0.172842, -0.0682592, -0.977187, -0.129373, 0.349998, -0.624609, -0.334016, -0.24161, -0.557681, 0.433578, 0.111883, 0.564711, -0.482612, -0.0377276, 0.976025, 0.145181, -0.361433, 0.590987, -0.331827, 0.465893, 0.561253, 0.170388, 0.287176, -0.558466, 0.40483, 0.144134, 0.908332, -0.249328, -0.273173, 0.591869, 0.407484, -0.481758, 0.53427, -0.125538, -0.249427, -0.908245, 0.144186, 0.465723, 0.590652, -0.154455, 0.26511, -0.907938, 0.113829, 0.0227999, -0.476611, 0.499442, -0.212814, 0.559444, -0.448449, 0.205225, -0.880612, -0.250044, -0.279732, 0.908515, -0.0675952, -0.0673393, 0.844627, 0.354864, -0.300456, -0.587569, -0.388614, 0.199368, -0.589206, -0.448634)
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(2.424, 0, 0, 0, 2.424, 0, 0, 0, 2.424, 5.70366, 4.98367, 5.40502)
+slide_on_ceiling = false
+wall_min_slide_angle = 0.349066
+script = ExtResource("1_wl0py")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.062, 0)
+shape = SubResource("ConvexPolygonShape3D_u3v8a")
+
+[node name="Head" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+environment = ExtResource("2_mavha")
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -3.5)
+collision_mask = 2
+debug_shape_custom_color = Color(0.794701, 0.587621, 3.85046e-07, 1)

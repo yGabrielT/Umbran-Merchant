@@ -1,12 +1,12 @@
 [gd_scene load_steps=23 format=3 uid="uid://dn8vx1of10jxq"]
 
-[ext_resource type="Shader" path="res://ursc/canvas_item/dithering.gdshader" id="1_hjmkh"]
-[ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://Textures/bayer2tile16.png" id="2_p74i3"]
+[ext_resource type="Shader" path="res://plugins/ursc/canvas_item/dithering.gdshader" id="1_hjmkh"]
+[ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://assets/textures/materials/bayer2tile16.png" id="2_p74i3"]
 [ext_resource type="Environment" uid="uid://c62mfdjj2y2bq" path="res://new_environment.tres" id="3_wct60"]
-[ext_resource type="Shader" path="res://ursc/spatial/standard_opaque.gdshader" id="4_ptd0n"]
-[ext_resource type="Shader" path="res://Shaders/node_3d.gdshader" id="6_mfy25"]
-[ext_resource type="Shader" path="res://ursc/spatial/shaderplane.gdshader" id="7_8in34"]
-[ext_resource type="Shader" path="res://Shaders/shadercolorquant.gdshader" id="8_dhrwu"]
+[ext_resource type="Shader" path="res://plugins/ursc/spatial/standard_opaque.gdshader" id="4_ptd0n"]
+[ext_resource type="Shader" path="res://resources/shaders/node_3d.gdshader" id="6_mfy25"]
+[ext_resource type="Shader" path="res://plugins/ursc/spatial/shaderplane.gdshader" id="7_8in34"]
+[ext_resource type="Shader" path="res://resources/shaders/shadercolorquant.gdshader" id="8_dhrwu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtus2"]
 shader = ExtResource("1_hjmkh")
