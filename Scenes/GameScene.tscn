@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://dixx52xms2qbh"]
+[gd_scene load_steps=92 format=3 uid="uid://dixx52xms2qbh"]
 
 [ext_resource type="Shader" path="res://plugins/ursc/canvas_item/dithering.gdshader" id="1_pyp88"]
 [ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://assets/textures/materials/bayer2tile16.png" id="2_dyoef"]
@@ -13,6 +13,7 @@
 [ext_resource type="Environment" uid="uid://c62mfdjj2y2bq" path="res://new_environment.tres" id="9_a2811"]
 [ext_resource type="Script" path="res://Scripts/PlayerManager.gd" id="10_w4jwg"]
 [ext_resource type="FontFile" uid="uid://lcgcawb0yvnv" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="12_vf4kw"]
+[ext_resource type="Script" path="res://Scripts/Npc.gd" id="13_3ssi3"]
 [ext_resource type="Script" path="res://Scripts/UIManager.gd" id="13_a7x3a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtus2"]
@@ -37,30 +38,7 @@ shader_parameter/uv_scroll_speed = Vector2(0, 0)
 shader_parameter/cull_distance_override = 0.0
 shader_parameter/convert_vertex_colors = true
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_0ksmo"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hstsw"]
-noise = SubResource("FastNoiseLite_0ksmo")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_jh7eq"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mbkup"]
-as_normal_map = true
-noise = SubResource("FastNoiseLite_jh7eq")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xclxy"]
-render_priority = 0
-shader = ExtResource("4_um133")
-shader_parameter/height_scale = 0.01
-shader_parameter/noise = SubResource("NoiseTexture2D_hstsw")
-shader_parameter/normalmap = SubResource("NoiseTexture2D_mbkup")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_xsrjv"]
-material = SubResource("ShaderMaterial_xclxy")
-subdivide_width = 32
-subdivide_depth = 32
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nsb6s"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cg0f5"]
 render_priority = 0
 shader = ExtResource("3_82qfi")
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
@@ -74,7 +52,7 @@ shader_parameter/cull_distance_override = 0.0
 shader_parameter/convert_vertex_colors = false
 shader_parameter/albedo_texture = ExtResource("5_hic6w")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pjntm"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cwj3k"]
 points = PackedVector3Array(2.09438, 0.0476097, 3.04702, -2.09438, -0.0476097, -3.04702, -3.04702, -0.0476097, -2.09438, 3.04702, -0.0476097, 2.09438, 2.09438, 0.0476097, -3.04702, -3.04702, 0.0476097, 2.09438, -2.09438, -0.0476097, 3.04702, -3.04702, 0.0476097, -2.09438, 3.04702, -0.0476097, -2.09438, 3.04702, 0.0476097, -2.09438, 2.09438, -0.0476097, -3.04702, -3.04702, -0.0476097, 2.09438, -2.09438, 0.0476097, -3.04702, -2.09438, 0.0476097, 3.04702, 2.09438, -0.0476097, 3.04702, 3.04702, 0.0476097, 2.09438)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8smb8"]
@@ -591,9 +569,157 @@ transparency = 1
 shading_mode = 0
 albedo_color = Color(0.931392, 0.766428, 0.327146, 1)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0ksmo"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hstsw"]
+noise = SubResource("FastNoiseLite_0ksmo")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jh7eq"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mbkup"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_jh7eq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xclxy"]
+render_priority = 0
+shader = ExtResource("4_um133")
+shader_parameter/height_scale = 0.01
+shader_parameter/color = Color(0.28485, 0.28485, 0.28485, 1)
+shader_parameter/noise = SubResource("NoiseTexture2D_hstsw")
+shader_parameter/normalmap = SubResource("NoiseTexture2D_mbkup")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xsrjv"]
+material = SubResource("ShaderMaterial_xclxy")
+subdivide_width = 32
+subdivide_depth = 32
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_33yyk"]
+size = Vector3(2.2, 0.0750977, 2.2)
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_q4hct"]
 height = 0.635677
 radius = 0.161647
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8vowc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_svf6j"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_t6w1i"]
+points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607, 0.498884, 0.169713, 0.559144, 0.464172, 0.231051, -0.803591, 0.320455, 0.40741, 0.651043, -0.243523, -0.482789, 0.594843, 0.0822132, -0.362868, -0.682312, 0.289697, 0.469044, -0.654529, -0.0662713, -0.127444, 0.842701, -0.338103, -0.393435, -0.683942, -0.244717, 0.438255, 0.623309, 0.200849, 0.0841477, 0.977454, 0.114795, -0.0682023, -0.976458, -0.12927, 0.20055, -0.563129, -0.451454, -0.185527, 0.595453, -0.453475, -0.273363, 0.592268, 0.407754, -0.00693649, -0.476823, 0.49966, 0.375821, -0.588614, 0.316955, 0.111579, 0.563059, -0.481177, -0.41725, 0.527866, -0.270497, -0.484546, -0.596972, -0.0665097, -0.279747, 0.908561, 0.0533361, -0.250197, -0.880712, 0.205319, 0.263647, -0.902771, -0.127394, 0.293368, 0.871526, -0.157196, 0.373412, -0.526319, -0.328246, 0.499663, 0.476641, -0.00688856, 0.0531056, 0.875001, 0.324703, -0.154543, -0.590854, 0.465879, -0.0972799, -0.782358, -0.398188, -0.387649, -0.498171, 0.31565, -0.30068, -0.587995, -0.388901)
+
+[sub_resource type="Animation" id="Animation_necr1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NPCTEST:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-7.29395, 2.70166, -14.1798)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NPCTEST:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.1771, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NPCTEST:quaternion")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Quaternion(0, -0.0123654, 0, 0.999924)]
+}
+
+[sub_resource type="Animation" id="Animation_lblks"]
+resource_name = "npc_walk_in"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NPCTEST:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 3, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-7.29395, 2.70166, -14.1798), Vector3(-1.59414, 2.70166, -10.4565), Vector3(-1.26752, 2.70166, -8.31851), Vector3(2.02484, 2.70166, -0.161405)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NPCTEST:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2.5, 3.4, 3.7, 5.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.1771, 0), Vector3(0, 0.915303, 0), Vector3(0, -0.0247314, 0), Vector3(0, 0.251205, 0), Vector3(0, 0.251205, 0), Vector3(0, -0.0247314, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_50t8q"]
+resource_name = "npc_walk_out"
+length = 5.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NPCTEST:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 3, 5.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(2.02484, 2.70166, -0.161405), Vector3(-1.26752, 2.70166, -8.31851), Vector3(-1.59414, 2.70166, -10.4565), Vector3(5.36089, 2.70166, -12.5447)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NPCTEST:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.0247314, 0), Vector3(0, -2.73144, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NPCTEST:quaternion")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.3, 2.5, 3.4, 4.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Quaternion(0, -0.0123654, 0, 0.999924), Quaternion(0, 0.976355, 0, -0.216175), Quaternion(0, 0.997181, 0, -0.0750283), Quaternion(0, 0.964449, 0, 0.264269), Quaternion(0, 0.771858, 0, 0.635795)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uk8ux"]
+_data = {
+"RESET": SubResource("Animation_necr1"),
+"npc_walk_in": SubResource("Animation_lblks"),
+"npc_walk_out": SubResource("Animation_50t8q")
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_obvsx"]
 font = ExtResource("12_vf4kw")
@@ -662,6 +788,7 @@ material = SubResource("ShaderMaterial_tn4an")
 [node name="CSGBox3D12" type="CSGBox3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
 transform = Transform3D(-4.82813e-09, 0, 12.9435, 0, 8.50406, 0, -0.110455, 0, -5.65776e-07, 0.279412, 1.33686, 8.31363)
 use_collision = true
+collision_layer = 5
 size = Vector3(19.8521, 0.377441, 1.27246)
 material = SubResource("ShaderMaterial_tn4an")
 
@@ -731,27 +858,16 @@ use_collision = true
 size = Vector3(1.71509, 1, 1.41675)
 material = SubResource("ShaderMaterial_tn4an")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
-transform = Transform3D(0.522846, 0.0151944, 0.0192401, -0.0129359, 0.519916, -0.0590624, -0.0208258, 0.0585217, 0.519721, 5.49545, 3.04597, 2.90966)
-mesh = SubResource("PlaneMesh_xsrjv")
-skeleton = NodePath("../../../../../../../..")
-
 [node name="StaticBody3D" type="StaticBody3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
-transform = Transform3D(3.28819, 0, 0, 0, 3.28819, 0, 0, 0, 3.28819, 0, 0, 0)
+transform = Transform3D(4.49445, 0, 0, 0, 4.49445, 0, 0, 0, 4.49445, -2.20317, -0.281489, 0)
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static/StaticBody3D"]
-transform = Transform3D(1.24111, 0, 0, 0, 1.24111, 0, 0, 0, 1.24111, -1.12799, -0.0479413, -0.124691)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static/StaticBody3D"]
 mesh = ExtResource("6_0lsv4")
-skeleton = NodePath("../../../../../../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_nsb6s")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_cg0f5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static/StaticBody3D"]
-transform = Transform3D(1.24111, 0, 0, 0, 1.24111, 0, 0, 0, 1.24111, -1.12799, -0.0479413, -0.124691)
-shape = SubResource("ConvexPolygonShape3D_pjntm")
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.21338, 3.32052)
-layers = 5
+shape = SubResource("ConvexPolygonShape3D_cwj3k")
 
 [node name="Interactables" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects"]
 
@@ -1054,6 +1170,21 @@ skeleton = NodePath("")
 blend_shapes/LiquidLow = 0.0
 surface_material_override/0 = SubResource("StandardMaterial3D_465n7")
 
+[node name="Others" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects"]
+transform = Transform3D(0.841685, 0, 0, 0, 0.841684, 0, 0, 0, 0.84169, 2.18228, 2.98553, 2.77762)
+
+[node name="DeliverArea" type="Area3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others"]
+collision_layer = 0
+collision_mask = 6
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others/DeliverArea"]
+transform = Transform3D(1.00001, 0, 0, 0, 1.00001, 0, 0, 0, 1, 0, -0.0226719, 0)
+mesh = SubResource("PlaneMesh_xsrjv")
+skeleton = NodePath("../../../../../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others/DeliverArea"]
+shape = SubResource("BoxShape3D_33yyk")
+
 [node name="Lights" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
@@ -1064,10 +1195,10 @@ shadow_enabled = true
 environment = ExtResource("9_a2811")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.17388, 4.24334, 3.06704)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0652, 4.24334, 3.06704)
 light_color = Color(1, 0.655279, 0.369502, 1)
 light_energy = 5.575
-omni_range = 30.921
+omni_range = 4.117
 omni_attenuation = 0.812252
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
@@ -1089,11 +1220,8 @@ light_color = Color(1, 0.682292, 0.409179, 1)
 omni_range = 30.921
 omni_attenuation = 0.812252
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
-active = false
-
 [node name="Player" type="CharacterBody3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
-transform = Transform3D(6.72109, 0, 0, 0, 6.72109, 0, 0, 0, 6.72109, 5.70366, 5.11839, 5.40502)
+transform = Transform3D(6.72109, 0, 0, 0, 6.72109, 0, 0, 0, 6.72109, 5.71444, 4.64115, 5.39691)
 slide_on_ceiling = false
 wall_min_slide_angle = 0.349066
 script = ExtResource("10_w4jwg")
@@ -1114,7 +1242,7 @@ collision_mask = 2
 debug_shape_custom_color = Color(0.794701, 0.587621, 3.85046e-07, 1)
 
 [node name="RaycastPlaceToPut" type="RayCast3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Head/Camera3D"]
-target_position = Vector3(0, 0, -3.5)
+target_position = Vector3(0, 0, -3)
 collision_mask = 4
 collide_with_areas = true
 debug_shape_custom_color = Color(0.794701, 0.587621, 3.85046e-07, 1)
@@ -1124,6 +1252,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.4, -0.5)
 
 [node name="LeftHand" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -0.4, -0.5)
+
+[node name="NPCS" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
+
+[node name="NPCTEST" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/NPCS"]
+transform = Transform3D(2.76484, 0, -0.0683924, 0, 2.76568, 0, 0.0683924, 0, 2.76484, -7.29395, 2.70166, -14.1798)
+rotation_edit_mode = 1
+mesh = SubResource("CapsuleMesh_8vowc")
+script = ExtResource("13_3ssi3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/NPCS/NPCTEST"]
+transform = Transform3D(0.61986, 0, 0, 0, 0.417847, 0, 0, 0, 0.61986, 0.0623367, 0.524306, 0.296119)
+mesh = SubResource("BoxMesh_svf6j")
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/NPCS/NPCTEST"]
+sync_to_physics = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/NPCS/NPCTEST/AnimatableBody3D"]
+transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_t6w1i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/NPCS"]
+libraries = {
+"": SubResource("AnimationLibrary_uk8ux")
+}
+autoplay = "npc_walk_in"
 
 [node name="UI_layer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
@@ -1214,3 +1367,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0.254902)
+
+[connection signal="body_entered" from="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others/DeliverArea" to="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player" method="_on_deliver_area_body_entered"]
+[connection signal="body_exited" from="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others/DeliverArea" to="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player" method="_on_deliver_area_body_exited"]

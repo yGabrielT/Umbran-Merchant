@@ -25,6 +25,10 @@ var t =0.0
 var leftHandObj : Node3D
 var rightHandObj : Node3D
 
+var lastraycastobj : Node3D
+var lookedOff = true
+var gotFirstLastRay = false
+
 #RaycastPlace
 var raycastPlaceGlobalPoint : Vector3
 var raycastPlaceNormal : Vector3
@@ -42,20 +46,19 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 
+#BodyEntered in Area
+var arrayOfBodies = []
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
-		
-	
-		
 
 func _input(event):
 	if event is InputEventMouseButton:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
+		
 
 func _physics_process(delta):
 #region Player Movement
@@ -94,15 +97,25 @@ func _physics_process(delta):
 	move_and_slide()
 #endregion
 	
+#region Raycast
+
 	if RaycastPotion.is_colliding():
 		raycastObj = RaycastPotion.get_collider().get_node("Outliner")
-		raycastObj.visible = true;
+		raycastObj.visible = true
 		isLookingToItem = true
+		if not gotFirstLastRay:
+			gotFirstLastRay = true
+			lastraycastobj = raycastObj
+		if lastraycastobj != raycastObj:
+			lastraycastobj.visible = false
+			lastraycastobj = raycastObj
 	else:
+		if lastraycastobj != null:
+			lastraycastobj.visible = false
 		if raycastObj != null:
-			raycastObj.visible = false;
+			raycastObj.visible = false
 			isLookingToItem = false
-	
+#endregion
 	
 
 func _headbob(time) -> Vector3:
@@ -110,7 +123,6 @@ func _headbob(time) -> Vector3:
 	pos.y = sin(time * BOB_FREQ) * BOB_AMP
 	pos.x = cos(time * BOB_FREQ / 2) * (BOB_AMP * cos_value)
 	return pos
-		
 
 func _process(delta):
 	
@@ -124,34 +136,33 @@ func _process(delta):
 	PutDownPotion()
 
 func GrabPotion():
-	if mouse1 == true and isLookingToItem == true and isLeftHandOccupied == false:
+	if mouse1 == true and isLookingToItem == true and isLeftHandOccupied == false and not mouse2:
+		raycastObj.get_parent().get_node("CollisionShape3D").disabled = true
 		hand1cooldown = true
 		isLeftHandOccupied = true
 		mouse1 = false
-		raycastObj.get_parent().get_node("CollisionShape3D").disabled = true
 		raycastObj.get_parent().reparent($Head/Camera3D/LeftHand)
 		leftHandObj = raycastObj.get_parent()
 		canInterpolate = true
 		var tween = get_tree().create_tween()
-		tween.tween_property(raycastObj.get_parent(), "position", $Head/Camera3D/LeftHand.position, .15).set_ease(Tween.EASE_IN)
+		tween.tween_property(raycastObj.get_parent(), "position", $Head/Camera3D/LeftHand.position, .07).set_ease(Tween.EASE_IN)
 		tween.tween_callback( func():
-			hand1cooldown = false)
+			hand1cooldown = false).set_delay(.15)
 		
 		
 		
-	if mouse2 == true and isLookingToItem == true and isRightHandOccupied == false:
+	if mouse2 == true and isLookingToItem == true and isRightHandOccupied == false and not mouse1:
+		raycastObj.get_parent().get_node("CollisionShape3D").disabled = true
 		hand2cooldown = true
 		isRightHandOccupied = true
 		mouse2 = false
-		raycastObj.get_parent().get_node("CollisionShape3D").disabled = true
 		raycastObj.get_parent().reparent($Head/Camera3D/RightHand)
 		rightHandObj = raycastObj.get_parent()
 		canInterpolate = true
 		var tween = get_tree().create_tween()
-		tween.tween_property(raycastObj.get_parent(), "position", $Head/Camera3D/RightHand.position, .15).set_ease(Tween.EASE_IN)
+		tween.tween_property(raycastObj.get_parent(), "position", $Head/Camera3D/RightHand.position, .07).set_ease(Tween.EASE_IN)
 		tween.tween_callback( func():
-			hand2cooldown = false)
-		
+			hand2cooldown = false).set_delay(.15)
 func RaycastAPlaceToPut():
 	if RaycastPlaceToPut.is_colliding():
 		raycastPlaceGlobalPoint = RaycastPlaceToPut.get_collision_point()
@@ -164,40 +175,51 @@ func RaycastAPlaceToPut():
 	else:
 			canPlace = false
 func PutDownPotion():
-	if isLeftHandOccupied and mouse1 and not isLookingToItem and canPlace:
-		hand1cooldown = true
-		mouse1 = false
+	if isLeftHandOccupied and mouse1 and not isLookingToItem and canPlace and not mouse2:
 		isLeftHandOccupied = false
+		hand1cooldown = true
 		canPlace = false
+		mouse1 = false
 		leftHandObj.reparent(RaycastPlaceToPut.get_collider())
 		
 		var tween = get_tree().create_tween()
 		leftHandObj.global_transform = align_with_y(leftHandObj.global_transform, raycastPlaceNormal)
 		tween.tween_callback( func():
 			hand1cooldown = false)
-		tween.tween_property(leftHandObj, "global_position", raycastPlaceGlobalPoint, .15).set_ease(Tween.EASE_IN)
+		tween.tween_property(leftHandObj, "global_position", raycastPlaceGlobalPoint, .07).set_ease(Tween.EASE_IN)
 		tween.tween_callback(func():
-			hand1cooldown = false
-			leftHandObj.get_node("CollisionShape3D").disabled = false)
+			leftHandObj.get_node("CollisionShape3D").disabled = false
+			hand1cooldown = false).set_delay(.15)
 		
-	if isRightHandOccupied and mouse2 and not isLookingToItem and canPlace:
-		hand2cooldown = true
-		mouse2 = false
+	if isRightHandOccupied and mouse2 and not isLookingToItem and canPlace and not mouse1:
 		isRightHandOccupied = false
+		hand2cooldown = true
 		canPlace = false
+		mouse2 = false
 		
 		rightHandObj.reparent(RaycastPlaceToPut.get_collider())
 		
 		var tween = get_tree().create_tween()
 		rightHandObj.global_transform = align_with_y(rightHandObj.global_transform, raycastPlaceNormal)
-		tween.tween_property(rightHandObj, "global_position", raycastPlaceGlobalPoint, .15).set_ease(Tween.EASE_IN)
+		tween.tween_property(rightHandObj, "global_position", raycastPlaceGlobalPoint, .07).set_ease(Tween.EASE_IN)
 		tween.tween_callback(func():
+			rightHandObj.get_node("CollisionShape3D").disabled = false
 			hand2cooldown = false
-			rightHandObj.get_node("CollisionShape3D").disabled = false)
-		
-		
+			).set_delay(.15)
 func align_with_y(xform, new_y):
 	xform.basis.y = new_y
 	xform.basis.x = -xform.basis.z.cross(new_y)
 	xform.basis = xform.basis.orthonormalized()
 	return xform
+
+
+
+func _on_deliver_area_body_entered(body):
+	arrayOfBodies.append(body)
+	
+	
+
+
+func _on_deliver_area_body_exited(body):
+	arrayOfBodies.erase(body)
+	

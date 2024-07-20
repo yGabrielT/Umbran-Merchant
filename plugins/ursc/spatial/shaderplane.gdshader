@@ -3,6 +3,7 @@ shader_type spatial;
 uniform sampler2D noise;
 uniform float height_scale = 0.5;
 uniform sampler2D normalmap;
+uniform vec4 color : source_color;
 varying vec2 tex_position;
 
 
@@ -22,6 +23,7 @@ void vertex() {
 void fragment() {
 	// Called for every pixel the material is visible on.
 	NORMAL_MAP = texture(normalmap, tex_position).xyz;
+	ALBEDO = color.xyz;
 }
 
 //void light() {
