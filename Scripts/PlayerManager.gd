@@ -22,9 +22,19 @@ var isLeftHandOccupied = false
 var isRightHandOccupied = false
 var canInterpolate = false
 var t =0.0
+var leftHandObj : Node3D
+var rightHandObj : Node3D
+
+#RaycastPlace
+var raycastPlaceGlobalPoint : Vector3
+var raycastPlaceNormal : Vector3
+var canPlace = false
+var hand1cooldown = false
+var hand2cooldown = false
 
 #raycast
-@onready var raycaster : RayCast3D = $Head/Camera3D/RayCast3D
+@onready var RaycastPotion : RayCast3D = $Head/Camera3D/RaycastPotion
+@onready var RaycastPlaceToPut : RayCast3D = $Head/Camera3D/RaycastPlaceToPut
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -84,8 +94,8 @@ func _physics_process(delta):
 	move_and_slide()
 #endregion
 	
-	if raycaster.is_colliding():
-		raycastObj = raycaster.get_collider().get_node("Outliner")
+	if RaycastPotion.is_colliding():
+		raycastObj = RaycastPotion.get_collider().get_node("Outliner")
 		raycastObj.visible = true;
 		isLookingToItem = true
 	else:
@@ -103,45 +113,91 @@ func _headbob(time) -> Vector3:
 		
 
 func _process(delta):
-	mouse1 = Input.is_action_pressed("mouse1")
-	mouse2 = Input.is_action_pressed("mouse2")
 	
+	
+	if not hand1cooldown:
+		mouse1 = Input.is_action_pressed("mouse1")
+	if not hand2cooldown:
+		mouse2 = Input.is_action_pressed("mouse2")
+	GrabPotion()
+	RaycastAPlaceToPut()
+	PutDownPotion()
+
+func GrabPotion():
 	if mouse1 == true and isLookingToItem == true and isLeftHandOccupied == false:
+		hand1cooldown = true
 		isLeftHandOccupied = true
+		mouse1 = false
 		raycastObj.get_parent().get_node("CollisionShape3D").disabled = true
 		raycastObj.get_parent().reparent($Head/Camera3D/LeftHand)
+		leftHandObj = raycastObj.get_parent()
 		canInterpolate = true
-		
 		var tween = get_tree().create_tween()
-		tween.tween_property(raycastObj.get_parent(), "position", $Head/Camera3D/LeftHand.position, .25)
-		
+		tween.tween_property(raycastObj.get_parent(), "position", $Head/Camera3D/LeftHand.position, .15).set_ease(Tween.EASE_IN)
+		tween.tween_callback( func():
+			hand1cooldown = false)
 		
 		
 		
 	if mouse2 == true and isLookingToItem == true and isRightHandOccupied == false:
+		hand2cooldown = true
 		isRightHandOccupied = true
+		mouse2 = false
 		raycastObj.get_parent().get_node("CollisionShape3D").disabled = true
 		raycastObj.get_parent().reparent($Head/Camera3D/RightHand)
+		rightHandObj = raycastObj.get_parent()
 		canInterpolate = true
+		var tween = get_tree().create_tween()
+		tween.tween_property(raycastObj.get_parent(), "position", $Head/Camera3D/RightHand.position, .15).set_ease(Tween.EASE_IN)
+		tween.tween_callback( func():
+			hand2cooldown = false)
+		
+func RaycastAPlaceToPut():
+	if RaycastPlaceToPut.is_colliding():
+		raycastPlaceGlobalPoint = RaycastPlaceToPut.get_collision_point()
+		raycastPlaceNormal = RaycastPlaceToPut.get_collision_normal()
+		
+		if raycastPlaceNormal.y > .8 and raycastPlaceNormal.y < 1.2:
+			canPlace = true
+		else:
+			canPlace = false
+	else:
+			canPlace = false
+func PutDownPotion():
+	if isLeftHandOccupied and mouse1 and not isLookingToItem and canPlace:
+		hand1cooldown = true
+		mouse1 = false
+		isLeftHandOccupied = false
+		canPlace = false
+		leftHandObj.reparent(RaycastPlaceToPut.get_collider())
 		
 		var tween = get_tree().create_tween()
-		tween.tween_property(raycastObj.get_parent(), "position", $Head/Camera3D/RightHand.position, .25)
-	#
-	#if canInterpolate:
-		#if isLeftHandOccupied:
-			#
-			#var tween = create_tween()
-			#tween.tween_property(raycastObj, "position", $Head/Camera3D/LeftHand.position, .25)
-			#t += delta
-			#raycastObj.get_parent().position = lerp(raycastObj.get_parent().position, $Head/Camera3D/LeftHand.position, delta * 5)
-			#raycastObj.get_parent().rotation.slerp($Head/Camera3D/LeftHand.rotation, delta * 5)
-			#if t > .1:
-				#t=0
-				#canInterpolate = false
-		#if isRightHandOccupied:
-			#t += delta
-			#raycastObj.get_parent().rotation.slerp($Head/Camera3D/RightHand.rotation, delta * 5)
-			#raycastObj.get_parent().position = lerp(raycastObj.get_parent().position, $Head/Camera3D/RightHand.position, delta * 5)
-			#if t > .1:
-				#t=0
-				#canInterpolate = false
+		leftHandObj.global_transform = align_with_y(leftHandObj.global_transform, raycastPlaceNormal)
+		tween.tween_callback( func():
+			hand1cooldown = false)
+		tween.tween_property(leftHandObj, "global_position", raycastPlaceGlobalPoint, .15).set_ease(Tween.EASE_IN)
+		tween.tween_callback(func():
+			hand1cooldown = false
+			leftHandObj.get_node("CollisionShape3D").disabled = false)
+		
+	if isRightHandOccupied and mouse2 and not isLookingToItem and canPlace:
+		hand2cooldown = true
+		mouse2 = false
+		isRightHandOccupied = false
+		canPlace = false
+		
+		rightHandObj.reparent(RaycastPlaceToPut.get_collider())
+		
+		var tween = get_tree().create_tween()
+		rightHandObj.global_transform = align_with_y(rightHandObj.global_transform, raycastPlaceNormal)
+		tween.tween_property(rightHandObj, "global_position", raycastPlaceGlobalPoint, .15).set_ease(Tween.EASE_IN)
+		tween.tween_callback(func():
+			hand2cooldown = false
+			rightHandObj.get_node("CollisionShape3D").disabled = false)
+		
+		
+func align_with_y(xform, new_y):
+	xform.basis.y = new_y
+	xform.basis.x = -xform.basis.z.cross(new_y)
+	xform.basis = xform.basis.orthonormalized()
+	return xform
