@@ -108,23 +108,40 @@ func _process(delta):
 	
 	if mouse1 == true and isLookingToItem == true and isLeftHandOccupied == false:
 		isLeftHandOccupied = true
+		raycastObj.get_parent().get_node("CollisionShape3D").disabled = true
 		raycastObj.get_parent().reparent($Head/Camera3D/LeftHand)
 		canInterpolate = true
+		
+		var tween = get_tree().create_tween()
+		tween.tween_property(raycastObj.get_parent(), "position", $Head/Camera3D/LeftHand.position, .25)
+		
+		
+		
+		
 	if mouse2 == true and isLookingToItem == true and isRightHandOccupied == false:
 		isRightHandOccupied = true
+		raycastObj.get_parent().get_node("CollisionShape3D").disabled = true
 		raycastObj.get_parent().reparent($Head/Camera3D/RightHand)
 		canInterpolate = true
-	
-	if canInterpolate:
-		if isLeftHandOccupied:
-			t += delta
-			raycastObj.get_parent().position = lerp(raycastObj.get_parent().position, $Head/Camera3D/LeftHand.position, delta * 20)
-			if t > .1:
-				t=0
-				canInterpolate = false
-		if isRightHandOccupied:
-			t += delta
-			raycastObj.get_parent().position = lerp(raycastObj.get_parent().position, $Head/Camera3D/RightHand.position, delta * 20)
-			if t > .1:
-				t=0
-				canInterpolate = false
+		
+		var tween = get_tree().create_tween()
+		tween.tween_property(raycastObj.get_parent(), "position", $Head/Camera3D/RightHand.position, .25)
+	#
+	#if canInterpolate:
+		#if isLeftHandOccupied:
+			#
+			#var tween = create_tween()
+			#tween.tween_property(raycastObj, "position", $Head/Camera3D/LeftHand.position, .25)
+			#t += delta
+			#raycastObj.get_parent().position = lerp(raycastObj.get_parent().position, $Head/Camera3D/LeftHand.position, delta * 5)
+			#raycastObj.get_parent().rotation.slerp($Head/Camera3D/LeftHand.rotation, delta * 5)
+			#if t > .1:
+				#t=0
+				#canInterpolate = false
+		#if isRightHandOccupied:
+			#t += delta
+			#raycastObj.get_parent().rotation.slerp($Head/Camera3D/RightHand.rotation, delta * 5)
+			#raycastObj.get_parent().position = lerp(raycastObj.get_parent().position, $Head/Camera3D/RightHand.position, delta * 5)
+			#if t > .1:
+				#t=0
+				#canInterpolate = false
