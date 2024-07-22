@@ -1,11 +1,12 @@
 extends Node3D
 var PotsInDeliverArea = []
-var NpcScene = preload("res://scenes/npcbase.tscn").instantiate()
+
 var isNpcDone = false
 var NpcAnimator : AnimationPlayer
 var potChecker = 99
 var potLiquidChecker = 99
 var currentNpcNumber = 0
+var potionOrderCorrector
 
 @export var allNpcs : Array[check_list]
 
@@ -18,22 +19,24 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	if NpcScene != null: #if npc gets erased stop
+	
+	if currentNpcNumber < len(allNpcs): #if npc gets erased stop
 		if potChecker != 0:  #continue if not all checks are done
+			print(currentNpcNumber,len(allNpcs))
 			if len(PotsInDeliverArea) != 0: #check if there at least a pot in the deliver area
 				
 				if len(allNpcs[currentNpcNumber].PotionList) == len(PotsInDeliverArea): #check the quantity of pots needed
-					potChecker = len(PotsInDeliverArea) # gives the value that needs to be subtratec
+					potChecker = len(allNpcs[currentNpcNumber].PotionList) # gives the value that needs to be subtratec
 					
 					# In every pot look at the liquids inside
 					for i in len(PotsInDeliverArea):
-						
+						PotsInDeliverArea.shuffle() 
 						#What is the number of liquids needed in the pot?
 						if len(allNpcs[currentNpcNumber].PotionList[i - 1].liquidsQuantityExpected) == len(PotsInDeliverArea[i - 1].liquids): 
 							
 							
 							if(potLiquidChecker != 0): #continue if not all checks are done
-								potLiquidChecker = len(PotsInDeliverArea[i - 1].liquids) # gives the value that needs to be subtratec
+								potLiquidChecker = len(allNpcs[currentNpcNumber].PotionList[i - 1].liquidsQuantityExpected) # gives the value that needs to be subtratec
 								for x in len(PotsInDeliverArea[i - 1].liquids): #look at the liquids at the individual pot
 									#Transform both Vector4 To Color8 and round it
 									var npcColorVec4 = Vector4(
@@ -44,27 +47,31 @@ func _process(delta):
 									var npcColor = round(npcColorVec4 * 255) 
 									var potColor = round(PotsInDeliverArea[i - 1].liquids[x - 1] * 255)
 									#Check if the colors are equal
-									if  potColor == npcColor:
-										
+									if  potColor == npcColor and not allNpcs[currentNpcNumber].PotionList[i - 1].isChecked:
+										allNpcs[currentNpcNumber].PotionList[i - 1].isChecked = true
 										potLiquidChecker -=  1#Subtract liquid value
 										
-										
+									
 							else:
-								PotsInDeliverArea[i - 1].queue_free()
+								
 								potChecker -= 1 #Subtract pot value
 		elif not isNpcDone:
 			#All check are done
 			isNpcDone = true
 			NpcAnimator.queue("walk_out")
+			for i in len(PotsInDeliverArea):
+				PotsInDeliverArea[i - 1].queue_free()
 			currentNpcNumber += 1
+			SpawnNpc()
 func SpawnNpc():
-	add_child(NpcScene)
-	
-	
-	
-	
-	NpcAnimator = NpcScene.get_node("NpcAnimations")
-	NpcAnimator.play("walk_in")
+	if currentNpcNumber < len(allNpcs):
+		potChecker = 99
+		potLiquidChecker = 99
+		isNpcDone = false
+		var NpcScene = preload("res://scenes/npcbase.tscn").instantiate()
+		add_child(NpcScene)
+		NpcAnimator = NpcScene.get_node("NpcAnimations")
+		NpcAnimator.play("walk_in")
 	
 
 func _on_deliver_area_body_entered(body):
