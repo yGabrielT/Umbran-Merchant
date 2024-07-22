@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="potions" load_steps=3 format=3 uid="uid://c68x411iihtsa"]
+
+[ext_resource type="Resource" uid="uid://saxrve2vbapw" path="res://resources/NpcTasks/liquids/blue_liquid.tres" id="1_88nve"]
+[ext_resource type="Script" path="res://Scripts/potions.gd" id="2_yg8je"]
+
+[resource]
+script = ExtResource("2_yg8je")
+hasOrder = false
+liquidsQuantityExpected = Array[Resource("res://Scripts/liquids.gd")]([ExtResource("1_88nve")])

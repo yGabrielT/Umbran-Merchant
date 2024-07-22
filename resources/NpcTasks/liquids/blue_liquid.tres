@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="liquid" load_steps=2 format=3 uid="uid://saxrve2vbapw"]
+
+[ext_resource type="Script" path="res://Scripts/liquids.gd" id="1_nqo1b"]
+
+[resource]
+script = ExtResource("1_nqo1b")
+liquidRatio = 100
+liquidColor = Color(0.266667, 0.870588, 1, 1)

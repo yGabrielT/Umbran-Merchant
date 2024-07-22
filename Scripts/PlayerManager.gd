@@ -100,13 +100,15 @@ func _physics_process(delta):
 	
 #region Raycast
 
-	if RaycastPotion.is_colliding():
+	if RaycastPotion.is_colliding() and RaycastPotion.get_collider() != null:
+		
 		raycastObj = RaycastPotion.get_collider().get_node("Outliner")
 		raycastObj.visible = true
 		isLookingToItem = true
-		if not gotFirstLastRay:
+		if lastraycastobj == null:
 			gotFirstLastRay = true
 			lastraycastobj = raycastObj
+		
 		if lastraycastobj != raycastObj:
 			lastraycastobj.visible = false
 			lastraycastobj = raycastObj

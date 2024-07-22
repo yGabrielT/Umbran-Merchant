@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="check_list" load_steps=3 format=3 uid="uid://cuiui127fyixk"]
+
+[ext_resource type="Resource" uid="uid://c68x411iihtsa" path="res://resources/NpcTasks/potions/shield_potion.tres" id="1_44gvv"]
+[ext_resource type="Script" path="res://Scripts/npcCheckList.gd" id="2_p58r5"]
+
+[resource]
+script = ExtResource("2_p58r5")
+PotionList = Array[Resource("res://Scripts/potions.gd")]([ExtResource("1_44gvv")])

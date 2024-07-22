@@ -12,7 +12,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Player.isLookingToItem == true:
+	if Player.isLookingToItem == true and Player.raycastObj != null:
 		ItemTextUI.visible = true
 		ItemNameUI.text = Player.raycastObj.get_parent().itemName
 		ItemDescUI.text = Player.raycastObj.get_parent().itemDesc

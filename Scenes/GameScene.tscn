@@ -1,8 +1,9 @@
-[gd_scene load_steps=87 format=3 uid="uid://dixx52xms2qbh"]
+[gd_scene load_steps=88 format=3 uid="uid://dixx52xms2qbh"]
 
 [ext_resource type="Shader" path="res://plugins/ursc/canvas_item/dithering.gdshader" id="1_pyp88"]
 [ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://assets/textures/materials/bayer2tile16.png" id="2_dyoef"]
 [ext_resource type="Shader" path="res://plugins/ursc/spatial/standard_opaque.gdshader" id="3_82qfi"]
+[ext_resource type="Resource" uid="uid://cuiui127fyixk" path="res://resources/NpcTasks/npcs/npc_list_1.tres" id="4_2ebl0"]
 [ext_resource type="Shader" path="res://plugins/ursc/spatial/shaderplane.gdshader" id="4_um133"]
 [ext_resource type="Texture2D" uid="uid://cjcwu5uq5jasx" path="res://assets/textures/materials/texture.png" id="5_hic6w"]
 [ext_resource type="ArrayMesh" uid="uid://dlek53txrrx10" path="res://assets/models/floor.obj" id="6_0lsv4"]
@@ -666,6 +667,7 @@ render_target_update_mode = 4
 
 [node name="NpcManager" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/GameHandlers"]
 script = ExtResource("13_3ssi3")
+allNpcs = Array[Resource("res://Scripts/npcCheckList.gd")]([ExtResource("4_2ebl0")])
 
 [node name="Objects" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
 
@@ -1108,35 +1110,37 @@ environment = ExtResource("9_a2811")
 [node name="OmniLight3D" type="OmniLight3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0652, 4.24334, 3.06704)
 light_color = Color(1, 0.655279, 0.369502, 1)
-light_energy = 5.575
-omni_range = 4.117
-omni_attenuation = 0.812252
+light_energy = 14.626
+omni_range = 8.063
+omni_attenuation = 0.554785
 
 [node name="OmniLight3D5" type="OmniLight3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.55869, 4.24334, 5.50821)
 light_color = Color(1, 0.655279, 0.369502, 1)
-light_energy = 5.575
-omni_range = 4.117
-omni_attenuation = 0.812252
+light_energy = 14.626
+omni_range = 8.063
+omni_attenuation = 0.554785
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9302, 4.24334, 3.06704)
 light_color = Color(1, 0.655279, 0.369502, 1)
-light_energy = 5.202
-omni_range = 30.921
-omni_attenuation = 0.812252
+light_energy = 14.626
+omni_range = 8.063
+omni_attenuation = 0.554785
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1443, 6.17877, 5.53723)
 light_color = Color(1, 0.682292, 0.409179, 1)
-omni_range = 30.921
-omni_attenuation = 0.812252
+light_energy = 14.626
+omni_range = 8.063
+omni_attenuation = 0.554785
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.92767, 6.17877, 5.53723)
 light_color = Color(1, 0.682292, 0.409179, 1)
-omni_range = 30.921
-omni_attenuation = 0.812252
+light_energy = 14.626
+omni_range = 8.063
+omni_attenuation = 0.554785
 
 [node name="Player" type="CharacterBody3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
 transform = Transform3D(6.72109, 0, 0, 0, 6.72109, 0, 0, 0, 6.72109, 5.71444, 4.64115, 5.39691)
