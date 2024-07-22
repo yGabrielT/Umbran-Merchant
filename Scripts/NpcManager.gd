@@ -38,6 +38,7 @@ func _process(delta):
 							if(potLiquidChecker != 0): #continue if not all checks are done
 								potLiquidChecker = len(allNpcs[currentNpcNumber].PotionList[i - 1].liquidsQuantityExpected) # gives the value that needs to be subtratec
 								for x in len(PotsInDeliverArea[i - 1].liquids): #look at the liquids at the individual pot
+									PotsInDeliverArea[i - 1].liquids.shuffle() 
 									#Transform both Vector4 To Color8 and round it
 									var npcColorVec4 = Vector4(
 										allNpcs[currentNpcNumber].PotionList[i - 1].liquidsQuantityExpected[x - 1].liquidColor.r,
@@ -47,8 +48,9 @@ func _process(delta):
 									var npcColor = round(npcColorVec4 * 255) 
 									var potColor = round(PotsInDeliverArea[i - 1].liquids[x - 1] * 255)
 									#Check if the colors are equal
-									if  potColor == npcColor and not allNpcs[currentNpcNumber].PotionList[i - 1].isChecked:
+									if  potColor == npcColor and not allNpcs[currentNpcNumber].PotionList[i - 1].isChecked and not allNpcs[currentNpcNumber].PotionList[i - 1].liquidsQuantityExpected[x - 1].isChecked:
 										allNpcs[currentNpcNumber].PotionList[i - 1].isChecked = true
+										allNpcs[currentNpcNumber].PotionList[i - 1].liquidsQuantityExpected[x - 1].isChecked
 										potLiquidChecker -=  1#Subtract liquid value
 										
 									

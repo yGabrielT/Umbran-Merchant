@@ -29,24 +29,21 @@ shader = ExtResource("1_pyp88")
 shader_parameter/color_depth = 32.0
 shader_parameter/dithering_pattern_texture = ExtResource("2_dyoef")
 
-[sub_resource type="Resource" id="Resource_fthjv"]
-script = ExtResource("5_su7yn")
-liquidRatio = 50
-liquidColor = Color(1, 0.290196, 0.305882, 0.921569)
-
 [sub_resource type="Resource" id="Resource_eck88"]
 script = ExtResource("5_su7yn")
-liquidRatio = 50
 liquidColor = Color(0, 0.682353, 0.572549, 0.470588)
+
+[sub_resource type="Resource" id="Resource_fthjv"]
+script = ExtResource("5_su7yn")
+liquidColor = Color(1, 0.290196, 0.305882, 0.921569)
 
 [sub_resource type="Resource" id="Resource_g7a5l"]
 script = ExtResource("6_ws1lb")
 hasOrder = false
-liquidsQuantityExpected = Array[ExtResource("5_su7yn")]([SubResource("Resource_fthjv"), SubResource("Resource_eck88")])
+liquidsQuantityExpected = Array[ExtResource("5_su7yn")]([SubResource("Resource_eck88"), SubResource("Resource_fthjv")])
 
 [sub_resource type="Resource" id="Resource_bii1h"]
 script = ExtResource("5_su7yn")
-liquidRatio = 100
 liquidColor = Color(1, 1, 1, 0.431373)
 
 [sub_resource type="Resource" id="Resource_cblw3"]
@@ -801,6 +798,9 @@ surface_material_override/0 = SubResource("ShaderMaterial_cg0f5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_cwj3k")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.79209, 5.52166)
 
 [node name="Interactables" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects"]
 
