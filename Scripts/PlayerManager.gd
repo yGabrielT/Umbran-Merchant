@@ -54,6 +54,7 @@ func _unhandled_input(event):
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+		
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -214,12 +215,3 @@ func align_with_y(xform, new_y):
 
 
 
-func _on_deliver_area_body_entered(body):
-	arrayOfBodies.append(body)
-	
-	
-
-
-func _on_deliver_area_body_exited(body):
-	arrayOfBodies.erase(body)
-	

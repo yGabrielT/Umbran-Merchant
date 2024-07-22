@@ -1,5 +1,10 @@
 extends MeshInstance3D
 
+@export var needAOrder : bool = false
+@export var potionsQuantityExpected = 1
+@export var liquidsQuantityExpected = 1
+@export var liquidRatioExpected = []
+@export var liquidsColor = [] 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

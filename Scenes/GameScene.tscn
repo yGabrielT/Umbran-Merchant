@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://dixx52xms2qbh"]
+[gd_scene load_steps=87 format=3 uid="uid://dixx52xms2qbh"]
 
 [ext_resource type="Shader" path="res://plugins/ursc/canvas_item/dithering.gdshader" id="1_pyp88"]
 [ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://assets/textures/materials/bayer2tile16.png" id="2_dyoef"]
@@ -13,7 +13,7 @@
 [ext_resource type="Environment" uid="uid://c62mfdjj2y2bq" path="res://new_environment.tres" id="9_a2811"]
 [ext_resource type="Script" path="res://Scripts/PlayerManager.gd" id="10_w4jwg"]
 [ext_resource type="FontFile" uid="uid://lcgcawb0yvnv" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="12_vf4kw"]
-[ext_resource type="Script" path="res://Scripts/Npc.gd" id="13_3ssi3"]
+[ext_resource type="Script" path="res://Scripts/NpcManager.gd" id="13_3ssi3"]
 [ext_resource type="Script" path="res://Scripts/UIManager.gd" id="13_a7x3a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtus2"]
@@ -607,132 +607,11 @@ subdivide_width = 32
 subdivide_depth = 32
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_33yyk"]
-size = Vector3(2.2, 0.0750977, 2.2)
+size = Vector3(2.2, 0.873633, 2.2)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_q4hct"]
 height = 0.635677
 radius = 0.161647
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_8vowc"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_svf6j"]
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_t6w1i"]
-points = PackedVector3Array(-0.125207, -0.532801, -0.480507, 0.0227831, 0.47607, 0.498884, 0.169713, 0.559144, 0.464172, 0.231051, -0.803591, 0.320455, 0.40741, 0.651043, -0.243523, -0.482789, 0.594843, 0.0822132, -0.362868, -0.682312, 0.289697, 0.469044, -0.654529, -0.0662713, -0.127444, 0.842701, -0.338103, -0.393435, -0.683942, -0.244717, 0.438255, 0.623309, 0.200849, 0.0841477, 0.977454, 0.114795, -0.0682023, -0.976458, -0.12927, 0.20055, -0.563129, -0.451454, -0.185527, 0.595453, -0.453475, -0.273363, 0.592268, 0.407754, -0.00693649, -0.476823, 0.49966, 0.375821, -0.588614, 0.316955, 0.111579, 0.563059, -0.481177, -0.41725, 0.527866, -0.270497, -0.484546, -0.596972, -0.0665097, -0.279747, 0.908561, 0.0533361, -0.250197, -0.880712, 0.205319, 0.263647, -0.902771, -0.127394, 0.293368, 0.871526, -0.157196, 0.373412, -0.526319, -0.328246, 0.499663, 0.476641, -0.00688856, 0.0531056, 0.875001, 0.324703, -0.154543, -0.590854, 0.465879, -0.0972799, -0.782358, -0.398188, -0.387649, -0.498171, 0.31565, -0.30068, -0.587995, -0.388901)
-
-[sub_resource type="Animation" id="Animation_necr1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("NPCTEST:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-7.29395, 2.70166, -14.1798)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("NPCTEST:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 1.1771, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("NPCTEST:quaternion")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Quaternion(0, -0.0123654, 0, 0.999924)]
-}
-
-[sub_resource type="Animation" id="Animation_lblks"]
-resource_name = "npc_walk_in"
-length = 6.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("NPCTEST:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.5, 3, 5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-7.29395, 2.70166, -14.1798), Vector3(-1.59414, 2.70166, -10.4565), Vector3(-1.26752, 2.70166, -8.31851), Vector3(2.02484, 2.70166, -0.161405)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("NPCTEST:rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1, 2.5, 3.4, 3.7, 5.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 1.1771, 0), Vector3(0, 0.915303, 0), Vector3(0, -0.0247314, 0), Vector3(0, 0.251205, 0), Vector3(0, 0.251205, 0), Vector3(0, -0.0247314, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_50t8q"]
-resource_name = "npc_walk_out"
-length = 5.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("NPCTEST:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.5, 3, 5.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(2.02484, 2.70166, -0.161405), Vector3(-1.26752, 2.70166, -8.31851), Vector3(-1.59414, 2.70166, -10.4565), Vector3(5.36089, 2.70166, -12.5447)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("NPCTEST:rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, -0.0247314, 0), Vector3(0, -2.73144, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("NPCTEST:quaternion")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.3, 2.5, 3.4, 4.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Quaternion(0, -0.0123654, 0, 0.999924), Quaternion(0, 0.976355, 0, -0.216175), Quaternion(0, 0.997181, 0, -0.0750283), Quaternion(0, 0.964449, 0, 0.264269), Quaternion(0, 0.771858, 0, 0.635795)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_uk8ux"]
-_data = {
-"RESET": SubResource("Animation_necr1"),
-"npc_walk_in": SubResource("Animation_lblks"),
-"npc_walk_out": SubResource("Animation_50t8q")
-}
 
 [sub_resource type="LabelSettings" id="LabelSettings_obvsx"]
 font = ExtResource("12_vf4kw")
@@ -780,6 +659,13 @@ size = Vector2i(320, 240)
 render_target_update_mode = 4
 
 [node name="World" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort"]
+
+[node name="GameHandlers" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
+
+[node name="LiquidManager" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/GameHandlers"]
+
+[node name="NpcManager" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/GameHandlers"]
+script = ExtResource("13_3ssi3")
 
 [node name="Objects" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
 
@@ -885,7 +771,7 @@ shape = SubResource("ConvexPolygonShape3D_cwj3k")
 [node name="Interactables" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects"]
 
 [node name="Cup" type="AnimatableBody3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.73117, 2.94488, 7.78721)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.74538, 2.9493, 7.80868)
 collision_layer = 2
 sync_to_physics = false
 script = ExtResource("7_dv8ga")
@@ -906,12 +792,13 @@ surface_material_override/0 = ExtResource("7_ajjoc")
 [node name="Liquids" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Cup"]
 transform = Transform3D(0.295985, 0, -6.21725e-15, 0, 0.295985, 0, 6.21725e-15, 0, 0.295985, 0, 0.461179, 0)
 
-[node name="CupLiquid" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Cup/Liquids"]
+[node name="CupLiquidBase" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Cup/Liquids"]
 transform = Transform3D(1, 0, 9.59233e-14, 0, 1, 0, -9.59233e-14, 0, 1, 0, 0, 0)
+visible = false
 gi_mode = 0
 mesh = SubResource("ArrayMesh_5gx7v")
 skeleton = NodePath("")
-blend_shapes/LiquidDown = 0.0
+blend_shapes/LiquidDown = 1.0
 surface_material_override/0 = SubResource("StandardMaterial3D_ued6n")
 
 [node name="Outliner" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Cup"]
@@ -967,8 +854,8 @@ shape = SubResource("ConvexPolygonShape3D_0kjlr")
 [node name="Liquids" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/BottleLL"]
 transform = Transform3D(0.0461791, 0, 0, 0, -2.01855e-09, -0.0461791, 0, 0.0461791, -2.01855e-09, 0, 0.372991, 0)
 
-[node name="BottleLLLiquid" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/BottleLL/Liquids"]
-transform = Transform3D(1, 3.77103e-15, 1.15847e-29, -3.77103e-15, 1, -7.4354e-15, -3.96238e-29, 7.4354e-15, 1, 0, 0, 0.000152588)
+[node name="BottleLLLiquidBase" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/BottleLL/Liquids"]
+transform = Transform3D(1, 3.77103e-15, 1.15847e-29, -3.77103e-15, 1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0, 0.000152588)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_jj676")
 skeleton = NodePath("")
@@ -1019,7 +906,7 @@ skeleton = NodePath("")
 [node name="Liquids" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/PotionBottleM"]
 transform = Transform3D(0.08, -1.13687e-15, 4.96942e-23, 0, -3.49691e-09, -0.08, 1.13687e-15, 0.08, -3.49691e-09, 0, 0.561432, 0)
 
-[node name="PotionBottleMLiquid" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/PotionBottleM/Liquids"]
+[node name="PotionBottleMLiquidBase" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/PotionBottleM/Liquids"]
 transform = Transform3D(0.999999, 1.42109e-14, 8.47033e-22, -1.42109e-14, 0.999999, 5.96046e-08, 0, -5.96046e-08, 0.999999, 0, 0, 0)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_potms")
@@ -1079,7 +966,7 @@ surface_material_override/0 = ExtResource("8_morjj")
 [node name="Liquids" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/BottleS"]
 transform = Transform3D(0.05, 0, 0, 0, -2.18557e-09, -0.05, 0, 0.05, -2.18557e-09, 0, 0.19645, 0)
 
-[node name="BottleSLiquid" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/BottleS/Liquids"]
+[node name="BottleSLiquidBase" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/BottleS/Liquids"]
 transform = Transform3D(0.926963, -7.10543e-15, 0, 7.10543e-15, 0.926963, 0, 0, 0, 0.926963, 0, -3.8147e-06, -7.62939e-06)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_out3h")
@@ -1131,7 +1018,7 @@ shape = SubResource("ConvexPolygonShape3D_agmke")
 [node name="Liquids" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/BottleThin"]
 transform = Transform3D(0.05, 0, 0, 0, -2.18557e-09, -0.05, 0, 0.05, -2.18557e-09, 0, 0.46587, 0)
 
-[node name="BottleThinLiquid" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/BottleThin/Liquids"]
+[node name="BottleThinLiquidBase" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/BottleThin/Liquids"]
 transform = Transform3D(0.912425, 0, 0, 0, 0.912425, 0, 0, 0, 0.912425, 0, 0, 0.464378)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_5vb76")
@@ -1183,7 +1070,7 @@ shape = SubResource("ConvexPolygonShape3D_cu2lo")
 [node name="Liquids" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/BottleL"]
 transform = Transform3D(0.05, 0, 0, 0, -2.18557e-09, -0.05, 0, 0.05, -2.18557e-09, 0, 0.535408, 0)
 
-[node name="BottleLLiquid" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/BottleL/Liquids"]
+[node name="BottleLLiquidBase" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/BottleL/Liquids"]
 transform = Transform3D(0.953001, 3.55271e-15, 0, -3.55271e-15, 0.953001, 0, 0, 0, 0.953001, 0, -2.5034e-06, 7.62939e-06)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_e1h6a")
@@ -1195,15 +1082,18 @@ surface_material_override/0 = SubResource("StandardMaterial3D_465n7")
 transform = Transform3D(0.841685, 0, 0, 0, 0.841684, 0, 0, 0, 0.84169, 2.18228, 2.98553, 2.77762)
 
 [node name="DeliverArea" type="Area3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others"]
+disable_mode = 1
 collision_layer = 0
 collision_mask = 6
+collision_priority = 2.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others/DeliverArea"]
-transform = Transform3D(1.00001, 0, 0, 0, 1.00001, 0, 0, 0, 1, 0, -0.0226719, 0)
+transform = Transform3D(1.00001, 0, 0, 0, 1.00001, 0, 0, 0, 1, 0, 0.0239923, 0)
 mesh = SubResource("PlaneMesh_xsrjv")
 skeleton = NodePath("../../../../../../../../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others/DeliverArea"]
+transform = Transform3D(1, 0, 0, 0, 1.00001, 0, 0, 0, 1.00001, 0, 0.399268, 0)
 shape = SubResource("BoxShape3D_33yyk")
 
 [node name="Lights" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
@@ -1217,6 +1107,13 @@ environment = ExtResource("9_a2811")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0652, 4.24334, 3.06704)
+light_color = Color(1, 0.655279, 0.369502, 1)
+light_energy = 5.575
+omni_range = 4.117
+omni_attenuation = 0.812252
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.55869, 4.24334, 5.50821)
 light_color = Color(1, 0.655279, 0.369502, 1)
 light_energy = 5.575
 omni_range = 4.117
@@ -1274,30 +1171,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.4, -0.5)
 [node name="LeftHand" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -0.4, -0.5)
 
-[node name="NPCS" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
-
-[node name="NPCTEST" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/NPCS"]
-transform = Transform3D(2.76484, 0, -0.0683924, 0, 2.76568, 0, 0.0683924, 0, 2.76484, -7.29395, 2.70166, -14.1798)
-rotation_edit_mode = 1
-mesh = SubResource("CapsuleMesh_8vowc")
-script = ExtResource("13_3ssi3")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/NPCS/NPCTEST"]
-transform = Transform3D(0.61986, 0, 0, 0, 0.417847, 0, 0, 0, 0.61986, 0.0623367, 0.524306, 0.296119)
-mesh = SubResource("BoxMesh_svf6j")
-
-[node name="AnimatableBody3D" type="AnimatableBody3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/NPCS/NPCTEST"]
-sync_to_physics = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/NPCS/NPCTEST/AnimatableBody3D"]
-transform = Transform3D(1, 0, -5.96046e-08, 0, 1, 0, 5.96046e-08, 0, 1, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_t6w1i")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/NPCS"]
-libraries = {
-"": SubResource("AnimationLibrary_uk8ux")
-}
-autoplay = "npc_walk_in"
+[node name="OmniLight3D6" type="OmniLight3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player"]
+light_color = Color(1, 0.655279, 0.369502, 1)
+light_energy = 5.575
+omni_range = 4.117
+omni_attenuation = 0.812252
 
 [node name="UI_layer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
@@ -1389,5 +1267,5 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0.254902)
 
-[connection signal="body_entered" from="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others/DeliverArea" to="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player" method="_on_deliver_area_body_entered"]
-[connection signal="body_exited" from="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others/DeliverArea" to="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player" method="_on_deliver_area_body_exited"]
+[connection signal="body_entered" from="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others/DeliverArea" to="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/GameHandlers/NpcManager" method="_on_deliver_area_body_entered"]
+[connection signal="body_exited" from="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others/DeliverArea" to="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/GameHandlers/NpcManager" method="_on_deliver_area_body_exited"]
