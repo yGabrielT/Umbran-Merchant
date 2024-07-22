@@ -23,6 +23,8 @@ func _process(delta):
 				print(npcColor, potColor)
 				if  potColor == npcColor:
 					print("LETSGO")
+					isNpcDone = true
+					
 		#if len(PotsInDeliverArea) == firstNpcScene.potionsQuantityExpected:
 			#pass
 func SpawnNpc():
@@ -31,7 +33,8 @@ func SpawnNpc():
 	firstNpcScene.needAOrder = false
 	firstNpcScene.liquidsQuantityExpected = 1
 	firstNpcScene.liquidRatioExpected = [100]
-	firstNpcScene.liquidsColor.append(Vector4(0.2649, 0.8707, 0.9993, 1) )
+	firstNpcScene.liquidsColor.append(Vector4(0.2649, 0.8707, 0.9993, 1))
+	NpcAnimator = firstNpcScene.get_node("NpcAnimations")
 
 func getLiquidsColor() -> Array[String]:
 	var liquidsColor = []
