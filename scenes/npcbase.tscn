@@ -104,4 +104,5 @@ shape = SubResource("ConvexPolygonShape3D_t6w1i")
 libraries = {
 "": SubResource("AnimationLibrary_sy6ca")
 }
-autoplay = "walk_in"
+
+[connection signal="animation_finished" from="NpcAnimations" to="." method="_on_npc_animations_animation_finished"]

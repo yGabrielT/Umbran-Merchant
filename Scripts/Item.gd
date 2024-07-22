@@ -18,7 +18,7 @@ func _ready():
 		mats[i].get_active_material(0).albedo_color.b,
 		mats[i].get_active_material(0).albedo_color.a)
 		liquids.append(vec)
-		print(mats[i].get_active_material(0).albedo_color)
+		print(liquids)
 	
 	
 	
