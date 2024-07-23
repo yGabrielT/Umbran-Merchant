@@ -5,4 +5,9 @@
 [resource]
 script = ExtResource("1_n2bws")
 dialogues = Array[String](["Your Final challenge", "Put yo bih go through your phone"])
-nodePos = NodePath("LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others/MeshInstance3D")
+speed = 72
+pitch = 64
+mouth = 128
+throat = 128
+singing = false
+phonetic = false
