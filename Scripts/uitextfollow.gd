@@ -20,7 +20,7 @@ func _process(delta):
 		dialogue.set_position((screenpos - Vector2(dialogue.size.x,dialogue.size.y)) + Vector2(35,-25))
 		dialogue.set_size(Vector2( 80 - (distance), 60 - (distance)))
 		dialogue.set_pivot_offset(Vector2(dialogue.size.x/2, dialogue.size.y/2) )
-		
+		print(distance)
 		
 		
 		

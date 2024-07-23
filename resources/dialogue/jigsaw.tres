@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="dialogue" load_steps=2 format=3 uid="uid://chi58x4ff6u7x"]
-
-[ext_resource type="Script" path="res://Scripts/dialogue.gd" id="1_n2bws"]
-
-[resource]
-script = ExtResource("1_n2bws")
-dialogues = Array[String](["Your Final challenge", "Put yo bih go through your phone"])
-nodePos = NodePath("LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others/MeshInstance3D")
