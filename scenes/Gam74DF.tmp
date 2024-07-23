@@ -646,9 +646,6 @@ size = Vector3(2.2, 0.873633, 2.2)
 height = 0.635677
 radius = 0.161647
 
-[sub_resource type="LabelSettings" id="LabelSettings_txxh8"]
-font = ExtResource("12_vf4kw")
-
 [sub_resource type="LabelSettings" id="LabelSettings_obvsx"]
 font = ExtResource("12_vf4kw")
 font_size = 42
@@ -660,6 +657,10 @@ font_color = Color(1, 1, 1, 0.529412)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_skujm"]
 blend_mode = 4
+
+[sub_resource type="LabelSettings" id="LabelSettings_txxh8"]
+font = ExtResource("12_vf4kw")
+font_size = 64
 
 [node name="All" type="Node3D"]
 
@@ -1221,42 +1222,6 @@ light_energy = 5.575
 omni_range = 4.117
 omni_attenuation = 0.812252
 
-[node name="DialogueUI" type="Control" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(160, 120)
-mouse_filter = 2
-
-[node name="ColorRect2" type="ColorRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/DialogueUI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -240.0
-offset_bottom = -180.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(40, 30)
-mouse_filter = 2
-color = Color(0, 0, 0, 0.694118)
-
-[node name="Label" type="Label" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/DialogueUI/ColorRect2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Hey good sir"
-label_settings = SubResource("LabelSettings_txxh8")
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-
 [node name="UI_layer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -1344,6 +1309,31 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0.254902)
+
+[node name="DialogueUI" type="Control" parent="UI_layer/SubViewport"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect2" type="ColorRect" parent="UI_layer/SubViewport/DialogueUI"]
+layout_mode = 1
+offset_right = 960.0
+offset_bottom = 320.0
+color = Color(0, 0, 0, 0.694118)
+
+[node name="Label" type="Label" parent="UI_layer/SubViewport/DialogueUI/ColorRect2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Hey good sir"
+label_settings = SubResource("LabelSettings_txxh8")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [connection signal="body_entered" from="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others/DeliverArea" to="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/GameHandlers/NpcManager" method="_on_deliver_area_body_entered"]
 [connection signal="body_exited" from="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others/DeliverArea" to="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/GameHandlers/NpcManager" method="_on_deliver_area_body_exited"]

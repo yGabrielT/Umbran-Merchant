@@ -22,7 +22,7 @@ func _process(delta):
 	
 	if currentNpcNumber < len(allNpcs): #if npc gets erased stop
 		if potChecker != 0:  #continue if not all checks are done
-			print(currentNpcNumber,len(allNpcs))
+			
 			if len(PotsInDeliverArea) != 0: #check if there at least a pot in the deliver area
 				
 				if len(allNpcs[currentNpcNumber].PotionList) == len(PotsInDeliverArea): #check the quantity of pots needed
