@@ -19,17 +19,19 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(currentTalker)
+	
 	if(not dialogueList.is_empty() and currentTalker != null):
 		pos = currentTalker.global_position
 		distance = cam.global_position.distance_to(pos)
 		manageDialogueTextAndAudio(delta)
-		if(cam.is_position_in_frustum(pos)) and isTalking:
+		if(cam.is_position_in_frustum(pos) and pos != null):
 			ManageBoxPosAndSize()
 		else:
 			var tween = get_tree().create_tween()
 			tween.tween_property(dialogueBox, "modulate:a", 0.0, .1).set_ease(Tween.EASE_IN)
-	
+	else:
+		var tween = get_tree().create_tween()
+		tween.tween_property(dialogueBox, "modulate:a", 0.0, .1).set_ease(Tween.EASE_IN)
 
 func ManageBoxPosAndSize():
 	var tween = dialogueBox.create_tween()

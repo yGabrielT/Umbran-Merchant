@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=3 uid="uid://dixx52xms2qbh"]
+[gd_scene load_steps=107 format=3 uid="uid://dixx52xms2qbh"]
 
 [ext_resource type="Shader" path="res://plugins/ursc/canvas_item/dithering.gdshader" id="1_pyp88"]
 [ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://assets/textures/materials/bayer2tile16.png" id="2_dyoef"]
@@ -22,6 +22,7 @@
 [ext_resource type="FontFile" uid="uid://lcgcawb0yvnv" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="12_vf4kw"]
 [ext_resource type="Script" path="res://Scripts/NpcManager.gd" id="13_3ssi3"]
 [ext_resource type="Script" path="res://Scripts/UIManager.gd" id="13_a7x3a"]
+[ext_resource type="PackedScene" uid="uid://dahhb8i3cw4sk" path="res://scenes/shadow_npc_obj.tscn" id="20_f5kwp"]
 [ext_resource type="PackedScene" uid="uid://dcyxwqthj66qo" path="res://resources/audiosForNpcs/guide_voice.tscn" id="22_2ravj"]
 [ext_resource type="Script" path="res://Scripts/AutoSizeRichLabel.gd" id="22_fvbrm"]
 
@@ -1163,6 +1164,9 @@ skeleton = NodePath("../../Static")
 transform = Transform3D(1, 0, 0, 0, 0.58452, 0.811381, 0, -0.811381, 0.58452, 2.81676, 0.259496, 0)
 billboard = 1
 texture = ExtResource("5_hic6w")
+
+[node name="PlayerRiggingIKwalk" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others" instance=ExtResource("20_f5kwp")]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -3.92372, 0, 0)
 
 [node name="Lights" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
 

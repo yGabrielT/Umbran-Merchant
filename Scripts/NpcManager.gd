@@ -68,7 +68,7 @@ func _process(delta):
 			for i in len(PotsInDeliverArea):
 				PotsInDeliverArea[i - 1].queue_free()
 
-	if not hasTalked:
+	if not hasTalked and not dialogueManager.isTalking:
 		
 		if NpcScene.hasCome:
 			hasTalked = true
