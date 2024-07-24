@@ -19,5 +19,5 @@ main_pitch_scale = 2.0
 word_pause = 0.03
 punctuation_pause = 2.0
 question_pitch_scale = 1.26
-syllable_size = 1
+syllable_size = 0
 word_cutting_percentage = 0.1

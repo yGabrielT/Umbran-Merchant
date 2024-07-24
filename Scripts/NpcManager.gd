@@ -3,6 +3,7 @@ var PotsInDeliverArea = []
 
 var isNpcDone = false
 var NpcAnimator : AnimationPlayer
+var modelNpcAnimator : AnimationPlayer
 var potChecker = 99
 var potLiquidChecker = 99
 var currentNpcNumber = 0
@@ -65,24 +66,37 @@ func _process(delta):
 			hasTalked = false
 			isNpcDone = true
 			NpcAnimator.queue("walk_out")
+			modelNpcAnimator.play("PlayerRiggingIKidleanims 2/Walk")
 			for i in len(PotsInDeliverArea):
 				PotsInDeliverArea[i - 1].queue_free()
 
-	if not hasTalked and not dialogueManager.isTalking:
-		
+	if not hasTalked:
 		if NpcScene.hasCome:
-			hasTalked = true
-			NpcScene.hasCome = false
-			TalkWithPlayer(true,NpcScene)
-		if NpcScene.isGoing:
-			hasTalked = true
-			NpcScene.isGoing = false
-			TalkWithPlayer(false,NpcScene)
+			match (allNpcs[currentNpcNumber].idleAnim123):
+						1:
+							modelNpcAnimator.play("PlayerRiggingIKidleanims/Idle1",.2)
+						2:
+							modelNpcAnimator.play("PlayerRiggingIKidleanims/Idle2",.2)
+						3:
+							modelNpcAnimator.play("PlayerRiggingIKidleanims/Idle3",.2)
+		if not dialogueManager.isTalking:
+			if NpcScene.hasCome:
+				
+				
+				hasTalked = true
+				NpcScene.hasCome = false
+				
+				TalkWithPlayer(true,NpcScene)
+			if NpcScene.isGoing:
+				hasTalked = true
+				NpcScene.isGoing = false
+				TalkWithPlayer(false,NpcScene)
 	if NpcScene != null:
 		if NpcScene.isGone :
 			currentNpcNumber += 1
 			NpcScene.queue_free()
 			SpawnNpc()
+		
 func SpawnNpc():
 	if currentNpcNumber < len(allNpcs):
 		hasTalked = false
@@ -91,7 +105,8 @@ func SpawnNpc():
 		isNpcDone = false
 		NpcScene = preload("res://scenes/npcbase.tscn").instantiate()
 		add_child(NpcScene)
-		
+		modelNpcAnimator = NpcScene.get_child(0).get_node("AnimationPlayer")
+		modelNpcAnimator.play("PlayerRiggingIKidleanims 2/Walk")
 		NpcAnimator = NpcScene.get_node("NpcAnimations")
 		NpcAnimator.play("walk_in")
 	

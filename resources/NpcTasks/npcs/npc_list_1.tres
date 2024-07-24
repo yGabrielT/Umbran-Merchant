@@ -20,3 +20,4 @@ script = ExtResource("2_p58r5")
 PotionList = Array[Resource("res://Scripts/potions.gd")]([ExtResource("1_44gvv")])
 dialogueEnter = SubResource("Resource_eh1gt")
 dialogueExit = SubResource("Resource_nh1w8")
+idleAnim123 = 3

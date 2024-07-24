@@ -4,8 +4,7 @@
 [ext_resource type="Script" path="res://addons/godot-voice-generator/voice_audio_stream_player.gd" id="2_c8fsw"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2bqt0"]
-random_pitch = 1.52
-random_volume_offset_db = 4.65
+random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("1_wa7i6")
 stream_0/weight = 1.0
@@ -18,4 +17,5 @@ main_pitch_scale = 1.51
 word_pause = 0.16
 punctuation_pause = 2.0
 question_pitch_scale = 1.18
+syllable_size = 0
 word_cutting_percentage = 0.1
