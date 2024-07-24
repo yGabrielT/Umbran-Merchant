@@ -7,8 +7,11 @@ var potChecker = 99
 var potLiquidChecker = 99
 var currentNpcNumber = 0
 var potionOrderCorrector
-
+@onready var dialogueManager = $"../DialogueManager"
 @export var allNpcs : Array[check_list]
+var NpcScene
+var hasTalked
+
 
 
 
@@ -20,10 +23,10 @@ func _ready():
 func _process(delta):
 	
 	
-	if currentNpcNumber < len(allNpcs): #if npc gets erased stop
+	if currentNpcNumber < len(allNpcs) and not NpcScene.isGoing: #if npc gets erased stop
 		if potChecker != 0:  #continue if not all checks are done
 			
-			if len(PotsInDeliverArea) != 0: #check if there at least a pot in the deliver area
+			if len(PotsInDeliverArea) != 0 and hasTalked: #check if there at least a pot in the deliver area
 				
 				if len(allNpcs[currentNpcNumber].PotionList) == len(PotsInDeliverArea): #check the quantity of pots needed
 					potChecker = len(allNpcs[currentNpcNumber].PotionList) # gives the value that needs to be subtratec
@@ -59,23 +62,47 @@ func _process(delta):
 								potChecker -= 1 #Subtract pot value
 		elif not isNpcDone:
 			#All check are done
+			hasTalked = false
 			isNpcDone = true
 			NpcAnimator.queue("walk_out")
 			for i in len(PotsInDeliverArea):
 				PotsInDeliverArea[i - 1].queue_free()
+
+	if not hasTalked:
+		
+		if NpcScene.hasCome:
+			hasTalked = true
+			NpcScene.hasCome = false
+			TalkWithPlayer(true,NpcScene)
+		if NpcScene.isGoing:
+			hasTalked = true
+			NpcScene.isGoing = false
+			TalkWithPlayer(false,NpcScene)
+	if NpcScene != null:
+		if NpcScene.isGone :
 			currentNpcNumber += 1
+			NpcScene.queue_free()
 			SpawnNpc()
 func SpawnNpc():
 	if currentNpcNumber < len(allNpcs):
+		hasTalked = false
 		potChecker = 99
 		potLiquidChecker = 99
 		isNpcDone = false
-		var NpcScene = preload("res://scenes/npcbase.tscn").instantiate()
+		NpcScene = preload("res://scenes/npcbase.tscn").instantiate()
 		add_child(NpcScene)
+		
 		NpcAnimator = NpcScene.get_node("NpcAnimations")
 		NpcAnimator.play("walk_in")
 	
 
+func TalkWithPlayer(isEntering : bool, npcNode):
+	dialogueManager.currentTalker = npcNode
+	if(isEntering):
+		dialogueManager.dialogueList.append(allNpcs[currentNpcNumber].dialogueEnter)
+	else:
+		dialogueManager.dialogueList.append(allNpcs[currentNpcNumber].dialogueExit)
+	
 func _on_deliver_area_body_entered(body):
 	PotsInDeliverArea.append(body)
 

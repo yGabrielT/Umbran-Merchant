@@ -12,20 +12,19 @@ var distance
 var isTalking
 var hasSam = false
 var sam
+var t = 0.0
+var canTalk
 func _ready():
-	sam = $"../../Player/AudioStreamPlayer"
-	sam.finished_saying.connect(isNotTalkingFunc)
-
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#print(currentNpc)
-	if(not dialogueList.is_empty()):
-		
+	print(currentTalker)
+	if(not dialogueList.is_empty() and currentTalker != null):
 		pos = currentTalker.global_position
 		distance = cam.global_position.distance_to(pos)
-		manageDialogueTextAndAudio()
-		if(cam.is_position_in_frustum(pos)) and distance < 5.0:
+		manageDialogueTextAndAudio(delta)
+		if(cam.is_position_in_frustum(pos)) and isTalking:
 			ManageBoxPosAndSize()
 		else:
 			var tween = get_tree().create_tween()
@@ -45,10 +44,14 @@ func hideDialogueBox():
 	var tween = get_tree().create_tween()
 	tween.tween_property(dialogueBox, "modulate:a", 0.0, .1).set_ease(Tween.EASE_IN)
 	
-func manageDialogueTextAndAudio():
+func manageDialogueTextAndAudio(delta):
 	
-	if (currentNpc < len(dialogueList)):
-		
+	if (currentNpc < len(dialogueList) and  dialogueList[currentNpc].npcSetting != null):
+		sam = dialogueList[currentNpc].npcSetting.instantiate()
+		add_child(sam)
+		sam.finished_saying.connect(isNotTalkingFunc)
+		sam.started_saying.connect(isTalkingFunc)
+		sam.connect("saying_characters", func(pos: int) -> void: dialogueBox.get_child(0).get_child(0).visible_characters = pos)
 		
 		
 		#sam.speed = dialogueList[currentNpc].speed
@@ -59,14 +62,26 @@ func manageDialogueTextAndAudio():
 		#sam.phonetic= dialogueList[currentNpc].phonetic
 		
 		if(currentDialogue < len(dialogueList[currentNpc].dialogues)):
-			if(not isTalking):
-				isTalking = true
-				dialogueBox.get_child(0).text = dialogueList[currentNpc].dialogues[currentDialogue]
+			if(not isTalking and canTalk):
+				canTalk = false
+				dialogueBox.get_child(0).get_child(0).text = "[center]" + dialogueList[currentNpc].dialogues[currentDialogue] + "[/center]"
 				sam.say(dialogueList[currentNpc].dialogues[currentDialogue])
 				currentDialogue += 1
+				
+				
+				
+			if (not canTalk):
+				if (t > sam.punctuation_pause):
+					t = 0
+					
+					canTalk = true
+				else:
+					t += delta
 		elif not isTalking:
 			currentDialogue = 0
 			currentNpc += 1
+			t = 99
+			
 	
 	
 	

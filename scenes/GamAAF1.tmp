@@ -17,13 +17,14 @@
 [ext_resource type="Texture2D" uid="uid://bchyrl3ntgmku" path="res://assets/textures/materials/cup and potion_4K_afromosia_basecolor.png" id="8_ln0dx"]
 [ext_resource type="Material" uid="uid://myc6xudn3s2y" path="res://resources/materials/outline.tres" id="8_morjj"]
 [ext_resource type="Environment" uid="uid://c62mfdjj2y2bq" path="res://new_environment.tres" id="9_a2811"]
-[ext_resource type="PackedScene" uid="uid://bw6o0b3ydmepk" path="res://resources/audiosForNpcs/jigsaw_voice.tscn" id="10_4b8nc"]
 [ext_resource type="Script" path="res://Scripts/PlayerManager.gd" id="10_w4jwg"]
+[ext_resource type="Script" path="res://Scripts/uitextfollow.gd" id="11_efo7d"]
 [ext_resource type="FontFile" uid="uid://lcgcawb0yvnv" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="12_vf4kw"]
 [ext_resource type="Script" path="res://Scripts/NpcManager.gd" id="13_3ssi3"]
 [ext_resource type="Script" path="res://Scripts/UIManager.gd" id="13_a7x3a"]
-[ext_resource type="PackedScene" uid="uid://dcyxwqthj66qo" path="res://resources/audiosForNpcs/guide_voice.tscn" id="22_2ravj"]
+[ext_resource type="Script" path="res://addons/godot-voice-generator/voice_audio_stream_player.gd" id="20_unrnj"]
 [ext_resource type="Script" path="res://Scripts/AutoSizeRichLabel.gd" id="22_fvbrm"]
+[ext_resource type="AudioStream" uid="uid://b4hbssq332ggd" path="res://addons/godot-voice-generator/sound/alphabet/low/w.wav" id="23_fesse"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtus2"]
 shader = ExtResource("1_pyp88")
@@ -37,7 +38,12 @@ shader_parameter/dithering_pattern_texture = ExtResource("2_dyoef")
 [sub_resource type="Resource" id="Resource_ntsot"]
 script = ExtResource("5_t6t4n")
 dialogues = Array[String](["Hey dude.", "finally got some grip to get working huh?"])
-npcSetting = ExtResource("22_2ravj")
+speed = 72
+pitch = 64
+mouth = 128
+throat = 128
+singing = false
+phonetic = false
 
 [sub_resource type="Resource" id="Resource_eck88"]
 script = ExtResource("5_su7yn")
@@ -61,21 +67,9 @@ script = ExtResource("6_ws1lb")
 hasOrder = false
 liquidsQuantityExpected = Array[ExtResource("5_su7yn")]([SubResource("Resource_bii1h")])
 
-[sub_resource type="Resource" id="Resource_l6672"]
-script = ExtResource("5_t6t4n")
-dialogues = Array[String](["grettings", "discovered thy potion shop and i the great one", "need a shield mixture with vigor for my foremost battles"])
-npcSetting = ExtResource("10_4b8nc")
-
-[sub_resource type="Resource" id="Resource_oihyl"]
-script = ExtResource("5_t6t4n")
-dialogues = Array[String](["thy have my gratitude little one"])
-npcSetting = ExtResource("10_4b8nc")
-
 [sub_resource type="Resource" id="Resource_y01n8"]
 script = ExtResource("7_d740x")
 PotionList = Array[ExtResource("6_ws1lb")]([SubResource("Resource_g7a5l"), SubResource("Resource_cblw3")])
-dialogueEnter = SubResource("Resource_l6672")
-dialogueExit = SubResource("Resource_oihyl")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tn4an"]
 render_priority = 0
@@ -667,6 +661,13 @@ size = Vector3(2.2, 0.873633, 2.2)
 height = 0.635677
 radius = 0.161647
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2bqt0"]
+random_pitch = 1.52
+random_volume_offset_db = 4.65
+streams_count = 1
+stream_0/stream = ExtResource("23_fesse")
+stream_0/weight = 1.0
+
 [sub_resource type="LabelSettings" id="LabelSettings_obvsx"]
 font = ExtResource("12_vf4kw")
 font_size = 42
@@ -1155,14 +1156,10 @@ transform = Transform3D(1, 0, 0, 0, 1.00001, 0, 0, 0, 1.00001, 0, 0.399268, 0)
 shape = SubResource("BoxShape3D_33yyk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others"]
-transform = Transform3D(1.18809, 0, 0, 0, 1.18809, 0, 0, 0, 1.18809, 2.20565, 0.683831, 0.0653765)
+transform = Transform3D(1.18809, 0, 0, 0, 1.18809, 0, 0, 0, 1.18809, 6.08371, 0.683831, 5.90795)
 mesh = SubResource("BoxMesh_knewj")
 skeleton = NodePath("../../Static")
-
-[node name="Sprite3D" type="Sprite3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others"]
-transform = Transform3D(1, 0, 0, 0, 0.58452, 0.811381, 0, -0.811381, 0.58452, 2.81676, 0.259496, 0)
-billboard = 1
-texture = ExtResource("5_hic6w")
+script = ExtResource("11_efo7d")
 
 [node name="Lights" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
 
@@ -1277,7 +1274,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 alignment = 1
 
 [node name="AutoSizeRichLabel" type="RichTextLabel" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/DialogueUI/ColorRect2/VBoxContainer"]
@@ -1289,7 +1285,15 @@ fit_content = true
 scroll_active = false
 script = ExtResource("22_fvbrm")
 
-[node name="AudioStreamPlayer" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player" instance=ExtResource("22_2ravj")]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player"]
+stream = SubResource("AudioStreamRandomizer_2bqt0")
+volume_db = -10.0
+script = ExtResource("20_unrnj")
+main_pitch_scale = 1.51
+word_pause = 0.16
+punctuation_pause = 2.0
+question_pitch_scale = 1.57
+word_cutting_percentage = 0.1
 
 [node name="UI_layer" type="SubViewportContainer" parent="."]
 anchors_preset = 15

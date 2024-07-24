@@ -1,8 +1,22 @@
-[gd_resource type="Resource" script_class="check_list" load_steps=3 format=3 uid="uid://cuiui127fyixk"]
+[gd_resource type="Resource" script_class="check_list" load_steps=7 format=3 uid="uid://cuiui127fyixk"]
 
 [ext_resource type="Resource" uid="uid://c68x411iihtsa" path="res://resources/NpcTasks/potions/shield_potion.tres" id="1_44gvv"]
+[ext_resource type="Script" path="res://Scripts/dialogue.gd" id="2_2ke0j"]
+[ext_resource type="PackedScene" uid="uid://bw6o0b3ydmepk" path="res://resources/audiosForNpcs/jigsaw_voice.tscn" id="2_8hiql"]
 [ext_resource type="Script" path="res://Scripts/npcCheckList.gd" id="2_p58r5"]
+
+[sub_resource type="Resource" id="Resource_eh1gt"]
+script = ExtResource("2_2ke0j")
+dialogues = Array[String](["Yo dude i would a heal potion yk yk"])
+npcSetting = ExtResource("2_8hiql")
+
+[sub_resource type="Resource" id="Resource_nh1w8"]
+script = ExtResource("2_2ke0j")
+dialogues = Array[String](["Ty dude saved my weekend"])
+npcSetting = ExtResource("2_8hiql")
 
 [resource]
 script = ExtResource("2_p58r5")
 PotionList = Array[Resource("res://Scripts/potions.gd")]([ExtResource("1_44gvv")])
+dialogueEnter = SubResource("Resource_eh1gt")
+dialogueExit = SubResource("Resource_nh1w8")

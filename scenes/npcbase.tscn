@@ -106,3 +106,4 @@ libraries = {
 }
 
 [connection signal="animation_finished" from="NpcAnimations" to="." method="_on_npc_animations_animation_finished"]
+[connection signal="animation_started" from="NpcAnimations" to="." method="_on_npc_animations_animation_started"]
