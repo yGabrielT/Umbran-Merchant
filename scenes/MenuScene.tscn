@@ -1,0 +1,179 @@
+[gd_scene load_steps=12 format=3 uid="uid://blqx2f6eajho2"]
+
+[ext_resource type="Script" path="res://Scripts/menuScripts/MenuManager.gd" id="1_tpb46"]
+[ext_resource type="Shader" path="res://plugins/ursc/canvas_item/dithering.gdshader" id="1_ultkk"]
+[ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://assets/textures/materials/bayer2tile16.png" id="2_xod4g"]
+[ext_resource type="PackedScene" uid="uid://cmi4tqlu3o7xm" path="res://scenes/npc_menu_walk.tscn" id="5_7euql"]
+[ext_resource type="PackedScene" uid="uid://dixx52xms2qbh" path="res://scenes/GameScene.tscn" id="5_pp6ob"]
+[ext_resource type="Shader" path="res://plugins/ursc/canvas_item/fade.gdshader" id="6_0xnuf"]
+[ext_resource type="Environment" uid="uid://c62mfdjj2y2bq" path="res://new_environment.tres" id="20_ygcxi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qtus2"]
+shader = ExtResource("1_ultkk")
+shader_parameter/color_depth = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_00eh2"]
+shader = ExtResource("1_ultkk")
+shader_parameter/color_depth = 32.0
+shader_parameter/dithering_pattern_texture = ExtResource("2_xod4g")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2re4r"]
+shader = ExtResource("6_0xnuf")
+shader_parameter/mode = -1
+
+[sub_resource type="LabelSettings" id="LabelSettings_2h3jf"]
+line_spacing = -24.515
+font_size = 51
+
+[node name="All" type="Node3D"]
+
+[node name="LowResPort" type="SubViewportContainer" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_qtus2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 4
+metadata/_edit_lock_ = true
+
+[node name="LowResSubPort" type="SubViewport" parent="LowResPort"]
+handle_input_locally = false
+size = Vector2i(320, 240)
+render_target_update_mode = 4
+
+[node name="DitherPort" type="SubViewportContainer" parent="LowResPort/LowResSubPort"]
+material = SubResource("ShaderMaterial_00eh2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="DitherSubPort" type="SubViewport" parent="LowResPort/LowResSubPort/DitherPort"]
+handle_input_locally = false
+size = Vector2i(320, 240)
+render_target_update_mode = 4
+
+[node name="World" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort" node_paths=PackedStringArray("spawnPos", "endPos", "AnyButton", "memeButton", "fadeOverlay", "MainLabel", "otherFade")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.602, 0)
+script = ExtResource("1_tpb46")
+npcToMove = ExtResource("5_7euql")
+spawnPos = NodePath("Spawn")
+endPos = NodePath("EndSpawn")
+maxCount = 18
+SpawnCD = 0.2
+AnyButton = NodePath("Camera3D/Any")
+memeButton = NodePath("Camera3D/meme")
+fadeOverlay = NodePath("Camera3D/Fade")
+MainLabel = NodePath("Camera3D/MainFront")
+otherFade = NodePath("Camera3D/OtherFade")
+SceneToChange = ExtResource("5_pp6ob")
+
+[node name="Lights" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
+transform = Transform3D(-0.616538, -0.78731, -0.00490658, -0.654614, 0.509142, 0.558798, -0.437449, 0.347732, -0.829289, 0, 2.05866, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Lights"]
+environment = ExtResource("20_ygcxi")
+
+[node name="Camera3D" type="Camera3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
+transform = Transform3D(1, 0, 0, 0, 0.947685, -0.319207, 0, 0.319207, 0.947685, 0, 0, 0)
+
+[node name="Fade" type="ColorRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Camera3D"]
+material = SubResource("ShaderMaterial_2re4r")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="MainFront" type="Label" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Camera3D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "UMBRAN
+MERCHANT"
+label_settings = SubResource("LabelSettings_2h3jf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Main" type="Label3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.666541, -0.632095, -21.5537)
+texture_filter = 0
+outline_modulate = Color(1, 1, 1, 1)
+text = "UMBRAN
+MERCHANT"
+font_size = 1315
+outline_size = 0
+line_spacing = -600.0
+
+[node name="Any" type="Label3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.666541, -8.96648, -21.5537)
+texture_filter = 0
+outline_modulate = Color(1, 1, 1, 1)
+text = "PRESS ANY  BUTTON"
+font_size = 562
+outline_size = 0
+line_spacing = -600.0
+
+[node name="meme" type="Label3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.666541, -10.9211, -21.5537)
+pixel_size = 0.006
+texture_filter = 0
+modulate = Color(1, 1, 1, 0.454902)
+outline_modulate = Color(1, 1, 1, 1)
+text = "(except your power button i guess)"
+font_size = 253
+outline_size = 0
+line_spacing = -600.0
+
+[node name="OtherFade" type="ColorRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Camera3D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Spawn" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -8)
+
+[node name="EndSpawn" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -8)
+
+[node name="UI_layer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="UI_layer"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+size = Vector2i(1280, 960)
+render_target_update_mode = 4
+
+[node name="Control" type="Control" parent="UI_layer/SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

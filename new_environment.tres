@@ -8,8 +8,8 @@ ground_bottom_color = Color(0.051971, 0.051971, 0.051971, 1)
 ground_horizon_color = Color(0, 0, 0, 1)
 ground_curve = 0.331286
 ground_energy_multiplier = 1.4
-sun_angle_max = 34.1
-sun_curve = 0.439226
+sun_angle_max = 40.95
+sun_curve = 1.0815
 
 [sub_resource type="Sky" id="Sky_8i848"]
 sky_material = SubResource("ProceduralSkyMaterial_ve4ol")

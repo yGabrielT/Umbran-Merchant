@@ -1611,7 +1611,7 @@ bones/37/rotation = Quaternion(0.00314674, 1.1528e-08, 0.000253043, 0.999995)
 bones/37/scale = Vector3(1, 1, 1)
 
 [node name="Eyes" type="BoneAttachment3D" parent="ShadowNpc/Skeleton3D"]
-transform = Transform3D(0.273433, -1.33984e-09, 3.09228e-10, 1.46079e-09, 0.289955, 1.18954e-08, -4.87489e-10, -1.90323e-08, 0.173828, 5.82077e-10, 1.06646, 6.51926e-08)
+transform = Transform3D(0.273433, -5.6472e-09, 3.43789e-10, 5.29928e-09, 0.289955, 2.38131e-10, -5.49335e-10, 6.82945e-10, 0.173828, 3.14321e-09, 1.06646, 2.98023e-08)
 bone_name = "Eyes"
 bone_idx = 10
 
