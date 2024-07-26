@@ -6,5 +6,5 @@
 render_priority = 0
 shader = ExtResource("1_8fjpd")
 shader_parameter/albedo_color = Color(0.513726, 0.996078, 1, 0.133333)
-shader_parameter/cull_distance_override = 12.0
-shader_parameter/convert_vertex_colors = true
+shader_parameter/cull_distance_override = 0.0
+shader_parameter/convert_vertex_colors = false
