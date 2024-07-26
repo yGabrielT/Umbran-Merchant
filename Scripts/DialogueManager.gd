@@ -14,6 +14,7 @@ var hasSam = false
 var sam
 var t = 0.0
 var canTalk
+signal npcDialogueEnded
 func _ready():
 	pass
 
@@ -23,12 +24,13 @@ func _process(delta):
 	if(not dialogueList.is_empty() and currentTalker != null):
 		pos = currentTalker.global_position
 		distance = cam.global_position.distance_to(pos)
-		manageDialogueTextAndAudio(delta)
+		
 		if(cam.is_position_in_frustum(pos) and pos != null):
 			ManageBoxPosAndSize()
 		else:
 			var tween = get_tree().create_tween()
 			tween.tween_property(dialogueBox, "modulate:a", 0.0, .1).set_ease(Tween.EASE_IN)
+		manageDialogueTextAndAudio(delta)
 	else:
 		var tween = get_tree().create_tween()
 		tween.tween_property(dialogueBox, "modulate:a", 0.0, .1).set_ease(Tween.EASE_IN)
@@ -82,6 +84,7 @@ func manageDialogueTextAndAudio(delta):
 		elif not isTalking:
 			currentDialogue = 0
 			currentNpc += 1
+			emit_signal("npcDialogueEnded")
 			t = 99
 			
 	

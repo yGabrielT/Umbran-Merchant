@@ -12,12 +12,14 @@ var potionOrderCorrector
 @export var allNpcs : Array[check_list]
 var NpcScene
 var hasTalked
-
+var canChange : bool = false
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	dialogueManager.npcDialogueEnded.connect(func():
+		set_canChange(true))
 	SpawnNpc()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -80,17 +82,19 @@ func _process(delta):
 						3:
 							modelNpcAnimator.play("PlayerRiggingIKidleanims/Idle3",.2)
 		if not dialogueManager.isTalking:
-			if NpcScene.hasCome:
+			
+			if NpcScene.hasCome and canChange:
 				
-				
+				canChange = false
 				hasTalked = true
 				NpcScene.hasCome = false
-				
 				TalkWithPlayer(true,NpcScene)
-			if NpcScene.isGoing:
+			if NpcScene.isGoing and canChange:
+				canChange = false
 				hasTalked = true
 				NpcScene.isGoing = false
 				TalkWithPlayer(false,NpcScene)
+			
 	if NpcScene != null:
 		if NpcScene.isGone :
 			currentNpcNumber += 1
@@ -112,6 +116,8 @@ func SpawnNpc():
 	
 
 func TalkWithPlayer(isEntering : bool, npcNode):
+	print("in your jaws")
+	
 	dialogueManager.currentTalker = npcNode
 	if(isEntering):
 		dialogueManager.dialogueList.append(allNpcs[currentNpcNumber].dialogueEnter)
@@ -124,3 +130,7 @@ func _on_deliver_area_body_entered(body):
 
 func _on_deliver_area_body_exited(body):
 	PotsInDeliverArea.erase(body)
+
+func set_canChange(value : bool):
+	canChange = value
+	print("balls")

@@ -117,7 +117,7 @@ func _physics_process(delta):
 			lastraycastobj.visible = false
 		if raycastObj != null:
 			raycastObj.visible = false
-			isLookingToItem = false
+		isLookingToItem = false
 #endregion
 	
 
