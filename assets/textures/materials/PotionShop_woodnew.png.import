@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c424j18g2xwpy"
-path.s3tc="res://.godot/imported/PotionShop_marblenew.png-04fa3733477f1236b98084183513ca04.s3tc.ctex"
+uid="uid://6hfhp3tc47lm"
+path.s3tc="res://.godot/imported/PotionShop_woodnew.png-c23e5ef7ee372d9bc3c99c0b6d5e18d9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "d6738cd70051f697d2ea9c7d45dd83b1"
+"md5": "311543048a68a8543b698f12f0078c8e"
 }
 
 [deps]
 
-source_file="res://assets/models/PotionShop_marblenew.png"
-dest_files=["res://.godot/imported/PotionShop_marblenew.png-04fa3733477f1236b98084183513ca04.s3tc.ctex"]
+source_file="res://assets/textures/materials/PotionShop_woodnew.png"
+dest_files=["res://.godot/imported/PotionShop_woodnew.png-c23e5ef7ee372d9bc3c99c0b6d5e18d9.s3tc.ctex"]
 
 [params]
 

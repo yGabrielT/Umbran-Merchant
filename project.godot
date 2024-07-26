@@ -95,6 +95,7 @@ mouse2={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/canvas_textures/default_texture_repeat=1
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/lossless_compression/force_png=true
@@ -110,7 +111,7 @@ textures/light_projectors/filter=0
 
 affine_texture_mapping={
 "type": "bool",
-"value": true
+"value": false
 }
 fog_color={
 "type": "color",
@@ -130,7 +131,7 @@ cull_distance={
 }
 texture_filtering={
 "type": "bool",
-"value": true
+"value": false
 }
 texture_lod_halve_distance={
 "type": "float",
@@ -138,5 +139,5 @@ texture_lod_halve_distance={
 }
 vertex_snap_intensity={
 "type": "int",
-"value": 2
+"value": 0
 }
