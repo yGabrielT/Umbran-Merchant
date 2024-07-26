@@ -72,7 +72,7 @@ func _process(delta):
 			for i in len(PotsInDeliverArea):
 				PotsInDeliverArea[i - 1].queue_free()
 
-	if not hasTalked:
+	if not hasTalked and NpcScene != null:
 		if NpcScene.hasCome:
 			match (allNpcs[currentNpcNumber].idleAnim123):
 						1:

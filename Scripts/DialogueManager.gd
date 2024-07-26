@@ -12,8 +12,10 @@ var distance
 var isTalking
 var hasSam = false
 var sam
-var t = 0.0
-var canTalk
+var t : float = 0.0
+var canTalk = false
+var allowedToTalk = true
+var canChangeSam = true
 signal npcDialogueEnded
 func _ready():
 	pass
@@ -51,12 +53,19 @@ func hideDialogueBox():
 func manageDialogueTextAndAudio(delta):
 	
 	if (currentNpc < len(dialogueList) and  dialogueList[currentNpc].npcSetting != null):
-		sam = dialogueList[currentNpc].npcSetting.instantiate()
-		add_child(sam)
-		sam.finished_saying.connect(isNotTalkingFunc)
-		sam.started_saying.connect(isTalkingFunc)
-		sam.connect("saying_characters", func(pos: int) -> void: dialogueBox.get_child(0).get_child(0).visible_characters = pos)
-		
+		if(canChangeSam):
+			canChangeSam = false
+			sam = dialogueList[currentNpc].npcSetting.instantiate()
+			add_child(sam)
+			sam.finished_saying.connect(isNotTalkingFunc)
+			sam.started_saying.connect(isTalkingFunc)
+			sam.connect("saying_characters", func(pos: int) -> void: dialogueBox.get_child(0).get_child(0).visible_characters = pos)
+		if(not isTalking):
+			if (t >= sam.punctuation_pause and not canTalk):
+					t = 0.0
+					canTalk = true
+			if (t < sam.punctuation_pause):
+					t += delta
 		
 		#sam.speed = dialogueList[currentNpc].speed
 		#sam.pitch= dialogueList[currentNpc].pitch
@@ -66,26 +75,26 @@ func manageDialogueTextAndAudio(delta):
 		#sam.phonetic= dialogueList[currentNpc].phonetic
 		
 		if(currentDialogue < len(dialogueList[currentNpc].dialogues)):
+			
+			
 			if(not isTalking and canTalk):
+				
 				canTalk = false
 				dialogueBox.get_child(0).get_child(0).text = "[center]" + dialogueList[currentNpc].dialogues[currentDialogue] + "[/center]"
 				sam.say(dialogueList[currentNpc].dialogues[currentDialogue])
 				currentDialogue += 1
+				t = 0.0
 				
 				
 				
-			if (not canTalk):
-				if (t > sam.punctuation_pause):
-					t = 0
-					
-					canTalk = true
-				else:
-					t += delta
-		elif not isTalking:
+		elif not isTalking and allowedToTalk:
+			canTalk = false
+			canChangeSam = true
 			currentDialogue = 0
 			currentNpc += 1
 			emit_signal("npcDialogueEnded")
 			t = 99
+			
 			
 	
 	

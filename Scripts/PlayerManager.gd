@@ -214,6 +214,9 @@ func align_with_y(xform, new_y):
 	xform.basis.x = -xform.basis.z.cross(new_y)
 	xform.basis = xform.basis.orthonormalized()
 	return xform
-
+func mixPotion():
+	if mouse1 == true and isLookingToItem == true and isLeftHandOccupied == true and not mouse2:
+		if len(raycastObj.get_parent().mats) == 1:
+			raycastObj.get_parent().mats[0]
 
 
