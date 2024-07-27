@@ -38,7 +38,7 @@ shader_parameter/dithering_pattern_texture = ExtResource("2_dyoef")
 
 [sub_resource type="Resource" id="Resource_ntsot"]
 script = ExtResource("5_t6t4n")
-dialogues = Array[String](["Hey dude.", "finally got some grip to get working huh?", "oh look someone is already there", "do your job im just watching"])
+dialogues = Array[String](["See?", "Easy ride", "looks there's already a client here", "do your job, i'll be watching."])
 npcSetting = ExtResource("22_2ravj")
 
 [sub_resource type="Resource" id="Resource_bmcry"]
@@ -1941,6 +1941,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.318987, 0)
 shape = SubResource("CylinderShape3D_q4hct")
 
 [node name="Head" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player"]
+transform = Transform3D(0.631109, 0, -0.775694, 0, 1, 0, 0.775694, 0, 0.631109, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Head"]
 transform = Transform3D(0.148785, 0, 0, 0, 0.148785, 0, 0, 0, 0.148785, 0.0016917, 0.00273496, 0.000470519)

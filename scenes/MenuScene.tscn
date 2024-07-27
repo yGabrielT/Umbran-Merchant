@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://plugins/ursc/canvas_item/dithering.gdshader" id="1_ultkk"]
 [ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://assets/textures/materials/bayer2tile16.png" id="2_xod4g"]
 [ext_resource type="PackedScene" uid="uid://cmi4tqlu3o7xm" path="res://scenes/npc_menu_walk.tscn" id="5_7euql"]
-[ext_resource type="PackedScene" uid="uid://dixx52xms2qbh" path="res://scenes/GameScene.tscn" id="5_pp6ob"]
+[ext_resource type="PackedScene" uid="uid://bksagkehyae6s" path="res://scenes/TutorialScene.tscn" id="5_iig0u"]
 [ext_resource type="Shader" path="res://plugins/ursc/canvas_item/fade.gdshader" id="6_0xnuf"]
 [ext_resource type="Environment" uid="uid://c62mfdjj2y2bq" path="res://new_environment.tres" id="20_ygcxi"]
 
@@ -71,7 +71,7 @@ memeButton = NodePath("Camera3D/Node3D/meme")
 fadeOverlay = NodePath("Camera3D/Fade")
 MainLabel = NodePath("Camera3D/Control/MainFront")
 otherFade = NodePath("Camera3D/OtherFade")
-SceneToChange = ExtResource("5_pp6ob")
+SceneToChange = ExtResource("5_iig0u")
 
 [node name="Lights" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
 
