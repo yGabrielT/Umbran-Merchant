@@ -49,6 +49,12 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 #BodyEntered in Area
 var arrayOfBodies = []
 
+#Color
+var colorOfTarget
+var leftHandObjLiquidColor
+var newColor
+
+
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
@@ -135,6 +141,7 @@ func _process(delta):
 	if not hand2cooldown:
 		mouse2 = Input.is_action_pressed("mouse2")
 	GrabPotion()
+	mixPotion()
 	RaycastAPlaceToPut()
 	PutDownPotion()
 
@@ -216,7 +223,27 @@ func align_with_y(xform, new_y):
 	return xform
 func mixPotion():
 	if mouse1 == true and isLookingToItem == true and isLeftHandOccupied == true and not mouse2:
-		if len(raycastObj.get_parent().mats) == 1:
-			raycastObj.get_parent().mats[0]
-
+		if len(raycastObj.get_parent().liquids) == 1 and len(leftHandObj.liquids) == 1:
+			print("got it")
+			colorOfTarget = Color(
+				raycastObj.get_parent().liquids[0].x,
+				raycastObj.get_parent().liquids[0].y,
+				raycastObj.get_parent().liquids[0].z,
+				raycastObj.get_parent().liquids[0].w)
+			leftHandObjLiquidColor = Color(
+				leftHandObj.liquids[0].x,
+				leftHandObj.liquids[0].y,
+				leftHandObj.liquids[0].z,
+				leftHandObj.liquids[0].w)
+			newColor = ((leftHandObjLiquidColor * .5) + (colorOfTarget * .5))
+			
+		
+			print(colorOfTarget,leftHandObjLiquidColor)
+			#apply color
+			raycastObj.get_parent().mats[0].get_active_material(0).albedo_color = newColor.clamp()
+			raycastObj.get_parent().updateLiquids()
+		hand1cooldown = true
+		mouse1 = false
+		await get_tree().create_timer(.2).timeout
+		hand1cooldown = false
 
