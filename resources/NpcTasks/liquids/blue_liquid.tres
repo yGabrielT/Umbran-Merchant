@@ -4,5 +4,4 @@
 
 [resource]
 script = ExtResource("1_nqo1b")
-liquidRatio = 100
-liquidColor = Color(0.266667, 0.870588, 1, 1)
+liquidColor = Color(0, 0.623529, 0.917647, 0.921569)

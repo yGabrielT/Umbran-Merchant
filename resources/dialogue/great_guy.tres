@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="check_list" load_steps=10 format=3 uid="uid://byiu62i3l2o2k"]
+
+[ext_resource type="Script" path="res://Scripts/liquids.gd" id="1_6sjbb"]
+[ext_resource type="Script" path="res://Scripts/potions.gd" id="2_1ikan"]
+[ext_resource type="PackedScene" uid="uid://bw6o0b3ydmepk" path="res://resources/audiosForNpcs/jigsaw_voice.tscn" id="3_20dmh"]
+[ext_resource type="Script" path="res://Scripts/dialogue.gd" id="4_kdhap"]
+[ext_resource type="Script" path="res://Scripts/npcCheckList.gd" id="5_xw81o"]
+
+[sub_resource type="Resource" id="Resource_eck88"]
+script = ExtResource("1_6sjbb")
+liquidColor = Color(0.631373, 0.580392, 0.65098, 0.960784)
+
+[sub_resource type="Resource" id="Resource_g7a5l"]
+script = ExtResource("2_1ikan")
+hasOrder = false
+liquidsQuantityExpected = Array[ExtResource("1_6sjbb")]([SubResource("Resource_eck88")])
+
+[sub_resource type="Resource" id="Resource_l6672"]
+script = ExtResource("4_kdhap")
+dialogues = Array[String](["grettings", "discovered thy potion shop and i the great one", "need a shield mixture with vigor for my foremost battles"])
+npcSetting = ExtResource("3_20dmh")
+
+[sub_resource type="Resource" id="Resource_oihyl"]
+script = ExtResource("4_kdhap")
+dialogues = Array[String](["thy have my gratitude little one"])
+npcSetting = ExtResource("3_20dmh")
+
+[resource]
+script = ExtResource("5_xw81o")
+anyBodyNeeded = false
+PotionList = Array[ExtResource("2_1ikan")]([SubResource("Resource_g7a5l")])
+dialogueEnter = SubResource("Resource_l6672")
+dialogueExit = SubResource("Resource_oihyl")
+idleAnim123 = 1

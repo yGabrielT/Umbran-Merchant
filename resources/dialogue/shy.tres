@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="check_list" load_steps=10 format=3 uid="uid://datgewl8uqgm0"]
+
+[ext_resource type="Script" path="res://Scripts/liquids.gd" id="1_tqrlf"]
+[ext_resource type="Script" path="res://Scripts/potions.gd" id="2_6loir"]
+[ext_resource type="PackedScene" uid="uid://d30h6llfefg2o" path="res://resources/audiosForNpcs/strange_voice.tscn" id="3_jx6vo"]
+[ext_resource type="Script" path="res://Scripts/dialogue.gd" id="4_fua18"]
+[ext_resource type="Script" path="res://Scripts/npcCheckList.gd" id="5_pfo3c"]
+
+[sub_resource type="Resource" id="Resource_3btub"]
+script = ExtResource("1_tqrlf")
+liquidColor = Color(0.858824, 0.337255, 0.827451, 0.666667)
+
+[sub_resource type="Resource" id="Resource_peurk"]
+script = ExtResource("2_6loir")
+hasOrder = false
+liquidsQuantityExpected = Array[ExtResource("1_tqrlf")]([SubResource("Resource_3btub")])
+
+[sub_resource type="Resource" id="Resource_04p5i"]
+script = ExtResource("4_fua18")
+dialogues = Array[String](["erm hi, wait... is that a transforming potion?", "w-w-why do u have that?", "j-j-just give it to me.", "The color? Its purple don't you know?"])
+npcSetting = ExtResource("3_jx6vo")
+
+[sub_resource type="Resource" id="Resource_n1mln"]
+script = ExtResource("4_fua18")
+dialogues = Array[String](["ah. i need to hide this from the other."])
+npcSetting = ExtResource("3_jx6vo")
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("5_pfo3c")
+anyBodyNeeded = false
+PotionList = Array[ExtResource("2_6loir")]([SubResource("Resource_peurk")])
+dialogueEnter = SubResource("Resource_04p5i")
+dialogueExit = SubResource("Resource_n1mln")
+idleAnim123 = 2

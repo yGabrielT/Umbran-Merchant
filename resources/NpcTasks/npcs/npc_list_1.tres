@@ -7,12 +7,12 @@
 
 [sub_resource type="Resource" id="Resource_eh1gt"]
 script = ExtResource("2_2ke0j")
-dialogues = Array[String](["Yo dude i would like slurping a shield potion yk yk"])
+dialogues = Array[String](["Hello, looks like the old guy got replaced once again huh?", "Anyways just give me that tiny dark blue bottle behind you."])
 npcSetting = ExtResource("2_8hiql")
 
 [sub_resource type="Resource" id="Resource_nh1w8"]
 script = ExtResource("2_2ke0j")
-dialogues = Array[String](["Ty dude saved my weekend"])
+dialogues = Array[String](["Good luck new kid."])
 npcSetting = ExtResource("2_8hiql")
 
 [resource]

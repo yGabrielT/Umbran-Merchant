@@ -1,4 +1,4 @@
-[gd_scene load_steps=158 format=3 uid="uid://dixx52xms2qbh"]
+[gd_scene load_steps=157 format=3 uid="uid://dixx52xms2qbh"]
 
 [ext_resource type="Shader" path="res://plugins/ursc/canvas_item/dithering.gdshader" id="1_pyp88"]
 [ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://assets/textures/materials/bayer2tile16.png" id="2_dyoef"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://Scripts/DialogueManager.gd" id="3_qd5um"]
 [ext_resource type="Resource" uid="uid://cuiui127fyixk" path="res://resources/NpcTasks/npcs/npc_list_1.tres" id="4_2ebl0"]
 [ext_resource type="Shader" path="res://plugins/ursc/spatial/shaderplane.gdshader" id="4_um133"]
-[ext_resource type="Script" path="res://Scripts/liquids.gd" id="5_su7yn"]
 [ext_resource type="Script" path="res://Scripts/dialogue.gd" id="5_t6t4n"]
 [ext_resource type="Script" path="res://Scripts/potions.gd" id="6_ws1lb"]
 [ext_resource type="Material" uid="uid://bf1cp2jgfis8t" path="res://resources/materials/glass.tres" id="7_ajjoc"]
@@ -14,12 +13,15 @@
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="7_dv8ga"]
 [ext_resource type="Texture2D" uid="uid://bchyrl3ntgmku" path="res://assets/textures/materials/cup and potion_4K_afromosia_basecolor.png" id="8_ln0dx"]
 [ext_resource type="Material" uid="uid://myc6xudn3s2y" path="res://resources/materials/outline.tres" id="8_morjj"]
+[ext_resource type="Resource" uid="uid://byiu62i3l2o2k" path="res://resources/dialogue/great_guy.tres" id="8_odgk6"]
 [ext_resource type="Environment" uid="uid://c62mfdjj2y2bq" path="res://new_environment.tres" id="9_a2811"]
-[ext_resource type="PackedScene" uid="uid://bw6o0b3ydmepk" path="res://resources/audiosForNpcs/jigsaw_voice.tscn" id="10_4b8nc"]
+[ext_resource type="Resource" uid="uid://datgewl8uqgm0" path="res://resources/dialogue/shy.tres" id="9_jclmh"]
+[ext_resource type="Resource" uid="uid://ccukdkjgdog2e" path="res://resources/dialogue/strange_dude.tres" id="10_h4jp6"]
 [ext_resource type="Script" path="res://Scripts/PlayerManager.gd" id="10_w4jwg"]
 [ext_resource type="FontFile" uid="uid://lcgcawb0yvnv" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="12_vf4kw"]
 [ext_resource type="Script" path="res://Scripts/NpcManager.gd" id="13_3ssi3"]
 [ext_resource type="Script" path="res://Scripts/UIManager.gd" id="13_a7x3a"]
+[ext_resource type="PackedScene" uid="uid://b82ytbnxrig4m" path="res://resources/audiosForNpcs/deep_voice.tscn" id="13_gpdhr"]
 [ext_resource type="Texture2D" uid="uid://b0j3u4rk608q8" path="res://assets/textures/materials/PotionShop_planknew.png" id="20_mgx0a"]
 [ext_resource type="Texture2D" uid="uid://c424j18g2xwpy" path="res://assets/textures/materials/PotionShop_marblenew.png" id="21_sin3i"]
 [ext_resource type="PackedScene" uid="uid://dcyxwqthj66qo" path="res://resources/audiosForNpcs/guide_voice.tscn" id="22_2ravj"]
@@ -41,48 +43,27 @@ script = ExtResource("5_t6t4n")
 dialogues = Array[String](["See?", "Easy ride", "looks there's already a client here", "do your job, i'll be watching."])
 npcSetting = ExtResource("22_2ravj")
 
-[sub_resource type="Resource" id="Resource_bmcry"]
-script = ExtResource("5_t6t4n")
-dialogues = Array[String]([])
-npcSetting = ExtResource("22_2ravj")
-
-[sub_resource type="Resource" id="Resource_eck88"]
-script = ExtResource("5_su7yn")
-liquidColor = Color(0, 0.682353, 0.572549, 0.470588)
-
-[sub_resource type="Resource" id="Resource_fthjv"]
-script = ExtResource("5_su7yn")
-liquidColor = Color(1, 0.290196, 0.305882, 0.921569)
-
-[sub_resource type="Resource" id="Resource_g7a5l"]
+[sub_resource type="Resource" id="Resource_q8rxt"]
 script = ExtResource("6_ws1lb")
 hasOrder = false
-liquidsQuantityExpected = Array[ExtResource("5_su7yn")]([SubResource("Resource_eck88"), SubResource("Resource_fthjv")])
+liquidsQuantityExpected = Array[Resource("res://Scripts/liquids.gd")]([])
 
-[sub_resource type="Resource" id="Resource_bii1h"]
-script = ExtResource("5_su7yn")
-liquidColor = Color(1, 1, 1, 0.431373)
-
-[sub_resource type="Resource" id="Resource_cblw3"]
-script = ExtResource("6_ws1lb")
-hasOrder = false
-liquidsQuantityExpected = Array[ExtResource("5_su7yn")]([SubResource("Resource_bii1h")])
-
-[sub_resource type="Resource" id="Resource_l6672"]
+[sub_resource type="Resource" id="Resource_q0uum"]
 script = ExtResource("5_t6t4n")
-dialogues = Array[String](["grettings", "discovered thy potion shop and i the great one", "need a shield mixture with vigor for my foremost battles"])
-npcSetting = ExtResource("10_4b8nc")
+dialogues = Array[String](["Give me anything"])
+npcSetting = ExtResource("13_gpdhr")
 
-[sub_resource type="Resource" id="Resource_oihyl"]
+[sub_resource type="Resource" id="Resource_7d5ja"]
 script = ExtResource("5_t6t4n")
-dialogues = Array[String](["thy have my gratitude little one"])
-npcSetting = ExtResource("10_4b8nc")
+dialogues = Array[String](["yeah that's it"])
+npcSetting = ExtResource("13_gpdhr")
 
-[sub_resource type="Resource" id="Resource_y01n8"]
+[sub_resource type="Resource" id="Resource_c7pc2"]
 script = ExtResource("7_d740x")
-PotionList = Array[ExtResource("6_ws1lb")]([SubResource("Resource_g7a5l"), SubResource("Resource_cblw3")])
-dialogueEnter = SubResource("Resource_l6672")
-dialogueExit = SubResource("Resource_oihyl")
+anyBodyNeeded = false
+PotionList = Array[ExtResource("6_ws1lb")]([SubResource("Resource_q8rxt")])
+dialogueEnter = SubResource("Resource_q0uum")
+dialogueExit = SubResource("Resource_7d5ja")
 idleAnim123 = 1
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8smb8"]
@@ -336,13 +317,6 @@ transparency = 1
 depth_draw_mode = 1
 shading_mode = 0
 albedo_color = Color(1, 0.290196, 0.305882, 0.921569)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p0mwe"]
-transparency = 1
-cull_mode = 2
-depth_draw_mode = 1
-shading_mode = 0
-albedo_color = Color(0, 0.682353, 0.572549, 0.470588)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_o7aqs"]
 points = PackedVector3Array(-1.67485, -1.10648, -2.76371, 1.76225, 0.261296, 3.30966, 1.74598, 1.1742, 3.28058, -1.68263, 1.0576, 3.50182, 1.15906, 1.72397, -2.63462, 1.17336, -1.79905, 3.16297, 1.60479, -1.54606, -2.51222, -1.45494, -1.6834, 3.16072, -1.54602, 1.60475, -2.51216, -1.22102, 1.73576, 3.26011, 1.37085, 0.475949, -3.61526, -1.10405, -1.7847, -2.53099, -0.638027, -1.30471, -3.59266, 1.71924, 1.26858, -2.51589, -0.526927, 1.36253, -3.59396, 1.17419, 1.74631, 3.27984, 1.52112, -1.46059, 3.51747, -1.67818, -1.10866, 3.49231, 1.30384, 1.30384, 3.66604, -1.76898, 1.15299, -2.5087, -1.41735, 0.250817, -3.59614, -1.78638, -1.21875, 3.14008, 1.15296, -1.76893, -2.50863, 1.7361, -1.10734, -2.65261, -1.23907, -1.35433, 3.65634, -1.79905, 1.17336, 3.16297, 1.00926, -1.06323, -3.52781, 1.73768, -1.33597, 3.1496, -1.78461, -1.10399, -2.53087, 1.8287, 0.391888, -1.71241, -1.10665, 1.73497, -2.65093, 1.6201, 1.6201, 3.1427)
@@ -721,6 +695,116 @@ blend_shape_mode = 0
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 10.0
+
+[sub_resource type="Animation" id="Animation_ydlgx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Guide/LeftEye:blend_shapes/Close")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Guide/RightEye:blend_shapes/Close")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Guide/LeftEye:blend_shapes/HalfClosed")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Guide/RightEye:blend_shapes/HalfClosed")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_xlql0"]
+resource_name = "eyes"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Guide/LeftEye:blend_shapes/Close")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5.6, 5.8, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Guide/RightEye:blend_shapes/Close")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5.6, 5.8, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Guide/LeftEye:blend_shapes/HalfClosed")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 5.6, 5.8, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Guide/RightEye:blend_shapes/HalfClosed")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 5.6, 5.8, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2hb5f"]
+_data = {
+"RESET": SubResource("Animation_ydlgx"),
+"eyes": SubResource("Animation_xlql0")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gkeil"]
 render_priority = 0
@@ -1317,12 +1401,12 @@ render_target_update_mode = 4
 
 [node name="DialogueManager" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/GameHandlers" node_paths=PackedStringArray("currentTalker")]
 script = ExtResource("3_qd5um")
-dialogueList = Array[ExtResource("5_t6t4n")]([SubResource("Resource_ntsot"), SubResource("Resource_bmcry")])
+dialogueList = Array[ExtResource("5_t6t4n")]([SubResource("Resource_ntsot")])
 currentTalker = NodePath("../../Objects/Others/GuideMesh")
 
 [node name="NpcManager" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/GameHandlers"]
 script = ExtResource("13_3ssi3")
-allNpcs = Array[ExtResource("7_d740x")]([ExtResource("4_2ebl0"), SubResource("Resource_y01n8")])
+allNpcs = Array[ExtResource("7_d740x")]([ExtResource("4_2ebl0"), ExtResource("8_odgk6"), ExtResource("9_jclmh"), ExtResource("10_h4jp6"), SubResource("Resource_c7pc2")])
 
 [node name="Objects" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
 
@@ -1355,11 +1439,10 @@ transform = Transform3D(0.295985, 0, -6.21725e-15, 0, 0.295985, 0, 6.21725e-15, 
 
 [node name="CupLiquidBase" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Cup/Liquids"]
 transform = Transform3D(1, 0, 9.59233e-14, 0, 1, 0, -9.59233e-14, 0, 1, 0, 0, 0)
-visible = false
 gi_mode = 0
 mesh = SubResource("ArrayMesh_5gx7v")
 skeleton = NodePath("")
-blend_shapes/LiquidDown = 1.0
+blend_shapes/LiquidDown = 0.0
 surface_material_override/0 = SubResource("StandardMaterial3D_ued6n")
 
 [node name="Outliner" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Cup"]
@@ -1468,20 +1551,12 @@ skeleton = NodePath("")
 transform = Transform3D(0.08, -1.13687e-15, 4.96942e-23, 0, -3.49691e-09, -0.08, 1.13687e-15, 0.08, -3.49691e-09, 0, 0.561432, 0)
 
 [node name="PotionBottleMLiquidBase" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/PotionBottleM/Liquids"]
-transform = Transform3D(0.999999, 1.42109e-14, 8.47033e-22, -1.42109e-14, 0.999999, 5.96046e-08, 0, -5.96046e-08, 0.999999, 0, 0, 0)
+transform = Transform3D(0.999999, 1.42109e-14, 8.47033e-22, -1.42109e-14, 0.999999, 5.96046e-08, -3.15028e-29, -5.96046e-08, 0.999999, 0, 0, 0)
 gi_mode = 0
 mesh = SubResource("ArrayMesh_potms")
 skeleton = NodePath("")
 blend_shapes/LiquidDown = 0.0
 surface_material_override/0 = SubResource("StandardMaterial3D_fsd5r")
-
-[node name="PotionBottleMLiquid" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/PotionBottleM/Liquids"]
-transform = Transform3D(0.999999, 1.42109e-14, 8.47033e-22, -1.42109e-14, 0.999999, 5.96046e-08, -3.4179e-28, -5.96046e-08, 0.999999, 0, 0, 0)
-gi_mode = 0
-mesh = SubResource("ArrayMesh_potms")
-skeleton = NodePath("")
-blend_shapes/LiquidDown = 0.44445
-surface_material_override/0 = SubResource("StandardMaterial3D_p0mwe")
 
 [node name="BottleS" type="AnimatableBody3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.99747, 3.1679, 8.5271)
@@ -1684,6 +1759,12 @@ skeleton = NodePath("")
 blend_shapes/Close = 0.0
 blend_shapes/HalfClosed = 1.0
 surface_material_override/0 = SubResource("StandardMaterial3D_6g4mi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Others/GuideMesh"]
+libraries = {
+"": SubResource("AnimationLibrary_2hb5f")
+}
+autoplay = "eyes"
 
 [node name="PotionShop" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects"]
 transform = Transform3D(-2.22487, 0, -1.94505e-07, 0, 2.22487, 0, 1.94505e-07, 0, -2.22487, -1.23032, 0.258356, -3.28331)

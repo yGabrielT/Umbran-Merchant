@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="check_list" load_steps=12 format=3 uid="uid://ccukdkjgdog2e"]
+
+[ext_resource type="Script" path="res://Scripts/liquids.gd" id="1_w8hv4"]
+[ext_resource type="Script" path="res://Scripts/potions.gd" id="2_bqxva"]
+[ext_resource type="PackedScene" uid="uid://b82ytbnxrig4m" path="res://resources/audiosForNpcs/deep_voice.tscn" id="3_4cpgr"]
+[ext_resource type="Script" path="res://Scripts/dialogue.gd" id="4_r1vgk"]
+[ext_resource type="Script" path="res://Scripts/npcCheckList.gd" id="5_rpk22"]
+
+[sub_resource type="Resource" id="Resource_3btub"]
+script = ExtResource("1_w8hv4")
+liquidColor = Color(0.858824, 0.337255, 0.827451, 0.666667)
+
+[sub_resource type="Resource" id="Resource_peurk"]
+script = ExtResource("2_bqxva")
+hasOrder = false
+liquidsQuantityExpected = Array[ExtResource("1_w8hv4")]([SubResource("Resource_3btub")])
+
+[sub_resource type="Resource" id="Resource_iyliq"]
+script = ExtResource("1_w8hv4")
+liquidColor = Color(0.933333, 0.764706, 0.32549, 1)
+
+[sub_resource type="Resource" id="Resource_5nha7"]
+script = ExtResource("2_bqxva")
+hasOrder = false
+liquidsQuantityExpected = Array[ExtResource("1_w8hv4")]([SubResource("Resource_iyliq")])
+
+[sub_resource type="Resource" id="Resource_cw75a"]
+script = ExtResource("4_r1vgk")
+dialogues = Array[String](["oh another one huh", "what is with that different umbrans there little shadow?", "well... since i'm here give me that white and yellow bottles please"])
+npcSetting = ExtResource("3_4cpgr")
+
+[sub_resource type="Resource" id="Resource_8njkq"]
+script = ExtResource("4_r1vgk")
+dialogues = Array[String](["Thank you sir."])
+npcSetting = ExtResource("3_4cpgr")
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("5_rpk22")
+anyBodyNeeded = false
+PotionList = Array[ExtResource("2_bqxva")]([SubResource("Resource_peurk"), SubResource("Resource_5nha7")])
+dialogueEnter = SubResource("Resource_cw75a")
+dialogueExit = SubResource("Resource_8njkq")
+idleAnim123 = 2
