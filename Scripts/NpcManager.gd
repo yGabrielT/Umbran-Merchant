@@ -26,7 +26,7 @@ func _ready():
 func _process(delta):
 	
 	
-	if currentNpcNumber < len(allNpcs) and not NpcScene.isGoing: #if npc gets erased stop
+	if currentNpcNumber < len(allNpcs) and not NpcScene.isGoing and dialogueManager.currentDialogue == 0: #if npc gets erased stop
 		if potChecker != 0:  #continue if not all checks are done
 			
 			if len(PotsInDeliverArea) != 0 and hasTalked: #check if there at least a pot in the deliver area
@@ -100,7 +100,12 @@ func _process(delta):
 			
 	if NpcScene != null:
 		if NpcScene.isGone :
-			
+			if dialogueManager.currentDialogue != 0:
+				canChange = true
+				dialogueManager.currentNpc += 1
+				dialogueManager.currentDialogue = 0
+				hasTalked = true
+				
 			currentNpcNumber += 1
 			NpcScene.queue_free()
 			SpawnNpc()
@@ -117,7 +122,7 @@ func SpawnNpc():
 		modelNpcAnimator.play("PlayerRiggingIKidleanims 2/Walk")
 		NpcAnimator = NpcScene.get_node("NpcAnimations")
 		NpcAnimator.play("walk_in")
-	
+		
 
 func TalkWithPlayer(isEntering : bool, npcNode):
 	print("in your jaws")
