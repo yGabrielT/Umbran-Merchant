@@ -49,13 +49,17 @@ func _process(delta):
 									for x in len(PotsInDeliverArea[i - 1].liquids): #look at the liquids at the individual pot
 										PotsInDeliverArea[i - 1].liquids.shuffle() 
 										#Transform both Vector4 To Color8 and round it
-										var npcColorVec4 = Vector4(
+										var npcColorVec4 = Vector3(
 											allNpcs[currentNpcNumber].PotionList[i - 1].liquidsQuantityExpected[x - 1].liquidColor.r,
 											allNpcs[currentNpcNumber].PotionList[i - 1].liquidsQuantityExpected[x - 1].liquidColor.g,
-											allNpcs[currentNpcNumber].PotionList[i - 1].liquidsQuantityExpected[x - 1].liquidColor.b,
-											allNpcs[currentNpcNumber].PotionList[i - 1].liquidsQuantityExpected[x - 1].liquidColor.a) 
+											allNpcs[currentNpcNumber].PotionList[i - 1].liquidsQuantityExpected[x - 1].liquidColor.b) 
+										var potColorVec3 = Vector3(
+											PotsInDeliverArea[i - 1].liquids[x - 1].x,
+											PotsInDeliverArea[i - 1].liquids[x - 1].y,
+											PotsInDeliverArea[i - 1].liquids[x - 1].z
+										)
 										var npcColor = round(npcColorVec4 * 255) 
-										var potColor = round(PotsInDeliverArea[i - 1].liquids[x - 1] * 255)
+										var potColor = round(potColorVec3 * 255)
 										#Check if the colors are equal
 										if  potColor.is_equal_approx(npcColor) and not allNpcs[currentNpcNumber].PotionList[i - 1].isChecked and not allNpcs[currentNpcNumber].PotionList[i - 1].liquidsQuantityExpected[x - 1].isChecked:
 											allNpcs[currentNpcNumber].PotionList[i - 1].isChecked = true

@@ -39,6 +39,7 @@ var hand2cooldown = false
 #raycast
 @onready var RaycastPotion : RayCast3D = $Head/Camera3D/RaycastPotion
 @onready var RaycastPlaceToPut : RayCast3D = $Head/Camera3D/RaycastPlaceToPut
+@onready var RaycastGetBook: RayCast3D = $Head/Camera3D/RaycastBook
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -55,16 +56,20 @@ var leftHandObjLiquidColor
 var rightHandObjLiquidColor
 var newColor
 
+#BookPage
+@export var BookUI : Control
+var isBookOpen = false
+
 
 func _unhandled_input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and not isBookOpen:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 		
 
 func _input(event):
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and not isBookOpen:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
 
@@ -78,14 +83,17 @@ func _physics_process(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_vector("left", "right", "up", "down")
-	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+	if(not isBookOpen):
+		var input_dir = Input.get_vector("left", "right", "up", "down")
+		var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		if direction:
+			velocity.x = direction.x * SPEED
+			velocity.z = direction.z * SPEED
+		else:
+			velocity.x = 0.0
+			velocity.z = 0.0
 	else:
-		velocity.x = 0.0
-		velocity.z = 0.0
+		velocity = Vector3.ZERO
 #endregion
 	
 #region HeadBob
@@ -145,6 +153,8 @@ func _process(delta):
 	mixPotion()
 	RaycastAPlaceToPut()
 	PutDownPotion()
+	RaycastBook()
+	ManageBook()
 
 func GrabPotion():
 	if mouse1 == true and isLookingToItem == true and isLeftHandOccupied == false and not mouse2:
@@ -273,4 +283,27 @@ func mixPotion():
 		mouse2 = false
 		await get_tree().create_timer(.2).timeout
 		hand2cooldown = false
-
+func RaycastBook():
+	if mouse1 == true and not mouse2 and RaycastGetBook.is_colliding():
+		
+		isBookOpen = true
+		mouse1 = false
+		BookUI.visible = true
+		
+		
+	if mouse2 == true and not mouse1 and RaycastGetBook.is_colliding():
+		
+		isBookOpen = true
+		mouse2 = false
+		BookUI.visible = true
+		
+		
+func ManageBook():
+	if isBookOpen:
+		if Input.is_action_pressed("back"):
+			pass
+		if Input.is_action_pressed("next"):
+			pass
+		if Input.is_action_pressed("exit"):
+			BookUI.visible = false
+			isBookOpen = false

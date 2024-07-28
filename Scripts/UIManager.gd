@@ -4,7 +4,6 @@ extends SubViewportContainer
 @onready var ItemNameUI : Label = $SubViewport/ItemTextUI/ItemName
 @onready var ItemDescUI : Label = $SubViewport/ItemTextUI/ItemName/ItemDesc
 @onready var Player = $"../LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player"
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -18,3 +17,9 @@ func _process(delta):
 		ItemDescUI.text = Player.raycastObj.get_parent().itemDesc
 	else:
 		ItemTextUI.visible = false
+		
+	
+
+
+
+	
