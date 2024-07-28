@@ -52,6 +52,7 @@ var arrayOfBodies = []
 #Color
 var colorOfTarget
 var leftHandObjLiquidColor
+var rightHandObjLiquidColor
 var newColor
 
 
@@ -198,7 +199,8 @@ func PutDownPotion():
 			hand1cooldown = false)
 		tween.tween_property(leftHandObj, "global_position", raycastPlaceGlobalPoint, .07).set_ease(Tween.EASE_IN)
 		tween.tween_callback(func():
-			leftHandObj.get_node("CollisionShape3D").disabled = false
+			leftHandObj.get_node("CollisionShape3D").disabled = false)
+		tween.tween_callback(func():
 			hand1cooldown = false).set_delay(.15)
 		
 	if isRightHandOccupied and mouse2 and not isLookingToItem and canPlace and not mouse1:
@@ -213,7 +215,8 @@ func PutDownPotion():
 		rightHandObj.global_transform = align_with_y(rightHandObj.global_transform, raycastPlaceNormal)
 		tween.tween_property(rightHandObj, "global_position", raycastPlaceGlobalPoint, .07).set_ease(Tween.EASE_IN)
 		tween.tween_callback(func():
-			rightHandObj.get_node("CollisionShape3D").disabled = false
+			rightHandObj.get_node("CollisionShape3D").disabled = false)
+		tween.tween_callback(func():
 			hand2cooldown = false
 			).set_delay(.15)
 func align_with_y(xform, new_y):
@@ -246,4 +249,28 @@ func mixPotion():
 		mouse1 = false
 		await get_tree().create_timer(.2).timeout
 		hand1cooldown = false
+	if mouse2 == true and isLookingToItem == true and isRightHandOccupied == true and not mouse1:
+		if(len(raycastObj.get_parent().liquids) == 1 and len(rightHandObj.liquids) == 1) and raycastObj.get_parent().isPotionBottle:
+			print("got it")
+			colorOfTarget = Color(
+				raycastObj.get_parent().liquids[0].x,
+				raycastObj.get_parent().liquids[0].y,
+				raycastObj.get_parent().liquids[0].z,
+				raycastObj.get_parent().liquids[0].w)
+			rightHandObjLiquidColor = Color(
+				rightHandObj.liquids[0].x,
+				rightHandObj.liquids[0].y,
+				rightHandObj.liquids[0].z,
+				rightHandObj.liquids[0].w)
+			newColor = ((rightHandObjLiquidColor * .5) + (colorOfTarget * .5))
+			
+		
+			print(colorOfTarget,leftHandObjLiquidColor)
+			#apply color
+			raycastObj.get_parent().mats[0].get_active_material(0).albedo_color = newColor.clamp()
+			raycastObj.get_parent().updateLiquids()
+		hand2cooldown = true
+		mouse2 = false
+		await get_tree().create_timer(.2).timeout
+		hand2cooldown = false
 

@@ -7,7 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_eh1gt"]
 script = ExtResource("2_2ke0j")
-dialogues = Array[String](["Hello, looks like the old guy got replaced once again huh?", "Anyways just give me that tiny dark blue bottle behind you."])
+dialogues = Array[String](["Hello, looks like the old guy got replaced once again huh?", "Anyways just give me that tiny [color=darkblue]dark blue[/color] bottle behind you."])
 npcSetting = ExtResource("2_8hiql")
 
 [sub_resource type="Resource" id="Resource_nh1w8"]
@@ -17,6 +17,7 @@ npcSetting = ExtResource("2_8hiql")
 
 [resource]
 script = ExtResource("2_p58r5")
+anyBodyNeeded = false
 PotionList = Array[Resource("res://Scripts/potions.gd")]([ExtResource("1_44gvv")])
 dialogueEnter = SubResource("Resource_eh1gt")
 dialogueExit = SubResource("Resource_nh1w8")

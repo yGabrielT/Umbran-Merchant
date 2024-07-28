@@ -16,9 +16,11 @@ var t : float = 0.0
 var canTalk = false
 var allowedToTalk = true
 var canChangeSam = true
+var regex
 signal npcDialogueEnded
 func _ready():
-	pass
+	regex = RegEx.new()
+	regex.compile("\\[.*?\\]")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -81,7 +83,8 @@ func manageDialogueTextAndAudio(delta):
 				
 				canTalk = false
 				dialogueBox.get_child(0).get_child(0).text = "[center]" + dialogueList[currentNpc].dialogues[currentDialogue] + "[/center]"
-				sam.say(dialogueList[currentNpc].dialogues[currentDialogue])
+				var text_without_tags = regex.sub(dialogueList[currentNpc].dialogues[currentDialogue], "", true)
+				sam.say(text_without_tags)
 				currentDialogue += 1
 				t = 0.0
 				

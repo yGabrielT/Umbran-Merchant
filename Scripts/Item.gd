@@ -2,12 +2,13 @@ extends StaticBody3D
 
 @export var itemName : String
 @export var itemDesc : String
-
+@export var isPotionBottle : bool
 var liquids = []
 var mats
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	updateLiquids()
 	
 	
@@ -20,6 +21,7 @@ func _process(delta):
 	pass
 	
 func updateLiquids():
+	
 	liquids.clear()
 	mats = $Liquids.get_children()
 	#print(self.name + " has ", len(mats))

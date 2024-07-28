@@ -729,6 +729,7 @@ sync_to_physics = false
 script = ExtResource("12_ce4eb")
 itemName = "Extra large bottle"
 itemDesc = "damn."
+isPotionBottle = true
 
 [node name="Outliner" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static/MeshInstance3D2/BottleLL"]
 transform = Transform3D(0.05, 8.88178e-16, 0, 3.88235e-23, -2.18557e-09, -0.05, -8.88178e-16, 0.05, -2.18557e-09, 0, 0.372991, 0)
@@ -788,7 +789,6 @@ shape = SubResource("ConvexPolygonShape3D_jx670")
 [node name="BottleLL2" type="AnimatableBody3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static/MeshInstance3D3/TutorialBottles" groups=["Bottle"]]
 transform = Transform3D(0.33257, 0, 0, 0, 0.259135, 0, 0, 0, 0.935567, 0.332086, 0.499254, -5.62668e-05)
 collision_layer = 2
-sync_to_physics = false
 script = ExtResource("12_ce4eb")
 itemName = "Extra large bottle"
 itemDesc = "damn."
@@ -843,6 +843,7 @@ sync_to_physics = false
 script = ExtResource("12_ce4eb")
 itemName = "Extra large bottle"
 itemDesc = "damn."
+isPotionBottle = true
 
 [node name="Outliner" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Static/MeshInstance3D3/TutorialBottles/BottleLL3"]
 transform = Transform3D(0.05, 8.88178e-16, 0, 3.88235e-23, -2.18557e-09, -0.05, -8.88178e-16, 0.05, -2.18557e-09, 0, 0.372991, 0)
