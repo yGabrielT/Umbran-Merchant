@@ -17,6 +17,7 @@ var canTalk = false
 var allowedToTalk = true
 var canChangeSam = true
 var regex
+
 signal npcDialogueEnded
 func _ready():
 	regex = RegEx.new()

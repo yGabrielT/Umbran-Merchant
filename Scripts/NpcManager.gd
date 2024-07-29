@@ -13,6 +13,7 @@ var potionOrderCorrector
 var NpcScene
 var hasTalked
 var canChange : bool = false
+@export var npcGrabSFX : AudioStream
 
 
 
@@ -77,7 +78,12 @@ func _process(delta):
 			NpcAnimator.queue("walk_out")
 			modelNpcAnimator.play("PlayerRiggingIKidleanims 2/Walk")
 			for i in len(PotsInDeliverArea):
-				PotsInDeliverArea[i - 1].queue_free()
+				
+				var tween = create_tween()
+				tween.tween_callback(func():
+					PotsInDeliverArea[i - 1].queue_free()
+					SoundManager.play_sound_with_pitch(npcGrabSFX, randf_range(.7,1.3))).set_delay(randf_range(0,.1))
+				
 
 	if not hasTalked and NpcScene != null:
 		if NpcScene.hasCome:

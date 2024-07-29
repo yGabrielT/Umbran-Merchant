@@ -7,9 +7,12 @@ var guideSaid = false
 var t1 = 0
 var canPutDialogue
 var issaid = false
+@export var exitAmbient : AudioStream
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	SoundManager.stop_all_ambient_sounds(.5)
+	SoundManager.set_ambient_sound_volume(.5)
+	SoundManager.play_ambient_sound(exitAmbient, 1)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

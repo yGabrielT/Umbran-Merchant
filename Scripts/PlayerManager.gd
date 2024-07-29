@@ -60,6 +60,13 @@ var newColor
 @export var BookUI : Control
 var isBookOpen = false
 
+#Audios
+@export var PickPotOnTableSFX : AudioStream
+@export var PutPotOnTableSFX : AudioStream
+var canStep = true
+@export var StepSFX : AudioStream
+@export var liquidPourInSFX : AudioStream
+
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion and not isBookOpen:
@@ -109,6 +116,17 @@ func _physics_process(delta):
 		
 	t_bob += delta * velocity_valuer * float(is_on_floor())
 	camera.transform.origin = _headbob(t_bob)
+	var ypos = _headbob(t_bob).y
+	ypos = snapped(ypos,0.001)
+	
+	if ypos == (BOB_AMP) and velocity.length() != 0.0 and not canStep:
+		canStep = true
+		
+	
+	if ypos == (-BOB_AMP) and velocity.length() != 0.0 and canStep:
+		canStep = false
+		SoundManager.play_sound_with_pitch(StepSFX,randf_range(.5,.8))
+	
 
 	move_and_slide()
 #endregion
@@ -140,6 +158,7 @@ func _headbob(time) -> Vector3:
 	var pos = Vector3.ZERO
 	pos.y = sin(time * BOB_FREQ) * BOB_AMP
 	pos.x = cos(time * BOB_FREQ / 2) * (BOB_AMP * cos_value)
+	
 	return pos
 
 func _process(delta):
@@ -165,6 +184,7 @@ func GrabPotion():
 		raycastObj.get_parent().reparent($Head/Camera3D/LeftHand)
 		leftHandObj = raycastObj.get_parent()
 		canInterpolate = true
+		SoundManager.play_sound_with_pitch(PickPotOnTableSFX, randf_range(.7,1.3))
 		var tween = get_tree().create_tween()
 		tween.tween_property(raycastObj.get_parent(), "position", $Head/Camera3D/LeftHand.position, .07).set_ease(Tween.EASE_IN)
 		tween.tween_callback( func():
@@ -180,6 +200,7 @@ func GrabPotion():
 		raycastObj.get_parent().reparent($Head/Camera3D/RightHand)
 		rightHandObj = raycastObj.get_parent()
 		canInterpolate = true
+		SoundManager.play_sound_with_pitch(PickPotOnTableSFX, randf_range(.7,1.3))
 		var tween = get_tree().create_tween()
 		tween.tween_property(raycastObj.get_parent(), "position", $Head/Camera3D/RightHand.position, .07).set_ease(Tween.EASE_IN)
 		tween.tween_callback( func():
@@ -209,7 +230,8 @@ func PutDownPotion():
 			hand1cooldown = false)
 		tween.tween_property(leftHandObj, "global_position", raycastPlaceGlobalPoint, .07).set_ease(Tween.EASE_IN)
 		tween.tween_callback(func():
-			leftHandObj.get_node("CollisionShape3D").disabled = false)
+			leftHandObj.get_node("CollisionShape3D").disabled = false
+			SoundManager.play_sound_with_pitch(PutPotOnTableSFX, randf_range(.7,1.3)))
 		tween.tween_callback(func():
 			hand1cooldown = false).set_delay(.15)
 		
@@ -225,7 +247,8 @@ func PutDownPotion():
 		rightHandObj.global_transform = align_with_y(rightHandObj.global_transform, raycastPlaceNormal)
 		tween.tween_property(rightHandObj, "global_position", raycastPlaceGlobalPoint, .07).set_ease(Tween.EASE_IN)
 		tween.tween_callback(func():
-			rightHandObj.get_node("CollisionShape3D").disabled = false)
+			rightHandObj.get_node("CollisionShape3D").disabled = false
+			SoundManager.play_sound_with_pitch(PutPotOnTableSFX, randf_range(.7,1.3)))
 		tween.tween_callback(func():
 			hand2cooldown = false
 			).set_delay(.15)
@@ -235,7 +258,7 @@ func align_with_y(xform, new_y):
 	xform.basis = xform.basis.orthonormalized()
 	return xform
 func mixPotion():
-	if mouse1 == true and isLookingToItem == true and isLeftHandOccupied == true and not mouse2:
+	if mouse1 == true and isLookingToItem == true and isLeftHandOccupied == true and not mouse2 and raycastObj != null:
 		if len(raycastObj.get_parent().liquids) == 1 and len(leftHandObj.liquids) == 1:
 			print("got it")
 			colorOfTarget = Color(
@@ -255,11 +278,12 @@ func mixPotion():
 			#apply color
 			raycastObj.get_parent().mats[0].get_active_material(0).albedo_color = newColor.clamp()
 			raycastObj.get_parent().updateLiquids()
+			SoundManager.play_sound_with_pitch(liquidPourInSFX, randf_range(1.1,1.7))
 		hand1cooldown = true
 		mouse1 = false
 		await get_tree().create_timer(.2).timeout
 		hand1cooldown = false
-	if mouse2 == true and isLookingToItem == true and isRightHandOccupied == true and not mouse1:
+	if mouse2 == true and isLookingToItem == true and isRightHandOccupied == true and not mouse1 and raycastObj != null:
 		if(len(raycastObj.get_parent().liquids) == 1 and len(rightHandObj.liquids) == 1) and raycastObj.get_parent().isPotionBottle:
 			print("got it")
 			colorOfTarget = Color(
@@ -284,19 +308,20 @@ func mixPotion():
 		await get_tree().create_timer(.2).timeout
 		hand2cooldown = false
 func RaycastBook():
-	if mouse1 == true and not mouse2 and RaycastGetBook.is_colliding():
-		
-		isBookOpen = true
-		mouse1 = false
-		BookUI.visible = true
-		
-		
-	if mouse2 == true and not mouse1 and RaycastGetBook.is_colliding():
-		
-		isBookOpen = true
-		mouse2 = false
-		BookUI.visible = true
-		
+	if RaycastGetBook != null:
+		if mouse1 == true and not mouse2 and RaycastGetBook.is_colliding():
+			
+			isBookOpen = true
+			mouse1 = false
+			BookUI.visible = true
+			
+			
+		if mouse2 == true and not mouse1 and RaycastGetBook.is_colliding():
+			
+			isBookOpen = true
+			mouse2 = false
+			BookUI.visible = true
+			
 		
 func ManageBook():
 	if isBookOpen:

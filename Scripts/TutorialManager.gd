@@ -16,9 +16,13 @@ var t = 0
 @onready var tableToSpawnBottle = $"../../Objects/Static/MeshInstance3D3"
 @export var sceneToChange : PackedScene
 @onready var fader = $"../../Player/DialogueUI/Fader/AnimationPlayer"
+@export var tutorialAmbienceForAudio : AudioStream
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	DialogueManager.t = -2
+	
+	SoundManager.play_ambient_sound(tutorialAmbienceForAudio, 1)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -76,6 +80,7 @@ func _process(delta):
 		if (once):
 			if t > 2.5:
 				once = false
+				
 				get_tree().change_scene_to_packed(sceneToChange)
 			else:
 				t += delta

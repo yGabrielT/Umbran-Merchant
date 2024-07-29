@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://bksagkehyae6s"]
+[gd_scene load_steps=87 format=3 uid="uid://bksagkehyae6s"]
 
 [ext_resource type="Shader" path="res://plugins/ursc/canvas_item/dithering.gdshader" id="1_prjr6"]
 [ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://assets/textures/materials/bayer2tile16.png" id="2_bnoll"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dcyxwqthj66qo" path="res://resources/audiosForNpcs/guide_voice.tscn" id="4_wotb6"]
 [ext_resource type="Script" path="res://Scripts/dialogue.gd" id="5_liwl1"]
 [ext_resource type="Script" path="res://Scripts/TutorialManager.gd" id="6_3d7cf"]
+[ext_resource type="AudioStream" uid="uid://kadg2ld1ppfl" path="res://assets/sounds/ambience/underwater ambience.mp3" id="8_j7qkf"]
 [ext_resource type="PackedScene" uid="uid://dixx52xms2qbh" path="res://scenes/GameScene.tscn" id="8_ob5by"]
 [ext_resource type="Shader" path="res://plugins/ursc/canvas_item/fade.gdshader" id="10_78mep"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="12_ce4eb"]
@@ -721,6 +722,9 @@ currentTalker = NodePath("../../Objects/Others/GuideMesh")
 script = ExtResource("6_3d7cf")
 colorNeeded = Color(0.5, 0.5, 0.5, 1)
 sceneToChange = ExtResource("8_ob5by")
+tutorialAmbienceForAudio = ExtResource("8_j7qkf")
+
+[node name="Audio" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/GameHandlers"]
 
 [node name="Objects" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
 
