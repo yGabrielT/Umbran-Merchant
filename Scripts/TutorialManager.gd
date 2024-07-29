@@ -17,6 +17,7 @@ var t = 0
 @export var sceneToChange : PackedScene
 @onready var fader = $"../../Player/DialogueUI/Fader/AnimationPlayer"
 @export var tutorialAmbienceForAudio : AudioStream
+@export var pickbottlevfx : AudioStream
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -45,6 +46,7 @@ func _process(delta):
 			
 		if(currentBody != null):
 			DialogueManager.allowedToTalk = true
+			SoundManager.play_sound_with_pitch(pickbottlevfx,randf_range(1.0,1.6))
 			currentBody.queue_free()
 			next = false
 	if DialogueManager.currentNpc == 2:
@@ -73,6 +75,7 @@ func _process(delta):
 	
 	if DialogueManager.currentNpc == 3:
 		DialogueManager.allowedToTalk = false
+		
 		if(DialogueManager.currentDialogue == 4):
 			fader.play_backwards("fade_start")
 			once = true
@@ -110,7 +113,8 @@ func checkBottle():
 		var roundedColor = round(potColorVec4 * 255)
 		var needColor = round(neededColorVec4 * 255)
 		if (roundedColor.is_equal_approx(needColor)):
-			currentBody = null
+			currentBody.queue_free()
+			SoundManager.play_sound_with_pitch(pickbottlevfx,randf_range(1.0,1.5))
 			DialogueManager.allowedToTalk = true
 			
 		else:

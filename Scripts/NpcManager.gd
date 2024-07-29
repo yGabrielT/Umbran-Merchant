@@ -14,6 +14,7 @@ var NpcScene
 var hasTalked
 var canChange : bool = false
 @export var npcGrabSFX : AudioStream
+var canSpawnNpc = true
 
 
 
@@ -27,7 +28,7 @@ func _ready():
 func _process(delta):
 	
 	
-	if currentNpcNumber < len(allNpcs) and not NpcScene.isGoing and dialogueManager.currentDialogue == 0: #if npc gets erased stop
+	if currentNpcNumber < len(allNpcs) and NpcScene != null and not NpcScene.isGoing and dialogueManager.currentDialogue == 0: #if npc gets erased stop
 		if potChecker != 0:  #continue if not all checks are done
 			
 			if len(PotsInDeliverArea) != 0 and hasTalked: #check if there at least a pot in the deliver area
@@ -118,7 +119,8 @@ func _process(delta):
 				
 			currentNpcNumber += 1
 			NpcScene.queue_free()
-			SpawnNpc()
+			if canSpawnNpc:
+				SpawnNpc()
 		
 func SpawnNpc():
 	if currentNpcNumber < len(allNpcs):

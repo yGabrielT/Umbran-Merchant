@@ -11,22 +11,23 @@ var issaid = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SoundManager.stop_all_ambient_sounds(.5)
-	SoundManager.set_ambient_sound_volume(.5)
 	SoundManager.play_ambient_sound(exitAmbient, 1)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if DialogueManag.currentNpc == 10 and DialogueManag.currentDialogue == 1 and not guideSaid and not DialogueManag.isTalking:
+		npcManag.canSpawnNpc = false
 		DialogueManag.currentTalker = GuideNode
 		DialogueManag.dialogueList.append(guideDialogue)
-		DialogueManag.canChangeSam = true
 		DialogueManag.allowedToTalk = false
 		guideSaid = true
 		issaid = true
-		
-	if DialogueManag.currentNpc == 12 and issaid:
-		DialogueManag.currentNpc = 11
+	
+	if DialogueManag.currentNpc == 11 and DialogueManag.currentDialogue == 6 and issaid:
+		DialogueManag.allowedToTalk = true
+		npcManag.canSpawnNpc = true
+		npcManag.SpawnNpc()
 		
 		issaid = false
 

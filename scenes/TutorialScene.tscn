@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://bksagkehyae6s"]
+[gd_scene load_steps=92 format=3 uid="uid://bksagkehyae6s"]
 
 [ext_resource type="Shader" path="res://plugins/ursc/canvas_item/dithering.gdshader" id="1_prjr6"]
 [ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://assets/textures/materials/bayer2tile16.png" id="2_bnoll"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/TutorialManager.gd" id="6_3d7cf"]
 [ext_resource type="AudioStream" uid="uid://kadg2ld1ppfl" path="res://assets/sounds/ambience/underwater ambience.mp3" id="8_j7qkf"]
 [ext_resource type="PackedScene" uid="uid://dixx52xms2qbh" path="res://scenes/GameScene.tscn" id="8_ob5by"]
+[ext_resource type="AudioStream" uid="uid://dwyptnhcg7bc7" path="res://assets/sounds/sfx/glassMovement.wav" id="9_qg5o2"]
 [ext_resource type="Shader" path="res://plugins/ursc/canvas_item/fade.gdshader" id="10_78mep"]
 [ext_resource type="Script" path="res://Scripts/Item.gd" id="12_ce4eb"]
 [ext_resource type="Material" uid="uid://bf1cp2jgfis8t" path="res://resources/materials/glass.tres" id="13_th7tc"]
@@ -15,6 +16,10 @@
 [ext_resource type="Texture2D" uid="uid://bchyrl3ntgmku" path="res://assets/textures/materials/cup and potion_4K_afromosia_basecolor.png" id="15_5bc2v"]
 [ext_resource type="Shader" path="res://plugins/ursc/spatial/shaderplane.gdshader" id="16_aeuec"]
 [ext_resource type="Shader" path="res://plugins/ursc/spatial/standard_opaque.gdshader" id="17_p727o"]
+[ext_resource type="AudioStream" uid="uid://b6jrc2b2b652u" path="res://assets/sounds/sfx/glasspick.wav" id="17_viwfh"]
+[ext_resource type="AudioStream" uid="uid://k1nt82ccl8yw" path="res://assets/sounds/sfx/glassPutDown.wav" id="18_t800h"]
+[ext_resource type="AudioStream" uid="uid://cpcrgu7or2l1o" path="res://assets/sounds/sfx/step.wav" id="19_p8pgc"]
+[ext_resource type="AudioStream" uid="uid://bxyqmyjj8xr4u" path="res://assets/sounds/sfx/viscous-liquid-fall-in-83980.mp3" id="20_qkvjl"]
 [ext_resource type="Environment" uid="uid://c62mfdjj2y2bq" path="res://new_environment.tres" id="22_rk7bv"]
 [ext_resource type="Script" path="res://Scripts/PlayerManager.gd" id="23_jg8hd"]
 [ext_resource type="Script" path="res://Scripts/AutoSizeRichLabel.gd" id="24_e6m61"]
@@ -723,6 +728,7 @@ script = ExtResource("6_3d7cf")
 colorNeeded = Color(0.5, 0.5, 0.5, 1)
 sceneToChange = ExtResource("8_ob5by")
 tutorialAmbienceForAudio = ExtResource("8_j7qkf")
+pickbottlevfx = ExtResource("9_qg5o2")
 
 [node name="Audio" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/GameHandlers"]
 
@@ -1027,6 +1033,10 @@ script = ExtResource("23_jg8hd")
 SPEED = 0.0
 SENSITIVITY = 0.0
 BOB_AMP = 0.01
+PickPotOnTableSFX = ExtResource("17_viwfh")
+PutPotOnTableSFX = ExtResource("18_t800h")
+StepSFX = ExtResource("19_p8pgc")
+liquidPourInSFX = ExtResource("20_qkvjl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.318987, 0)

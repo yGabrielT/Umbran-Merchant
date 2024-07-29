@@ -176,7 +176,7 @@ func _process(delta):
 	ManageBook()
 
 func GrabPotion():
-	if mouse1 == true and isLookingToItem == true and isLeftHandOccupied == false and not mouse2:
+	if mouse1 == true and isLookingToItem == true and isLeftHandOccupied == false and not mouse2 and not hand1cooldown:
 		raycastObj.get_parent().get_node("CollisionShape3D").disabled = true
 		hand1cooldown = true
 		isLeftHandOccupied = true
@@ -188,11 +188,11 @@ func GrabPotion():
 		var tween = get_tree().create_tween()
 		tween.tween_property(raycastObj.get_parent(), "position", $Head/Camera3D/LeftHand.position, .07).set_ease(Tween.EASE_IN)
 		tween.tween_callback( func():
-			hand1cooldown = false).set_delay(.15)
+			hand1cooldown = false).set_delay(.5)
 		
 		
 		
-	if mouse2 == true and isLookingToItem == true and isRightHandOccupied == false and not mouse1:
+	if mouse2 == true and isLookingToItem == true and isRightHandOccupied == false and not mouse1 and not hand2cooldown:
 		raycastObj.get_parent().get_node("CollisionShape3D").disabled = true
 		hand2cooldown = true
 		isRightHandOccupied = true
@@ -204,7 +204,7 @@ func GrabPotion():
 		var tween = get_tree().create_tween()
 		tween.tween_property(raycastObj.get_parent(), "position", $Head/Camera3D/RightHand.position, .07).set_ease(Tween.EASE_IN)
 		tween.tween_callback( func():
-			hand2cooldown = false).set_delay(.15)
+			hand2cooldown = false).set_delay(.5)
 func RaycastAPlaceToPut():
 	if RaycastPlaceToPut.is_colliding():
 		raycastPlaceGlobalPoint = RaycastPlaceToPut.get_collision_point()
@@ -217,7 +217,7 @@ func RaycastAPlaceToPut():
 	else:
 			canPlace = false
 func PutDownPotion():
-	if isLeftHandOccupied and mouse1 and not isLookingToItem and canPlace and not mouse2:
+	if isLeftHandOccupied and mouse1 and not isLookingToItem and canPlace and not mouse2 and not hand1cooldown:
 		isLeftHandOccupied = false
 		hand1cooldown = true
 		canPlace = false
@@ -233,9 +233,10 @@ func PutDownPotion():
 			leftHandObj.get_node("CollisionShape3D").disabled = false
 			SoundManager.play_sound_with_pitch(PutPotOnTableSFX, randf_range(.7,1.3)))
 		tween.tween_callback(func():
-			hand1cooldown = false).set_delay(.15)
+			
+			hand1cooldown = false).set_delay(.5)
 		
-	if isRightHandOccupied and mouse2 and not isLookingToItem and canPlace and not mouse1:
+	if isRightHandOccupied and mouse2 and not isLookingToItem and canPlace and not mouse1 and not hand2cooldown:
 		isRightHandOccupied = false
 		hand2cooldown = true
 		canPlace = false
@@ -250,8 +251,9 @@ func PutDownPotion():
 			rightHandObj.get_node("CollisionShape3D").disabled = false
 			SoundManager.play_sound_with_pitch(PutPotOnTableSFX, randf_range(.7,1.3)))
 		tween.tween_callback(func():
+			
 			hand2cooldown = false
-			).set_delay(.15)
+			).set_delay(.5)
 func align_with_y(xform, new_y):
 	xform.basis.y = new_y
 	xform.basis.x = -xform.basis.z.cross(new_y)
@@ -297,12 +299,11 @@ func mixPotion():
 				rightHandObj.liquids[0].z,
 				rightHandObj.liquids[0].w)
 			newColor = ((rightHandObjLiquidColor * .5) + (colorOfTarget * .5))
-			
-		
 			print(colorOfTarget,leftHandObjLiquidColor)
 			#apply color
 			raycastObj.get_parent().mats[0].get_active_material(0).albedo_color = newColor.clamp()
 			raycastObj.get_parent().updateLiquids()
+			SoundManager.play_sound_with_pitch(liquidPourInSFX, randf_range(1.1,1.7))
 		hand2cooldown = true
 		mouse2 = false
 		await get_tree().create_timer(.2).timeout

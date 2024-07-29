@@ -1,4 +1,4 @@
-[gd_scene load_steps=194 format=3 uid="uid://dixx52xms2qbh"]
+[gd_scene load_steps=217 format=3 uid="uid://dixx52xms2qbh"]
 
 [ext_resource type="Shader" path="res://plugins/ursc/canvas_item/dithering.gdshader" id="1_pyp88"]
 [ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://assets/textures/materials/bayer2tile16.png" id="2_dyoef"]
@@ -21,10 +21,13 @@
 [ext_resource type="FontFile" uid="uid://lcgcawb0yvnv" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="12_vf4kw"]
 [ext_resource type="Script" path="res://Scripts/NpcManager.gd" id="13_3ssi3"]
 [ext_resource type="Script" path="res://Scripts/UIManager.gd" id="13_a7x3a"]
+[ext_resource type="Script" path="res://Scripts/liquids.gd" id="13_s2y5c"]
 [ext_resource type="AudioStream" uid="uid://dwyptnhcg7bc7" path="res://assets/sounds/sfx/glassMovement.wav" id="13_v8g1n"]
 [ext_resource type="Script" path="res://Scripts/GuideManager.gd" id="14_5term"]
 [ext_resource type="Script" path="res://Scripts/AudioManager.gd" id="14_6hchr"]
 [ext_resource type="AudioStream" uid="uid://du5pbyiac0xay" path="res://assets/sounds/ambience/ghost-wails.mp3" id="14_bkgve"]
+[ext_resource type="PackedScene" uid="uid://hscxwx3mgsp" path="res://resources/audiosForNpcs/idk_voice.tscn" id="14_rxnm0"]
+[ext_resource type="PackedScene" uid="uid://bw6o0b3ydmepk" path="res://resources/audiosForNpcs/jigsaw_voice.tscn" id="15_r4lam"]
 [ext_resource type="Texture2D" uid="uid://vusmmxgkuhox" path="res://assets/models/book_leathernew.png" id="18_osw14"]
 [ext_resource type="Texture2D" uid="uid://b0j3u4rk608q8" path="res://assets/textures/materials/PotionShop_planknew.png" id="20_mgx0a"]
 [ext_resource type="Texture2D" uid="uid://c424j18g2xwpy" path="res://assets/textures/materials/PotionShop_marblenew.png" id="21_sin3i"]
@@ -58,7 +61,7 @@ npcSetting = ExtResource("22_2ravj")
 [sub_resource type="Resource" id="Resource_q8rxt"]
 script = ExtResource("6_ws1lb")
 hasOrder = false
-liquidsQuantityExpected = Array[Resource("res://Scripts/liquids.gd")]([])
+liquidsQuantityExpected = Array[ExtResource("13_s2y5c")]([])
 
 [sub_resource type="Resource" id="Resource_q0uum"]
 script = ExtResource("5_t6t4n")
@@ -76,6 +79,87 @@ anyBodyNeeded = false
 PotionList = Array[ExtResource("6_ws1lb")]([SubResource("Resource_q8rxt")])
 dialogueEnter = SubResource("Resource_q0uum")
 dialogueExit = SubResource("Resource_7d5ja")
+idleAnim123 = 1
+
+[sub_resource type="Resource" id="Resource_dto3c"]
+script = ExtResource("13_s2y5c")
+liquidColor = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="Resource" id="Resource_1pfbt"]
+script = ExtResource("6_ws1lb")
+hasOrder = false
+liquidsQuantityExpected = Array[ExtResource("13_s2y5c")]([SubResource("Resource_dto3c")])
+
+[sub_resource type="Resource" id="Resource_n71yd"]
+script = ExtResource("5_t6t4n")
+dialogues = Array[String](["Hey can you give me a [color=gray]stoic[/color] potion"])
+npcSetting = ExtResource("14_rxnm0")
+
+[sub_resource type="Resource" id="Resource_am5o2"]
+script = ExtResource("5_t6t4n")
+dialogues = Array[String](["perfect for me."])
+npcSetting = ExtResource("14_rxnm0")
+
+[sub_resource type="Resource" id="Resource_b60ab"]
+script = ExtResource("7_d740x")
+anyBodyNeeded = false
+PotionList = Array[ExtResource("6_ws1lb")]([SubResource("Resource_1pfbt")])
+dialogueEnter = SubResource("Resource_n71yd")
+dialogueExit = SubResource("Resource_am5o2")
+idleAnim123 = 2
+
+[sub_resource type="Resource" id="Resource_px1km"]
+script = ExtResource("13_s2y5c")
+liquidColor = Color(0.633, 0.935, 0.5, 1)
+
+[sub_resource type="Resource" id="Resource_xar7u"]
+script = ExtResource("6_ws1lb")
+hasOrder = false
+liquidsQuantityExpected = Array[ExtResource("13_s2y5c")]([SubResource("Resource_px1km")])
+
+[sub_resource type="Resource" id="Resource_wf4k5"]
+script = ExtResource("5_t6t4n")
+dialogues = Array[String](["Give me a [color=#a1ee80]forest[/color] potion"])
+npcSetting = ExtResource("15_r4lam")
+
+[sub_resource type="Resource" id="Resource_d8x11"]
+script = ExtResource("5_t6t4n")
+dialogues = Array[String](["ending"])
+npcSetting = ExtResource("15_r4lam")
+
+[sub_resource type="Resource" id="Resource_ekxjy"]
+script = ExtResource("7_d740x")
+anyBodyNeeded = false
+PotionList = Array[ExtResource("6_ws1lb")]([SubResource("Resource_xar7u")])
+dialogueEnter = SubResource("Resource_wf4k5")
+dialogueExit = SubResource("Resource_d8x11")
+idleAnim123 = 3
+
+[sub_resource type="Resource" id="Resource_rxs67"]
+script = ExtResource("13_s2y5c")
+liquidColor = Color(0.5, 0.5, 0, 1)
+
+[sub_resource type="Resource" id="Resource_lnh0v"]
+script = ExtResource("6_ws1lb")
+hasOrder = false
+liquidsQuantityExpected = Array[ExtResource("13_s2y5c")]([SubResource("Resource_rxs67")])
+
+[sub_resource type="Resource" id="Resource_7kehv"]
+script = ExtResource("5_t6t4n")
+dialogues = Array[String](["Give an [color=#808000]absorption[/color] potion"])
+npcSetting = ExtResource("14_rxnm0")
+
+[sub_resource type="Resource" id="Resource_bhs5c"]
+script = ExtResource("5_t6t4n")
+dialogues = Array[String](["yeah yeah"])
+npcSetting = ExtResource("14_rxnm0")
+
+[sub_resource type="Resource" id="Resource_pusvh"]
+script = ExtResource("7_d740x")
+anyBodyNeeded = false
+PotionList = Array[ExtResource("6_ws1lb")]([SubResource("Resource_lnh0v")])
+dialogueEnter = SubResource("Resource_7kehv")
+dialogueExit = SubResource("Resource_bhs5c")
 idleAnim123 = 1
 
 [sub_resource type="Resource" id="Resource_vi8i4"]
@@ -147,6 +231,12 @@ _surfaces = [{
 }]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2mgoa"]
+resource_local_to_scene = true
+render_priority = -1
+transparency = 1
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1vvb6"]
 resource_local_to_scene = true
 render_priority = -1
 transparency = 1
@@ -655,6 +745,16 @@ albedo_color = Color(0.266667, 0.870588, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_octac"]
 albedo_color = Color(0.266667, 0.870588, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ka1o2"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v2sl8"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vxlew"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mwhkr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hqhfm"]
 resource_name = "BookCape"
@@ -1610,7 +1710,7 @@ currentTalker = NodePath("../../Objects/Others/GuideMesh")
 
 [node name="NpcManager" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/GameHandlers"]
 script = ExtResource("13_3ssi3")
-allNpcs = Array[ExtResource("7_d740x")]([ExtResource("4_2ebl0"), ExtResource("8_odgk6"), ExtResource("9_jclmh"), ExtResource("10_h4jp6"), SubResource("Resource_c7pc2")])
+allNpcs = Array[ExtResource("7_d740x")]([ExtResource("4_2ebl0"), ExtResource("8_odgk6"), ExtResource("9_jclmh"), ExtResource("10_h4jp6"), SubResource("Resource_c7pc2"), SubResource("Resource_b60ab"), SubResource("Resource_ekxjy"), SubResource("Resource_pusvh")])
 npcGrabSFX = ExtResource("13_v8g1n")
 
 [node name="GuideManager" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/GameHandlers"]
@@ -1711,6 +1811,47 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.461179, 0)
 visible = false
 
 [node name="Outline" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Cup2/Outliner"]
+transform = Transform3D(1, 0, -1.58787e-14, 0, 1, 0, 1.58787e-14, 0, 1, 0, 0, 0)
+mesh = SubResource("ArrayMesh_qdku3")
+skeleton = NodePath("../../CupMesh")
+surface_material_override/0 = ExtResource("8_morjj")
+
+[node name="Cup4" type="AnimatableBody3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12.6431, 2.69857, 3.65654)
+collision_layer = 2
+sync_to_physics = false
+script = ExtResource("7_dv8ga")
+itemName = "Cup"
+itemDesc = "Good for mixing"
+isPotionBottle = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Cup4"]
+transform = Transform3D(0.3, 0, -6.21725e-15, 0, 0.3, 0, 6.21725e-15, 0, 0.3, 0, 0.461179, 0)
+shape = SubResource("ConvexPolygonShape3D_8smb8")
+
+[node name="CupMesh" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Cup4"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.461179, 0)
+gi_mode = 0
+mesh = SubResource("ArrayMesh_u6cu7")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("7_ajjoc")
+
+[node name="Liquids" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Cup4"]
+transform = Transform3D(0.295985, 0, -6.21725e-15, 0, 0.295985, 0, 6.21725e-15, 0, 0.295985, 0, 0.461179, 0)
+
+[node name="CupLiquidBase" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Cup4/Liquids"]
+transform = Transform3D(1, 0, 9.59233e-14, 0, 1, 0, -9.59233e-14, 0, 1, 0, 0, 0)
+gi_mode = 0
+mesh = SubResource("ArrayMesh_5gx7v")
+skeleton = NodePath("")
+blend_shapes/LiquidDown = 0.0
+surface_material_override/0 = SubResource("StandardMaterial3D_1vvb6")
+
+[node name="Outliner" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Cup4"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.461179, 0)
+visible = false
+
+[node name="Outline" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Cup4/Outliner"]
 transform = Transform3D(1, 0, -1.58787e-14, 0, 1, 0, 1.58787e-14, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_qdku3")
 skeleton = NodePath("../../CupMesh")
@@ -2086,6 +2227,72 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vvqyn")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Beetle/Liquids"]
 mesh = SubResource("PointMesh_vtrfj")
 surface_material_override/0 = SubResource("StandardMaterial3D_octac")
+
+[node name="Oil nails" type="AnimatableBody3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8934, 2.6804, 0.123234)
+collision_layer = 2
+sync_to_physics = false
+script = ExtResource("7_dv8ga")
+itemName = "Bettle cask"
+itemDesc = "A blue cask of a beetle"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Oil nails"]
+transform = Transform3D(0.560359, 0, 0, 0, 0.560359, 0, 0, 0, 0.560359, 0, 0.327602, 0)
+mesh = SubResource("BoxMesh_2j1t0")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ka1o2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Oil nails"]
+transform = Transform3D(0.560359, 0, 0, 0, 0.560359, 0, 0, 0, 0.560359, 0, 0.327602, 0)
+shape = SubResource("ConvexPolygonShape3D_4n12w")
+
+[node name="Outliner" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Oil nails"]
+transform = Transform3D(0.560359, 0, 0, 0, 0.560359, 0, 0, 0, 0.560359, 0, 0.327602, 0)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Oil nails/Outliner"]
+mesh = SubResource("ArrayMesh_j3gy6")
+skeleton = NodePath("../../MeshInstance3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_vvqyn")
+
+[node name="Liquids" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Oil nails"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Oil nails/Liquids"]
+mesh = SubResource("PointMesh_vtrfj")
+surface_material_override/0 = SubResource("StandardMaterial3D_v2sl8")
+
+[node name="White berry" type="AnimatableBody3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8934, 2.6804, -0.982625)
+collision_layer = 2
+sync_to_physics = false
+script = ExtResource("7_dv8ga")
+itemName = "Bettle cask"
+itemDesc = "A blue cask of a beetle"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/White berry"]
+transform = Transform3D(0.560359, 0, 0, 0, 0.560359, 0, 0, 0, 0.560359, 0, 0.327602, 0)
+mesh = SubResource("BoxMesh_2j1t0")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_vxlew")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/White berry"]
+transform = Transform3D(0.560359, 0, 0, 0, 0.560359, 0, 0, 0, 0.560359, 0, 0.327602, 0)
+shape = SubResource("ConvexPolygonShape3D_4n12w")
+
+[node name="Outliner" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/White berry"]
+transform = Transform3D(0.560359, 0, 0, 0, 0.560359, 0, 0, 0, 0.560359, 0, 0.327602, 0)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/White berry/Outliner"]
+mesh = SubResource("ArrayMesh_j3gy6")
+skeleton = NodePath("../../MeshInstance3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_vvqyn")
+
+[node name="Liquids" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/White berry"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/White berry/Liquids"]
+mesh = SubResource("PointMesh_vtrfj")
+surface_material_override/0 = SubResource("StandardMaterial3D_mwhkr")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables"]
 transform = Transform3D(0.343512, 0, 0, 0, 0.343512, 0, 0, 0, 0.343512, -5.40677, 2.99286, 2.97237)
