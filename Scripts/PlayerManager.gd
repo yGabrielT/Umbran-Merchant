@@ -68,6 +68,7 @@ var canStep = true
 @export var liquidPourInSFX : AudioStream
 
 
+
 func _unhandled_input(event):
 	if event is InputEventMouseMotion and not isBookOpen:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
@@ -76,9 +77,10 @@ func _unhandled_input(event):
 		
 
 func _input(event):
-	if event is InputEventMouseButton and not isBookOpen:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		
+	if not isBookOpen and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+		if event is InputEventMouseButton:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			
 
 func _physics_process(delta):
 #region Player Movement

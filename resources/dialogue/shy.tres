@@ -22,7 +22,7 @@ npcSetting = ExtResource("3_jx6vo")
 
 [sub_resource type="Resource" id="Resource_n1mln"]
 script = ExtResource("4_fua18")
-dialogues = Array[String](["ah. i need to hide this from the [i]others[/i]."])
+dialogues = Array[String](["ah. i need to hide this from the [u]others[/u]."])
 npcSetting = ExtResource("3_jx6vo")
 
 [resource]

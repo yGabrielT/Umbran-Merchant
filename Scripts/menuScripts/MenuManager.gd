@@ -19,8 +19,12 @@ var cam : Camera3D
 var isPressed = false
 var isInitialFadeIn = false
 @export var SceneToChange : PackedScene
+@export var ambientSfx :AudioStream
+@export var clickSound : AudioStream
+var canChange = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	SoundManager.play_ambient_sound(ambientSfx,1)
 	cam= get_viewport().get_camera_3d()
 	var startTween = get_tree().create_tween()
 	startTween.tween_property(otherFade, "color:a", 0, 2).set_ease(Tween.EASE_OUT_IN)
@@ -31,6 +35,8 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton and not isPressed and isInitialFadeIn:
 		isPressed = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		SoundManager.play_sound_with_pitch(clickSound,.6)
+		SoundManager.stop_all_ambient_sounds(.3)
 		var tweenButton = get_tree().create_tween()
 		var newbutton = AnyButton.duplicate()
 		cam.add_child(newbutton)
@@ -41,10 +47,12 @@ func _unhandled_input(event):
 		tweenButton.tween_property(fadeOverlay, "color:a", 1, 5)
 		tweenButton.parallel().tween_property(MainLabel, "modulate:a", 0, 3)
 		tweenButton.tween_callback(func():
-			get_tree().change_scene_to_packed(SceneToChange))
+			canChange = true)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
+	if canChange:
+		canChange = false
+		ChangeScene()
 	
 	if temp > SpawnCD and  count < maxCount:
 		temp = 0
@@ -69,5 +77,8 @@ func RandomPos():
 
 func ReduceCount():
 	count -= 1
+	
+func ChangeScene():
+	get_tree().change_scene_to_packed(SceneToChange)
 	
 

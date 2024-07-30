@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://blqx2f6eajho2"]
+[gd_scene load_steps=14 format=3 uid="uid://blqx2f6eajho2"]
 
 [ext_resource type="Script" path="res://Scripts/menuScripts/MenuManager.gd" id="1_tpb46"]
 [ext_resource type="Shader" path="res://plugins/ursc/canvas_item/dithering.gdshader" id="1_ultkk"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cmi4tqlu3o7xm" path="res://scenes/npc_menu_walk.tscn" id="5_7euql"]
 [ext_resource type="PackedScene" uid="uid://bksagkehyae6s" path="res://scenes/TutorialScene.tscn" id="5_iig0u"]
 [ext_resource type="Shader" path="res://plugins/ursc/canvas_item/fade.gdshader" id="6_0xnuf"]
+[ext_resource type="AudioStream" uid="uid://kadg2ld1ppfl" path="res://assets/sounds/ambience/underwater ambience.mp3" id="6_pqaip"]
+[ext_resource type="AudioStream" uid="uid://dew17pebt2ikb" path="res://assets/sounds/sfx/metal-design-explosion-13491.mp3" id="7_iippn"]
 [ext_resource type="Environment" uid="uid://c62mfdjj2y2bq" path="res://new_environment.tres" id="20_ygcxi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtus2"]
@@ -72,6 +74,8 @@ fadeOverlay = NodePath("Camera3D/Fade")
 MainLabel = NodePath("Camera3D/Control/MainFront")
 otherFade = NodePath("Camera3D/OtherFade")
 SceneToChange = ExtResource("5_iig0u")
+ambientSfx = ExtResource("6_pqaip")
+clickSound = ExtResource("7_iippn")
 
 [node name="Lights" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World"]
 
