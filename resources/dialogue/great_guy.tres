@@ -17,7 +17,7 @@ liquidsQuantityExpected = Array[ExtResource("1_6sjbb")]([SubResource("Resource_e
 
 [sub_resource type="Resource" id="Resource_l6672"]
 script = ExtResource("4_kdhap")
-dialogues = Array[String](["grettings", "discovered thy potion shop and i the great one", "need a shield mixture with vigor for my foremost battles"])
+dialogues = Array[String](["grettings", "discovered thy potion shop and i the great one", "need a [color=#44deff]shield[/color] mixture with [color=#ff4a4eeb]vigor[/color] for my foremost battles"])
 npcSetting = ExtResource("3_20dmh")
 
 [sub_resource type="Resource" id="Resource_oihyl"]

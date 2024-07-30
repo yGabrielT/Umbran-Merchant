@@ -17,12 +17,12 @@ liquidsQuantityExpected = Array[ExtResource("1_tqrlf")]([SubResource("Resource_3
 
 [sub_resource type="Resource" id="Resource_04p5i"]
 script = ExtResource("4_fua18")
-dialogues = Array[String](["erm hi, wait... is that a transforming potion?", "w-w-why do u have that?", "j-j-just give it to me.", "The color? Its purple don't you know?"])
+dialogues = Array[String](["erm hi, wait... is that a transforming potion?", "w-w-why do u have that?", "j-j-just give it to me.", "The color? Its [color=#db56d3aa]purple[/color] don't you know?"])
 npcSetting = ExtResource("3_jx6vo")
 
 [sub_resource type="Resource" id="Resource_n1mln"]
 script = ExtResource("4_fua18")
-dialogues = Array[String](["ah. i need to hide this from the other."])
+dialogues = Array[String](["ah. i need to hide this from the [b]others[/b]."])
 npcSetting = ExtResource("3_jx6vo")
 
 [resource]

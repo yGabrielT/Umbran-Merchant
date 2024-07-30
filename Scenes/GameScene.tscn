@@ -1,4 +1,4 @@
-[gd_scene load_steps=217 format=3 uid="uid://dixx52xms2qbh"]
+[gd_scene load_steps=219 format=3 uid="uid://dixx52xms2qbh"]
 
 [ext_resource type="Shader" path="res://plugins/ursc/canvas_item/dithering.gdshader" id="1_pyp88"]
 [ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://assets/textures/materials/bayer2tile16.png" id="2_dyoef"]
@@ -165,6 +165,11 @@ idleAnim123 = 1
 [sub_resource type="Resource" id="Resource_vi8i4"]
 script = ExtResource("5_t6t4n")
 dialogues = Array[String](["Oh looks like you are out of stock huh", "Well if you haven't looked yet there's a distant table there with some ingredients", "there's also a book with some recipes", "it may not have too much of it but it is still worth it using it", "Ah yes you can write in that book too", "Don't expect me to have everything done for you kiddo"])
+npcSetting = ExtResource("22_2ravj")
+
+[sub_resource type="Resource" id="Resource_ud4ut"]
+script = ExtResource("5_t6t4n")
+dialogues = Array[String](["Good job kiddo", "Looks like i can still play a bit more with you tomorrow", "Go have a rest, see ya in the morning", "sweet dreams"])
 npcSetting = ExtResource("22_2ravj")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_h0rla"]
@@ -1637,11 +1642,136 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0.254902)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RichTextLabel:theme_override_colors/default_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RichTextLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RichTextLabel4:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RichTextLabel4:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_5r7t3"]
+resource_name = "ending"
+length = 8.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../../../../UI_layer/SubViewport/GameplayUI/ColorRect:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.254902), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RichTextLabel:theme_override_colors/default_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.5, 5.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RichTextLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RichTextLabel4:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 6.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RichTextLabel4:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(6.2, 8.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6m25x"]
 _data = {
 "Fad_in": SubResource("Animation_wpebi"),
-"RESET": SubResource("Animation_rsq8n")
+"RESET": SubResource("Animation_rsq8n"),
+"ending": SubResource("Animation_5r7t3")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_car55"]
@@ -1713,10 +1843,12 @@ script = ExtResource("13_3ssi3")
 allNpcs = Array[ExtResource("7_d740x")]([ExtResource("4_2ebl0"), ExtResource("8_odgk6"), ExtResource("9_jclmh"), ExtResource("10_h4jp6"), SubResource("Resource_c7pc2"), SubResource("Resource_b60ab"), SubResource("Resource_ekxjy"), SubResource("Resource_pusvh")])
 npcGrabSFX = ExtResource("13_v8g1n")
 
-[node name="GuideManager" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/GameHandlers"]
+[node name="GuideManager" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/GameHandlers" node_paths=PackedStringArray("AnimatorFade")]
 script = ExtResource("14_5term")
 guideDialogue = SubResource("Resource_vi8i4")
+guideEndDialogue = SubResource("Resource_ud4ut")
 exitAmbient = ExtResource("14_bkgve")
+AnimatorFade = NodePath("../../Player/Fader/AnimationPlayer")
 
 [node name="AudioManager" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/GameHandlers"]
 script = ExtResource("14_6hchr")
@@ -2731,6 +2863,36 @@ libraries = {
 "": SubResource("AnimationLibrary_6m25x")
 }
 autoplay = "Fad_in"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Fader"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 0)
+bbcode_enabled = true
+text = "[center][b]To be continued?[/b][center]"
+fit_content = true
+scroll_active = false
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Fader"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 190.17
+offset_bottom = 190.169
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]THANK YOU FOR PLAYING[/center]"
+scroll_active = false
 
 [node name="Book" type="Control" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player"]
 visible = false

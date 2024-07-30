@@ -6,27 +6,27 @@
 [ext_resource type="Script" path="res://Scripts/dialogue.gd" id="4_r1vgk"]
 [ext_resource type="Script" path="res://Scripts/npcCheckList.gd" id="5_rpk22"]
 
-[sub_resource type="Resource" id="Resource_3btub"]
+[sub_resource type="Resource" id="Resource_xniia"]
 script = ExtResource("1_w8hv4")
-liquidColor = Color(0.858824, 0.337255, 0.827451, 0.666667)
+liquidColor = Color(1, 1, 1, 0.431373)
 
-[sub_resource type="Resource" id="Resource_peurk"]
+[sub_resource type="Resource" id="Resource_uhqe8"]
 script = ExtResource("2_bqxva")
 hasOrder = false
-liquidsQuantityExpected = Array[ExtResource("1_w8hv4")]([SubResource("Resource_3btub")])
+liquidsQuantityExpected = Array[ExtResource("1_w8hv4")]([SubResource("Resource_xniia")])
 
-[sub_resource type="Resource" id="Resource_iyliq"]
+[sub_resource type="Resource" id="Resource_1ttmt"]
 script = ExtResource("1_w8hv4")
 liquidColor = Color(0.933333, 0.764706, 0.32549, 1)
 
-[sub_resource type="Resource" id="Resource_5nha7"]
+[sub_resource type="Resource" id="Resource_b7g5c"]
 script = ExtResource("2_bqxva")
 hasOrder = false
-liquidsQuantityExpected = Array[ExtResource("1_w8hv4")]([SubResource("Resource_iyliq")])
+liquidsQuantityExpected = Array[ExtResource("1_w8hv4")]([SubResource("Resource_1ttmt")])
 
 [sub_resource type="Resource" id="Resource_cw75a"]
 script = ExtResource("4_r1vgk")
-dialogues = Array[String](["oh another one huh", "what is with that different umbrans there little shadow?", "well... since i'm here give me that white and yellow bottles please"])
+dialogues = Array[String](["oh another one huh", "what is with that different [u]umbrans[/u] there little shadow?", "well... since i'm here give me that [color=white]white[/color] and [color=#eec353]yellow[/color] bottles please"])
 npcSetting = ExtResource("3_4cpgr")
 
 [sub_resource type="Resource" id="Resource_8njkq"]
@@ -38,7 +38,7 @@ npcSetting = ExtResource("3_4cpgr")
 resource_local_to_scene = true
 script = ExtResource("5_rpk22")
 anyBodyNeeded = false
-PotionList = Array[ExtResource("2_bqxva")]([SubResource("Resource_peurk"), SubResource("Resource_5nha7")])
+PotionList = Array[ExtResource("2_bqxva")]([SubResource("Resource_uhqe8"), SubResource("Resource_b7g5c")])
 dialogueEnter = SubResource("Resource_cw75a")
 dialogueExit = SubResource("Resource_8njkq")
 idleAnim123 = 2

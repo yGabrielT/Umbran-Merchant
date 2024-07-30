@@ -3,11 +3,13 @@ extends Node
 @onready var npcManag = $"../NpcManager"
 var guideSaid = false
 @export var guideDialogue : dialogue
+@export var guideEndDialogue : dialogue
 @onready var GuideNode = $"../../Objects/Others/GuideMesh"
 var t1 = 0
 var canPutDialogue
 var issaid = false
 @export var exitAmbient : AudioStream
+@export var AnimatorFade : AnimationPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SoundManager.stop_all_ambient_sounds(.5)
@@ -23,12 +25,20 @@ func _process(delta):
 		DialogueManag.allowedToTalk = false
 		guideSaid = true
 		issaid = true
-	
 	if DialogueManag.currentNpc == 11 and DialogueManag.currentDialogue == 6 and issaid:
 		DialogueManag.allowedToTalk = true
 		npcManag.canSpawnNpc = true
 		npcManag.SpawnNpc()
-		
 		issaid = false
+		
+	if npcManag.currentNpcNumber == 8 and not issaid:
+		
+		DialogueManag.currentTalker = GuideNode
+		DialogueManag.dialogueList.append(guideEndDialogue)
+		DialogueManag.allowedToTalk = false
+		issaid = true
+		if not DialogueManag.isTalking and DialogueManag.currentDialogue == 3:
+			AnimatorFade.play_backwards("Fad_in")
+		
 
 
