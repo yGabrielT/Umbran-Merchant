@@ -10,6 +10,7 @@ var canPutDialogue
 var issaid = false
 @export var exitAmbient : AudioStream
 @export var AnimatorFade : AnimationPlayer
+var endTrigger = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SoundManager.stop_all_ambient_sounds(.5)
@@ -37,8 +38,9 @@ func _process(delta):
 		DialogueManag.dialogueList.append(guideEndDialogue)
 		DialogueManag.allowedToTalk = false
 		issaid = true
-		if not DialogueManag.isTalking and DialogueManag.currentDialogue == 3:
-			AnimatorFade.play_backwards("Fad_in")
+		endTrigger = true
 		
+	if not DialogueManag.isTalking and DialogueManag.currentDialogue == 3 and endTrigger:
+		AnimatorFade.play("ending")
 
 
