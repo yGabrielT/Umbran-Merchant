@@ -273,7 +273,11 @@ func mixPotion():
 				leftHandObj.liquids[0].y,
 				leftHandObj.liquids[0].z,
 				leftHandObj.liquids[0].w)
-			newColor = ((leftHandObjLiquidColor * .5) + (colorOfTarget * .5))
+			if raycastObj.get_parent().noLiquidInThePot:
+				raycastObj.get_parent().noLiquidInThePot = false
+				newColor = leftHandObjLiquidColor
+			else:
+				newColor = ((leftHandObjLiquidColor * .5) + (colorOfTarget * .5))
 			
 		
 			print(colorOfTarget,leftHandObjLiquidColor)
@@ -298,7 +302,11 @@ func mixPotion():
 				rightHandObj.liquids[0].y,
 				rightHandObj.liquids[0].z,
 				rightHandObj.liquids[0].w)
-			newColor = ((rightHandObjLiquidColor * .5) + (colorOfTarget * .5))
+			if raycastObj.get_parent().noLiquidInThePot:
+				raycastObj.get_parent().noLiquidInThePot = false
+				newColor = rightHandObjLiquidColor
+			else:
+				newColor = ((rightHandObjLiquidColor * .5) + (colorOfTarget * .5))
 			print(colorOfTarget,leftHandObjLiquidColor)
 			#apply color
 			raycastObj.get_parent().mats[0].get_active_material(0).albedo_color = newColor.clamp()

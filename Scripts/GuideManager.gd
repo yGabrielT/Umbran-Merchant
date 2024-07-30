@@ -14,6 +14,7 @@ var endTrigger = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SoundManager.stop_all_ambient_sounds(.5)
+	SoundManager.set_ambient_sound_volume(.7)
 	SoundManager.play_ambient_sound(exitAmbient, 1)
 
 

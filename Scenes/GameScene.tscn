@@ -1,4 +1,4 @@
-[gd_scene load_steps=219 format=3 uid="uid://dixx52xms2qbh"]
+[gd_scene load_steps=222 format=3 uid="uid://dixx52xms2qbh"]
 
 [ext_resource type="Shader" path="res://plugins/ursc/canvas_item/dithering.gdshader" id="1_pyp88"]
 [ext_resource type="Texture2D" uid="uid://cl5r2kp31c4p1" path="res://assets/textures/materials/bayer2tile16.png" id="2_dyoef"]
@@ -92,12 +92,12 @@ liquidsQuantityExpected = Array[ExtResource("13_s2y5c")]([SubResource("Resource_
 
 [sub_resource type="Resource" id="Resource_n71yd"]
 script = ExtResource("5_t6t4n")
-dialogues = Array[String](["Hey can you give me a [color=gray]stoic[/color] potion"])
+dialogues = Array[String](["Another big week in Panaleia huh?", "Did you know that those festival organizers are going to start the Great war a day early?", "Man, that sucks it was always supposed to be every weekend,", " What next? War every day? I have other things to do.", "You know what i mean, right?", "Anyways just give me a [color=gray]stoic[/color] potion please."])
 npcSetting = ExtResource("14_rxnm0")
 
 [sub_resource type="Resource" id="Resource_am5o2"]
 script = ExtResource("5_t6t4n")
-dialogues = Array[String](["perfect for me."])
+dialogues = Array[String](["Perfect for me now."])
 npcSetting = ExtResource("14_rxnm0")
 
 [sub_resource type="Resource" id="Resource_b60ab"]
@@ -119,12 +119,12 @@ liquidsQuantityExpected = Array[ExtResource("13_s2y5c")]([SubResource("Resource_
 
 [sub_resource type="Resource" id="Resource_wf4k5"]
 script = ExtResource("5_t6t4n")
-dialogues = Array[String](["Give me a [color=#a1ee80]forest[/color] potion"])
+dialogues = Array[String](["Heh hi little shadow.", "Seems like you are doing a great job,", "judging by the quantity of [u]umbrans[/u] picking these potions. ", "Just be careful with that demanding shadow there kid,", "not a good look on him to be honest.", "Give me a [color=#a1ee80]forest[/color] potion little shadow."])
 npcSetting = ExtResource("15_r4lam")
 
 [sub_resource type="Resource" id="Resource_d8x11"]
 script = ExtResource("5_t6t4n")
-dialogues = Array[String](["ending"])
+dialogues = Array[String](["Don't forget what i said..."])
 npcSetting = ExtResource("15_r4lam")
 
 [sub_resource type="Resource" id="Resource_ekxjy"]
@@ -146,12 +146,12 @@ liquidsQuantityExpected = Array[ExtResource("13_s2y5c")]([SubResource("Resource_
 
 [sub_resource type="Resource" id="Resource_7kehv"]
 script = ExtResource("5_t6t4n")
-dialogues = Array[String](["Give an [color=#808000]absorption[/color] potion"])
+dialogues = Array[String](["This war is not going to be a easy one,", " i need something to counter all these other [u]umbrans[/u] in the field.", "May i have an [color=#808000]absorption[/color] potion?"])
 npcSetting = ExtResource("14_rxnm0")
 
 [sub_resource type="Resource" id="Resource_bhs5c"]
 script = ExtResource("5_t6t4n")
-dialogues = Array[String](["yeah yeah"])
+dialogues = Array[String](["Thank you weakling"])
 npcSetting = ExtResource("14_rxnm0")
 
 [sub_resource type="Resource" id="Resource_pusvh"]
@@ -240,18 +240,21 @@ resource_local_to_scene = true
 render_priority = -1
 transparency = 1
 shading_mode = 0
+albedo_color = Color(1, 1, 1, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1vvb6"]
 resource_local_to_scene = true
 render_priority = -1
 transparency = 1
 shading_mode = 0
+albedo_color = Color(1, 1, 1, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1yjl0"]
 resource_local_to_scene = true
 render_priority = -1
 transparency = 1
 shading_mode = 0
+albedo_color = Color(1, 1, 1, 0)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_uafoi"]
 _surfaces = [{
@@ -1776,13 +1779,24 @@ _data = {
 
 [sub_resource type="LabelSettings" id="LabelSettings_car55"]
 font = ExtResource("12_vf4kw")
-font_size = 123
+font_size = 88
 font_color = Color(0, 0, 0, 1)
-outline_size = 12
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_dyoh5"]
 font_size = 46
+font_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_blyo8"]
+font_size = 46
+font_color = Color(0.631373, 0.933333, 0.501961, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_d66qn"]
+font_size = 46
+font_color = Color(0.501961, 0.501961, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f8wn0"]
+font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_obvsx"]
 font = ExtResource("12_vf4kw")
@@ -1915,6 +1929,7 @@ script = ExtResource("7_dv8ga")
 itemName = "Cup"
 itemDesc = "Good for mixing"
 isPotionBottle = true
+noLiquidInThePot = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Cup2"]
 transform = Transform3D(0.3, 0, -6.21725e-15, 0, 0.3, 0, 6.21725e-15, 0, 0.3, 0, 0.461179, 0)
@@ -1956,6 +1971,7 @@ script = ExtResource("7_dv8ga")
 itemName = "Cup"
 itemDesc = "Good for mixing"
 isPotionBottle = true
+noLiquidInThePot = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Cup4"]
 transform = Transform3D(0.3, 0, -6.21725e-15, 0, 0.3, 0, 6.21725e-15, 0, 0.3, 0, 0.461179, 0)
@@ -1997,6 +2013,7 @@ script = ExtResource("7_dv8ga")
 itemName = "Cup"
 itemDesc = "Good for mixing"
 isPotionBottle = true
+noLiquidInThePot = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Cup3"]
 transform = Transform3D(0.3, 0, -6.21725e-15, 0, 0.3, 0, 6.21725e-15, 0, 0.3, 0, 0.461179, 0)
@@ -2935,11 +2952,10 @@ grow_vertical = 2
 theme_override_constants/separation = 250
 vertical = true
 
-[node name="Shield Potion recipe" type="Control" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage"]
+[node name="PotionRecipe" type="Control" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/Shield Potion recipe"]
-modulate = Color(0.520741, 0.534472, 0.572461, 1)
+[node name="1Color" type="TextureRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe"]
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 1
@@ -2956,19 +2972,19 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("31_0vaxu")
 
-[node name="Label" type="Label" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/Shield Potion recipe"]
+[node name="+" type="Label" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe"]
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 0
-offset_left = 185.36
-offset_right = 259.36
+offset_left = 198.95
+offset_right = 272.954
 offset_bottom = 149.0
 text = "+"
 label_settings = SubResource("LabelSettings_car55")
 vertical_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/Shield Potion recipe"]
-modulate = Color(0.926708, 0.267819, 0, 1)
+[node name="2Color" type="TextureRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe"]
+modulate = Color(0, 0, 0, 1)
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 1
@@ -2985,19 +3001,19 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("31_0vaxu")
 
-[node name="Label2" type="Label" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/Shield Potion recipe"]
+[node name="=" type="Label" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 400.0
-offset_right = 474.0
+offset_left = 421.15
+offset_right = 495.15
 offset_bottom = 149.0
 text = "=
 "
 label_settings = SubResource("LabelSettings_car55")
 vertical_alignment = 1
 
-[node name="TextureRect3" type="TextureRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/Shield Potion recipe"]
-modulate = Color(0.926708, 0.267819, 0, 1)
+[node name="ResultColor" type="TextureRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe"]
+modulate = Color(0.5, 0.5, 0.5, 1)
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 1
@@ -3014,7 +3030,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("31_0vaxu")
 
-[node name="TextureRect4" type="TextureRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/Shield Potion recipe"]
+[node name="Potion" type="TextureRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe"]
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 1
@@ -3031,14 +3047,243 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("32_qgypb")
 
-[node name="Label3" type="Label" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/Shield Potion recipe"]
+[node name="PotionName" type="Label" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe"]
 texture_filter = 1
 layout_mode = 2
 offset_top = -72.0
 offset_right = 700.0
 offset_bottom = -4.0
-text = "Shield Potion"
+text = "Stoic potion"
 label_settings = SubResource("LabelSettings_dyoh5")
+horizontal_alignment = 1
+
+[node name="PotionRecipe2" type="Control" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage"]
+layout_mode = 2
+
+[node name="1Color" type="TextureRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe2"]
+modulate = Color(1, 1, 0, 1)
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -8.0
+offset_right = -140.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_0vaxu")
+
+[node name="+" type="Label" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe2"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = 198.95
+offset_right = 272.954
+offset_bottom = 149.0
+text = "+"
+label_settings = SubResource("LabelSettings_car55")
+vertical_alignment = 1
+
+[node name="2Color" type="TextureRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe2"]
+modulate = Color(0.266667, 0.870588, 1, 1)
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -8.0
+offset_right = 60.0001
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_0vaxu")
+
+[node name="=" type="Label" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe2"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 421.15
+offset_right = 495.15
+offset_bottom = 149.0
+text = "=
+"
+label_settings = SubResource("LabelSettings_car55")
+vertical_alignment = 1
+
+[node name="ResultColor" type="TextureRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe2"]
+modulate = Color(0.631373, 0.933333, 0.501961, 1)
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 150.0
+offset_top = -8.0
+offset_right = 310.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_0vaxu")
+
+[node name="Potion" type="TextureRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe2"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 150.0
+offset_top = -8.0
+offset_right = 310.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("32_qgypb")
+
+[node name="PotionName" type="Label" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe2"]
+texture_filter = 1
+layout_mode = 2
+offset_top = -72.0
+offset_right = 700.0
+offset_bottom = -4.0
+text = "Forest potion"
+label_settings = SubResource("LabelSettings_blyo8")
+horizontal_alignment = 1
+
+[node name="PotionRecipe3" type="Control" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage"]
+layout_mode = 2
+
+[node name="1Color" type="TextureRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe3"]
+modulate = Color(1, 1, 0, 1)
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -8.0
+offset_right = -140.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_0vaxu")
+
+[node name="+" type="Label" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe3"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = 198.95
+offset_right = 272.954
+offset_bottom = 149.0
+text = "+"
+label_settings = SubResource("LabelSettings_car55")
+vertical_alignment = 1
+
+[node name="2Color" type="TextureRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe3"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -8.0
+offset_right = 60.0001
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_0vaxu")
+
+[node name="=" type="Label" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe3"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 421.15
+offset_right = 495.15
+offset_bottom = 149.0
+text = "=
+"
+label_settings = SubResource("LabelSettings_car55")
+vertical_alignment = 1
+
+[node name="ResultColor" type="TextureRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe3"]
+modulate = Color(0.501961, 0.501961, 0, 1)
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 150.0
+offset_top = -8.0
+offset_right = 310.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_0vaxu")
+
+[node name="Potion" type="TextureRect" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe3"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 150.0
+offset_top = -8.0
+offset_right = 310.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("32_qgypb")
+
+[node name="PotionName" type="Label" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect/FirstPage/PotionRecipe3"]
+texture_filter = 1
+layout_mode = 2
+offset_top = -72.0
+offset_right = 700.0
+offset_bottom = -4.0
+text = "Absorption potion"
+label_settings = SubResource("LabelSettings_d66qn")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player/Book/TextureRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -156.0
+offset_top = -1.78998
+offset_right = 156.0
+offset_bottom = 68.21
+grow_horizontal = 2
+grow_vertical = 0
+text = "[F] TO CLOSE"
+label_settings = SubResource("LabelSettings_f8wn0")
 horizontal_alignment = 1
 
 [node name="AudioStreamPlayer" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Player" instance=ExtResource("22_2ravj")]

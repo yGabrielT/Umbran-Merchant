@@ -3,6 +3,7 @@ extends StaticBody3D
 @export var itemName : String
 @export var itemDesc : String
 @export var isPotionBottle : bool
+@export var noLiquidInThePot : bool = false 
 var liquids = []
 var mats
 
