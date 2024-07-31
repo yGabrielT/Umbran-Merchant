@@ -2581,7 +2581,7 @@ collision_layer = 2
 sync_to_physics = false
 script = ExtResource("7_dv8ga")
 itemName = "Bat eye"
-itemDesc = "You don't know how it got here"
+itemDesc = "It can be turned into a yellow strange liquid."
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Eye"]
 transform = Transform3D(0.560359, 0, 0, 0, 0.560359, 0, 0, 0, 0.560359, 0, 0.327602, 0)
@@ -2910,8 +2910,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8934, 2.6804, 1.21705)
 collision_layer = 2
 sync_to_physics = false
 script = ExtResource("7_dv8ga")
-itemName = "Bettle cask"
-itemDesc = "A blue cask of a beetle"
+itemName = "Bettle wing case"
+itemDesc = "From a bettle that can fit in a adult umbran hand. "
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Beetle"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.473222, 0)
@@ -3017,8 +3017,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8934, 2.6804, 0.123234)
 collision_layer = 2
 sync_to_physics = false
 script = ExtResource("7_dv8ga")
-itemName = "Bettle cask"
-itemDesc = "A blue cask of a beetle"
+itemName = "Oil nails"
+itemDesc = "Nails that contains a strange oil inside."
 
 [node name="Outliner" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/Oil nails"]
 transform = Transform3D(0.560359, 0, 0, 0, 0.560359, 0, 0, 0, 0.560359, 0, 0.327602, 0)
@@ -3130,8 +3130,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8934, 2.6804, -0.982625)
 collision_layer = 2
 sync_to_physics = false
 script = ExtResource("7_dv8ga")
-itemName = "Bettle cask"
-itemDesc = "A blue cask of a beetle"
+itemName = "White berry"
+itemDesc = "Taken from the mystic forest of Panaleia."
 
 [node name="Outliner" type="Node3D" parent="LowResPort/LowResSubPort/DitherPort/DitherSubPort/World/Objects/Interactables/White berry"]
 transform = Transform3D(0.560359, 0, 0, 0, 0.560359, 0, 0, 0, 0.560359, 0, 0.327602, 0)

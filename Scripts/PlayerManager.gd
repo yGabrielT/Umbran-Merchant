@@ -263,7 +263,7 @@ func align_with_y(xform, new_y):
 	return xform
 func mixPotion():
 	if mouse1 == true and isLookingToItem == true and isLeftHandOccupied == true and not mouse2 and raycastObj != null:
-		if len(raycastObj.get_parent().liquids) == 1 and len(leftHandObj.liquids) == 1:
+		if len(raycastObj.get_parent().liquids) == 1 and len(leftHandObj.liquids) == 1 and raycastObj.get_parent().isPotionBottle:
 			print("got it")
 			colorOfTarget = Color(
 				raycastObj.get_parent().liquids[0].x,
